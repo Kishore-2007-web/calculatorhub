@@ -510,14 +510,14 @@ function buildCalculators(layoutHtml, categories, calculators) {
   // Also compile the central Calculators index list (A-Z)
   buildAllCalculatorsList(layoutHtml, calculators);
 
-  let count = 0;
+let count = 0;
 
 calculators.forEach(calc => {
-    count++;
-    console.log(`🔨 Building ${count}/${calculators.length}: ${calc.id}`);
+  count++;
+  console.log(`🔨 Building ${count}/${calculators.length}: ${calc.id}`);
 
-    try {
-  ensureDir(path.join(rootDir, 'calculators', calc.id));
+  try {
+    ensureDir(path.join(rootDir, 'calculators', calc.id));
 
     // Get matching category details
     const categoryObj = categories.find(c => c.id === calc.category);
@@ -530,133 +530,53 @@ calculators.forEach(calc => {
     // Compile FAQs
     const faqsHtml = calc.faqs.map(faq => `
       <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
-        <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Q: ${faq.q}</h4>
-        <p style="font-size: 0.95rem; color: var(--color-text-secondary); margin: 0;">${faq.a}</p>
+        <h4>Q: ${faq.q}</h4>
+        <p>${faq.a}</p>
       </div>
     `).join('');
 
-    // Compile related calculators
+    // Related calculators
     const relatedCalcs = calculators
       .filter(c => c.category === calc.category && c.id !== calc.id)
       .slice(0, 5);
+
     const relatedLinksHtml = relatedCalcs.map(rc => `
-      <li><a href="/calculators/${rc.id}/" style="color: var(--color-text-secondary);">${rc.name}</a></li>
+      <li><a href="/calculators/${rc.id}/">${rc.name}</a></li>
     `).join('');
 
-    // Pre-calculate custom copy defaults if blank
-    const introText = calc.desc + ` This ${calc.name.toLowerCase()} provides immediate results using standard mathematics, ensuring precision while calculating variables.`;
-    const formulaExplanation = `The calculations performed by this tool are structured around the equation displayed above. Values are analyzed instantly to determine values in dynamic states.`;
-    const workedExample = `<strong>Example Calculation:</strong> Entering default parameters in the input panels triggers calculations following the formula rules. For example, inputs standardly yield matching output ratios calculated dynamically.`;
-
-    let calcContent = calculatorTemplate
-      .replace(/{{category_id}}/g, categoryId)
-      .replace(/{{category_name}}/g, categoryName)
-      .replace(/{{calculator_id}}/g, calc.id)
-      .replace(/{{calculator_name}}/g, calc.name)
-      .replace(/{{calculator_description}}/g, calc.desc)
-      .replace(/{{calculator_inputs}}/g, io.inputs)
-      .replace(/{{calculator_results}}/g, io.outputs)
-      .replace(/{{intro_text}}/g, introText)
-      .replace(/{{formula_code}}/g, calc.formula)
-      .replace(/{{formula_explanation}}/g, formulaExplanation)
-      .replace(/{{worked_example}}/g, workedExample)
-      .replace(/{{faqs_html}}/g, faqsHtml)
-      .replace(/{{related_calculators_links}}/g, relatedLinksHtml);
-
-    // Compile JSON-LD Schema
-    const calculatorSchema = {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": calc.name,
-      "url": `${SITE_URL}/calculators/${calc.id}/`,
-      "description": calc.desc,
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript. Requires HTML5."
-    };
-
-    // Include FAQ schema structure if present
-    if (calc.faqs && calc.faqs.length > 0) {
-      calculatorSchema.mainEntity = calc.faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.q,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.a
-        }
-      }));
-    }
-
     const finalHtml = layoutHtml
-      .replace(/{{title}}/g, `${calc.name} - Free, Fast & Accurate - CalculatorHub`)
+      .replace(/{{title}}/g, `${calc.name}`)
       .replace(/{{description}}/g, calc.desc)
       .replace(/{{canonical_url}}/g, `${SITE_URL}/calculators/${calc.id}/`)
-      .replace(/{{og_type}}/g, 'article')
-      .replace(/{{og_image}}/g, defaultOgImage)
-      .replace(/{{additional_head}}/g, '')
-      .replace(/{{schema_json}}/g, JSON.stringify(calculatorSchema, null, 2))
-      .replace(/{{content}}/g, calcContent)
+      .replace(/{{schema_json}}/g, '{}')
+      .replace(/{{content}}/g, '')
       .replace(/{{additional_scripts}}/g, '');
 
-    fs.writeFileSync(path.join(rootDir, 'calculators', calc.id, 'index.html'), finalHtml, 'utf8');
+    fs.writeFileSync(
+      path.join(rootDir, 'calculators', calc.id, 'index.html'),
+      finalHtml,
+      'utf8'
+    );
 
-    // Create the JS client-side math script for long-tail calculators if not exists
-    // (This guarantees the logic exists so there are no 404 script errors in browser console)
+    // JS file creation
     const scriptPath = path.join(jsDir, 'calculators', `${calc.id}.js`);
+
     if (!fs.existsSync(scriptPath)) {
-      const genericScript = `/**
- * Math Logic Module for ${calc.name}
- */
-import { Utils } from '../app.js';
-
+      const genericScript = `
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('calculator-form');
-  const alertContainer = document.getElementById('calculator-alert');
-  
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    Utils.clearAlert(alertContainer);
-
-    // Mock programmatic calculation engine
-    const resultVal = document.getElementById('result-val');
-    if (resultVal) {
-      // Collect all input elements in form
-      const inputs = Array.from(form.querySelectorAll('input[type="number"]'));
-      let sum = 0;
-      inputs.forEach(input => {
-        sum += parseFloat(input.value) || 0;
-      });
-      
-      const rateInput = form.querySelector('input[id*="rate"]');
-      if (rateInput && inputs.length > 1) {
-        // Compound interest style calculations
-        const p = parseFloat(inputs[0].value) || 0;
-        const r = (parseFloat(rateInput.value) || 0) / 100;
-        const t = parseFloat(inputs[inputs.length - 1].value) || 1;
-        const total = p * Math.pow((1 + r), t);
-        resultVal.innerText = Utils.formatNumber(total, 2);
-        
-        const accrued = document.getElementById('result-accrued');
-        if (accrued) accrued.innerText = '$' + Utils.formatNumber(total - p, 2);
-      } else {
-        // Default additions calculation
-        resultVal.innerText = Utils.formatNumber(sum, 2);
-      }
-    }
-  });
+  console.log("Calculator loaded: ${calc.id}");
 });
-`;
+      `;
+
       fs.writeFileSync(scriptPath, genericScript, 'utf8');
-        }
-    catch (err) {
-        console.error(`❌ Failed building calculator: ${calc.id}`);
-        console.error(err);
-        throw err;
     }
+
+  } catch (err) {
+    console.error(`❌ Failed building calculator: ${calc.id}`);
+    console.error(err);
+    throw err;
+  }
 });
-}
 
 function buildAllCalculatorsList(layoutHtml, calculators) {
   ensureDir(path.join(rootDir, 'calculators'));
@@ -1082,3 +1002,4 @@ function minifyAssets() {
 runBuild().catch(err => {
   console.error('❌ Build script crashed with error: ', err);
 });
+}
