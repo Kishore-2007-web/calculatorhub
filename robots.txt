@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Exclude source templates and scripts
+Disallow: /templates/
+Disallow: /scripts/
+Disallow: /node_modules/
+
+Sitemap: https://calculatorhub.org/sitemap.xml

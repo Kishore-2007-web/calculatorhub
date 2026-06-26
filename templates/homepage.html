@@ -1,0 +1,124 @@
+<!-- Hero Banner Section -->
+<section style="text-align: center; padding: 4rem 1.5rem; background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg-base)); border-radius: var(--radius-xl); margin-bottom: 3rem; border: 1px solid var(--color-border); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--color-primary-glow); filter: blur(80px); border-radius: 50%;"></div>
+  <div style="position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background: rgba(16, 185, 129, 0.1); filter: blur(80px); border-radius: 50%;"></div>
+  
+  <h1 style="font-size: 2.75rem; font-weight: 800; margin-bottom: 0.75rem;">Every Calculator You Need</h1>
+  <p style="font-size: 1.25rem; font-weight: 500; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto 2.5rem;">Free, Fast & Accurate. Solve math equations, plan investments, estimate loan payments, analyze health parameters, and convert units instantly.</p>
+
+  <!-- Large Center Search Bar -->
+  <div class="search-container" style="max-width: 650px; margin: 0 auto; box-shadow: var(--shadow-lg); border-radius: var(--radius-md);">
+    <input type="text" id="homepage-search" class="input-control" placeholder="What are we calculating today? (e.g. Compound Interest, Pregnancy Due Date, BMI...)" aria-label="Large Homepage Search" style="padding: 1.1rem 1.5rem; font-size: 1.1rem; border-width: 2px;">
+    <div id="homepage-search-results" class="search-results-popup" style="text-align: left;"></div>
+  </div>
+</section>
+
+<!-- Recently Visited Calculators (Hidden by default, displayed via client JS if present) -->
+<section id="recent-visits-section" style="margin-bottom: 3rem; display: none;">
+  <h2 style="font-size: 1.5rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">🕒 Recently Visited</h2>
+  <div id="recent-visits-grid" class="grid grid-cols-4"></div>
+</section>
+
+<!-- Categories Section -->
+<section style="margin-bottom: 4rem;">
+  <div class="flex justify-between items-center" style="margin-bottom: 1.5rem;">
+    <h2 style="font-size: 1.75rem;">Browse by Category</h2>
+    <a href="/categories/" style="font-weight: 600; display: flex; align-items: center; gap: 0.25rem;">View All Categories &rarr;</a>
+  </div>
+  <div class="grid grid-cols-4">
+    {{categories_grid}}
+  </div>
+</section>
+
+<!-- Popular Calculators Section -->
+<section style="margin-bottom: 4rem;">
+  <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">⚡ Popular Calculators</h2>
+  <div class="grid grid-cols-4">
+    {{popular_calculators_grid}}
+  </div>
+</section>
+
+<!-- Informational Section / Product Guide -->
+<section class="card card-glass" style="margin-bottom: 4rem; padding: 2.5rem; border-radius: var(--radius-xl);">
+  <h2 style="font-size: 1.75rem; margin-bottom: 1rem;">Why Choose CalculatorHub?</h2>
+  <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">CalculatorHub is engineered for speed, utility, and precision. Whether you are a student solving algebra matrices, a homebuyer estimating mortgage amortizations, a business planning profit margins, or a fitness enthusiast calculating macronutrient needs, we have optimized tools tailored exactly to your criteria.</p>
+  
+  <div class="grid grid-cols-3" style="margin-top: 2rem; gap: 2rem;">
+    <div>
+      <h3 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">🚀 Instant Rendering</h3>
+      <p style="font-size: 0.95rem;">Pre-compiled, lightweight static pages run client-side with zero delay, minimal layout shift, and outstanding Core Web Vitals.</p>
+    </div>
+    <div>
+      <h3 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">🎯 Guaranteed Accuracy</h3>
+      <p style="font-size: 0.95rem;">All calculation algorithms are thoroughly vetted using industry-standard formulas, giving you results you can trust.</p>
+    </div>
+    <div>
+      <h3 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">📱 Mobile & Offline Friendly</h3>
+      <p style="font-size: 0.95rem;">Designed from a mobile-first philosophy. Progressive Web App compatibility lets you use these calculators on-the-go.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Bind Homepage Search to Global Search logic -->
+<script type="module">
+  import { calculators } from './js/database.js';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const hpSearch = document.getElementById('homepage-search');
+    const hpResults = document.getElementById('homepage-search-results');
+    
+    if (!hpSearch || !hpResults) return;
+    
+    hpSearch.addEventListener('input', () => {
+      const q = hpSearch.value.trim().toLowerCase();
+      if (q === '') {
+        hpResults.classList.remove('active');
+        return;
+      }
+      
+      const matches = calculators.filter(c => 
+        c.name.toLowerCase().includes(q) || 
+        c.keywords.some(k => k.includes(q))
+      ).slice(0, 8);
+      
+      if (matches.length === 0) {
+        hpResults.innerHTML = '<div style="padding:16px; text-align:center; color:var(--color-text-secondary);">No matches found</div>';
+      } else {
+        hpResults.innerHTML = matches.map(c => `
+          <div class="search-item" onclick="window.location.href='/calculators/${c.id}/'">
+            <span>🧮</span>
+            <div>
+              <div style="font-weight:600;">${c.name}</div>
+              <div style="font-size:0.75rem; color:var(--color-text-secondary);">${c.desc}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+      hpResults.classList.add('active');
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!hpSearch.contains(e.target) && !hpResults.contains(e.target)) {
+        hpResults.classList.remove('active');
+      }
+    });
+
+    // Populate Recently Visited client-side
+    const recent = JSON.parse(localStorage.getItem('recent_calculators')) || [];
+    const recentVisitsSection = document.getElementById('recent-visits-section');
+    const recentVisitsGrid = document.getElementById('recent-visits-grid');
+    
+    if (recent.length > 0 && recentVisitsSection && recentVisitsGrid) {
+      recentVisitsSection.style.display = 'block';
+      recentVisitsGrid.innerHTML = recent.map(item => `
+        <a href="${item.path}" class="card flex items-center gap-md" style="padding: 1rem 1.25rem;">
+          <span style="font-size: 1.5rem;">🧮</span>
+          <div style="overflow: hidden;">
+            <div style="font-weight: 600; color: var(--color-text-primary); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${item.name}</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-secondary);">Calculate now</div>
+          </div>
+        </a>
+      `).join('');
+    }
+  });
+</script>

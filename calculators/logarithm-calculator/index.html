@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logarithm - Free, Fast & Accurate - CalculatorHub</title>
+  <meta name="description" content="Professional, free, fast, and accurate calculation tool to compute logarithm.">
+  <link rel="canonical" href="https://calculatorhub.org/calculators/logarithm-calculator/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Logarithm - Free, Fast & Accurate - CalculatorHub">
+  <meta property="og:description" content="Professional, free, fast, and accurate calculation tool to compute logarithm.">
+  <meta property="og:url" content="https://calculatorhub.org/calculators/logarithm-calculator/">
+  <meta property="og:image" content="https://calculatorhub.org/assets/og-image.png">
+  <meta property="og:site_name" content="CalculatorHub">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Logarithm - Free, Fast & Accurate - CalculatorHub">
+  <meta name="twitter:description" content="Professional, free, fast, and accurate calculation tool to compute logarithm.">
+  <meta name="twitter:image" content="https://calculatorhub.org/assets/og-image.png">
+  <!-- Favicon / PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/icons/icon-192.png">
+  <!-- Theme style sheets -->
+  <link rel="stylesheet" href="/css/main.min.css">
+  <link rel="stylesheet" href="/css/components.min.css">
+  <link rel="stylesheet" href="/css/dark-theme.min.css">
+  
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Logarithm",
+  "url": "https://calculatorhub.org/calculators/logarithm-calculator/",
+  "description": "Professional, free, fast, and accurate calculation tool to compute logarithm.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Logarithm?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Logarithm is a dedicated calculation interface that assists users in solving specialized equations."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Header Section -->
+  <header class="navbar">
+    <div class="container flex justify-between items-center" style="width: 100%;">
+      <a href="/" class="logo" aria-label="CalculatorHub Home">
+        <span>🧮 CalculatorHub</span>
+      </a>
+      
+      <!-- Search Box Input (Nav Bar) -->
+      <div class="search-container">
+        <input type="text" id="global-search" class="input-control" placeholder="Search 300+ calculators (e.g., GPA, EMI)..." aria-label="Global Search">
+        <div id="search-results" class="search-results-popup"></div>
+      </div>
+
+      <!-- Settings & Links -->
+      <div class="flex items-center gap-md">
+        <nav id="nav-links" class="flex gap-md" style="align-items: center;">
+          <a href="/" style="font-weight: 500;">Home</a>
+          <a href="/categories/" style="font-weight: 500;">Categories</a>
+          <a href="/blog/" style="font-weight: 500;">Blog</a>
+          <a href="/about.html" style="font-weight: 500;">About</a>
+        </nav>
+        
+        <!-- Theme Toggle slider -->
+        <label class="theme-switch" aria-label="Toggle light and dark mode">
+          <input type="checkbox" id="theme-toggle">
+          <span class="theme-slider"></span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <!-- Top Ad Slot Banner -->
+  <div class="container">
+    <div class="ad-slot ad-slot-top"></div>
+  </div>
+
+  <!-- Main Content Insertion -->
+  <main id="main-content" class="container animate-fade-in" style="margin-top: 1rem; margin-bottom: 2rem;">
+    <!-- Calculator Page Breadcrumbs -->
+<nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+  <ol style="list-style: none; display: flex; gap: 0.5rem; padding: 0;">
+    <li><a href="/">Home</a></li>
+    <li style="color: var(--color-text-tertiary);">&gt;</li>
+    <li><a href="/categories/math/">Mathematics</a></li>
+    <li style="color: var(--color-text-tertiary);">&gt;</li>
+    <li aria-current="page" style="color: var(--color-text-primary); font-weight: 500;">Logarithm</li>
+  </ol>
+</nav>
+
+<div class="grid" style="grid-template-columns: 2.2fr 1.1fr; gap: 2rem; align-items: start;">
+  <!-- Calculator Dashboard -->
+  <div>
+    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Logarithm</h1>
+    <p style="font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: 1.5rem;">Professional, free, fast, and accurate calculation tool to compute logarithm.</p>
+
+    <!-- Interactive Card Layout -->
+    <div class="grid grid-cols-2" style="gap: 1.5rem; align-items: stretch; margin-bottom: 3rem;">
+      <!-- Inputs Column -->
+      <div class="card card-premium" style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h2 style="font-size: 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">⚙️ Input Parameters</h2>
+          <form id="calculator-form" onsubmit="return false;">
+            
+            <div class="form-group">
+              <label for="val-a">Input Value A</label>
+              <input type="number" id="val-a" class="input-control" value="25" required>
+            </div>
+            <div class="form-group">
+              <label for="val-b">Input Value B</label>
+              <input type="number" id="val-b" class="input-control" value="5" required>
+            </div>
+          
+            <button type="submit" id="calculate-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Calculate Now</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Outputs / Results Column -->
+      <div class="card card-glass" style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; border-color: var(--color-primary-glow);">
+        <div>
+          <h2 style="font-size: 1.25rem; margin-bottom: 1.25rem;">📊 Results</h2>
+          <div id="calculator-results">
+            
+            <div style="text-align: center; padding: 2.5rem 0;">
+              <div style="font-size: 0.9rem; color: var(--color-text-secondary); font-weight: 600;">RESULT</div>
+              <div id="result-val" style="font-size: 3rem; font-weight: 800; color: var(--color-primary); margin-top: 0.5rem;">30.00</div>
+            </div>
+          
+          </div>
+        </div>
+        <!-- Alert placeholder for errors -->
+        <div id="calculator-alert" style="margin-top: auto;"></div>
+      </div>
+    </div>
+
+    <!-- SEO Rich Text Copy Section -->
+    <article class="card" style="padding: 2.5rem; line-height: 1.8;">
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">What is the Logarithm?</h2>
+        <p>Professional, free, fast, and accurate calculation tool to compute logarithm. This logarithm provides immediate results using standard mathematics, ensuring precision while calculating variables.</p>
+      </section>
+
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">How to Use the Calculator</h2>
+        <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li>Enter the required inputs in the left parameter panel.</li>
+          <li>Click the "Calculate Now" button.</li>
+          <li>Review the calculated outputs instantly in the results panel.</li>
+        </ol>
+      </section>
+
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">The Mathematical Formula</h2>
+        <div style="background-color: var(--color-bg-base); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--color-primary); font-family: monospace; font-size: 1.1rem; margin-bottom: 1rem;">
+          Result calculated dynamically based on input variables.
+        </div>
+        <p>The calculations performed by this tool are structured around the equation displayed above. Values are analyzed instantly to determine values in dynamic states.</p>
+      </section>
+
+      <section style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">Worked Example</h2>
+        <div style="background-color: var(--color-bg-base); padding: 1.5rem; border-radius: var(--radius-md); font-size: 0.95rem; border: 1px solid var(--color-border);">
+          <strong>Example Calculation:</strong> Entering default parameters in the input panels triggers calculations following the formula rules. For example, inputs standardly yield matching output ratios calculated dynamically.
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-text-primary);">Frequently Asked Questions (FAQs)</h2>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          
+      <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+        <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Q: What is the Logarithm?</h4>
+        <p style="font-size: 0.95rem; color: var(--color-text-secondary); margin: 0;">The Logarithm is a dedicated calculation interface that assists users in solving specialized equations.</p>
+      </div>
+    
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <!-- Sidebar Column -->
+  <aside style="position: sticky; top: 90px; display: flex; flex-direction: column; gap: 1.5rem;">
+    <!-- Sidebar Advertisement -->
+    <div class="ad-slot ad-slot-sidebar"></div>
+
+    <!-- Related Calculators -->
+    <div class="card" style="padding: 1.25rem;">
+      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">Related Calculators</h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+        
+      <li><a href="/calculators/simple-calculator/" style="color: var(--color-text-secondary);">Simple Calculator</a></li>
+    
+      <li><a href="/calculators/scientific-calculator/" style="color: var(--color-text-secondary);">Scientific Calculator</a></li>
+    
+      <li><a href="/calculators/percentage-calculator/" style="color: var(--color-text-secondary);">Percentage Calculator</a></li>
+    
+      <li><a href="/calculators/fraction-calculator/" style="color: var(--color-text-secondary);">Fraction Calculator</a></li>
+    
+      <li><a href="/calculators/matrix-calculator/" style="color: var(--color-text-secondary);">Matrix Calculator</a></li>
+    
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- Dynamic Calculator Calculation Module Import -->
+<script type="module" src="/js/calculators/logarithm-calculator.js"></script>
+
+  </main>
+
+  <!-- Bottom Ad Slot Banner -->
+  <div class="container">
+    <div class="ad-slot ad-slot-bottom"></div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer style="border-top: 1px solid var(--color-border); padding: 3rem 0; background-color: var(--color-bg-surface); margin-top: 4rem;">
+    <div class="container grid grid-cols-4">
+      <div>
+        <h4 style="margin-bottom: 1rem;">CalculatorHub</h4>
+        <p style="font-size: 0.9rem;">Every Calculator You Need — Free, Fast & Accurate. Covering math, finance, tax, conversion, and construction.</p>
+        <p style="font-size: 0.85rem; margin-top: 1rem; color: var(--color-text-secondary); line-height: 1.4;">
+          <a href="mailto:itsmekishoreoo@gmail.com" style="color: var(--color-primary); text-decoration: underline;">contact us</a> to send feedbacks and tell us if you found any mistakes.
+        </p>
+        <p style="font-size: 0.85rem; margin-top: 1rem;">&copy; 2026 CalculatorHub. All rights reserved.</p>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 1rem;">Categories</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+          <li><a href="/categories/math/" style="color: var(--color-text-secondary);">Mathematics</a></li>
+          <li><a href="/categories/finance/" style="color: var(--color-text-secondary);">Finance</a></li>
+          <li><a href="/categories/banking/" style="color: var(--color-text-secondary);">Banking & Loans</a></li>
+          <li><a href="/categories/health-fitness/" style="color: var(--color-text-secondary);">Health & Fitness</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 1rem;">Popular Calculators</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+          <li><a href="/calculators/age-calculator/" style="color: var(--color-text-secondary);">Age Calculator</a></li>
+          <li><a href="/calculators/bmi-calculator/" style="color: var(--color-text-secondary);">BMI Calculator</a></li>
+          <li><a href="/calculators/percentage-calculator/" style="color: var(--color-text-secondary);">Percentage Calculator</a></li>
+          <li><a href="/calculators/emi-calculator/" style="color: var(--color-text-secondary);">EMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 1rem;">Legal & Support</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+          <li><a href="/contact.html" style="color: var(--color-text-secondary);">Contact Us</a></li>
+          <li><a href="/privacy-policy.html" style="color: var(--color-text-secondary);">Privacy Policy</a></li>
+          <li><a href="/terms.html" style="color: var(--color-text-secondary);">Terms & Conditions</a></li>
+          <li><a href="/disclaimer.html" style="color: var(--color-text-secondary);">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Sticky Ad Slot Banner -->
+  <div class="ad-slot ad-slot-mobile-sticky"></div>
+
+  <!-- Global scripts -->
+  <script type="module" src="/js/app.min.js"></script>
+  <script type="module" src="/js/search.min.js"></script>
+  
+</body>
+</html>

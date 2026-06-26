@@ -1,0 +1,22 @@
+{
+  "short_name": "CalculatorHub",
+  "name": "CalculatorHub - Free, Fast & Accurate Online Calculators",
+  "description": "Every calculator you need. 300+ free online calculators covering math, finance, health, science, and unit conversions.",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B0F19",
+  "theme_color": "#4F46E5",
+  "display": "standalone",
+  "orientation": "portrait"
+}

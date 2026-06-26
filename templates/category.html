@@ -1,0 +1,50 @@
+<!-- Category Header & Breadcrumbs -->
+<nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.9rem;">
+  <ol style="list-style: none; display: flex; gap: 0.5rem; padding: 0;">
+    <li><a href="/">Home</a></li>
+    <li style="color: var(--color-text-tertiary);">&gt;</li>
+    <li><a href="/categories/">Categories</a></li>
+    <li style="color: var(--color-text-tertiary);">&gt;</li>
+    <li aria-current="page" style="color: var(--color-text-primary); font-weight: 500;">{{category_name}}</li>
+  </ol>
+</nav>
+
+<div class="grid" style="grid-template-columns: 2.5fr 1fr; gap: 2rem; align-items: start;">
+  <!-- Main Category Content -->
+  <div>
+    <header style="margin-bottom: 2rem;">
+      <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{category_name}} Calculators</h1>
+      <p style="font-size: 1.1rem; color: var(--color-text-secondary); max-width: 800px;">{{category_description}}</p>
+    </header>
+
+    <!-- Category Calculators List -->
+    <section style="margin-bottom: 3rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1.25rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem;">Available Calculators</h2>
+      <div class="grid grid-cols-2" style="gap: 1.25rem;">
+        {{calculators_list}}
+      </div>
+    </section>
+
+    <!-- Comprehensive Guide content compiled statically per category -->
+    <section class="card" style="padding: 2rem; margin-top: 2rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Guide to {{category_name}} Calculations</h2>
+      <div style="font-size: 1rem; color: var(--color-text-secondary); line-height: 1.7;">
+        {{category_guide}}
+      </div>
+    </section>
+  </div>
+
+  <!-- Sidebar -->
+  <aside style="position: sticky; top: 90px; display: flex; flex-direction: column; gap: 1.5rem;">
+    <!-- Sidebar Ad Slot -->
+    <div class="ad-slot ad-slot-sidebar"></div>
+
+    <!-- Other Categories Card -->
+    <div class="card" style="padding: 1.25rem;">
+      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">Other Categories</h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+        {{sidebar_categories}}
+      </ul>
+    </div>
+  </aside>
+</div>
