@@ -779,7 +779,7 @@ function buildStaticPages(layoutHtml, categories, calculators, articles) {
           <div>
             <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">General Inquiries</h2>
             <p>For inquiries regarding calculator metrics, formulas, bug reports, and advertising integrations, please reach us through the contact form or email our support desk.</p>
-            <p style="margin-top: 1.5rem;"><strong>Email:</strong> <a href="mailto:itsmekishoreoo@gmail.com" style="color: var(--color-primary); text-decoration: underline;">itsmekishoreoo@gmail.com</a></p>
+            <p style="margin-top: 1.5rem;"><strong>Email:</strong> <a href="mailto:itsmekishore00@gmail.com" style="color: var(--color-primary); text-decoration: underline;">itsmekishore00@gmail.com</a></p>
           </div>
         </div>
         <script>
