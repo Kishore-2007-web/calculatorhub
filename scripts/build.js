@@ -510,8 +510,14 @@ function buildCalculators(layoutHtml, categories, calculators) {
   // Also compile the central Calculators index list (A-Z)
   buildAllCalculatorsList(layoutHtml, calculators);
 
-  calculators.forEach(calc => {
-    ensureDir(path.join(rootDir, 'calculators', calc.id));
+  let count = 0;
+
+calculators.forEach(calc => {
+    count++;
+    console.log(`🔨 Building ${count}/${calculators.length}: ${calc.id}`);
+
+    try {
+  ensureDir(path.join(rootDir, 'calculators', calc.id));
 
     // Get matching category details
     const categoryObj = categories.find(c => c.id === calc.category);
@@ -643,8 +649,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 `;
       fs.writeFileSync(scriptPath, genericScript, 'utf8');
+        }
+    catch (err) {
+        console.error(`❌ Failed building calculator: ${calc.id}`);
+        console.error(err);
+        throw err;
     }
-  });
+});
 }
 
 function buildAllCalculatorsList(layoutHtml, calculators) {
