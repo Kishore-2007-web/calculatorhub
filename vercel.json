@@ -1,6 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "cleanUrls": true,
   "headers": [
     {
@@ -36,5 +34,7 @@
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
     }
-  ]
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "."
 }

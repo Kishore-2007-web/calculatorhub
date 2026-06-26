@@ -18,6 +18,7 @@
   "author": "CalculatorHub Team",
   "license": "MIT",
   "dependencies": {
-    "nodemailer": "^9.0.1"
-  }
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {}
 }
