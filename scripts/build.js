@@ -8,10 +8,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Target file system paths
-const rootDir = path.join(__dirname, "..", "public");
-const templatesDir = path.join(rootDir, "templates");
-const cssDir = path.join(rootDir, "css");
-const jsDir = path.join(rootDir, "js");
+const OUT_DIR = path.join(__dirname, "../dist");
+
+const templatesDir = path.join(OUT_DIR, "templates");
+const cssDir = path.join(OUT_DIR, "css");
+const jsDir = path.join(OUT_DIR, "js");
 
 // Custom layout configurations
 const SITE_URL = "https://calculatorhub.org";
@@ -569,15 +570,12 @@ function buildCalculators(layoutHtml, categories, calculators) {
     try {
       ensureDir(path.join(rootDir, "calculators", calc.id));
 
-      // Get matching category details
       const categoryObj = categories.find((c) => c.id === calc.category);
       const categoryName = categoryObj ? categoryObj.name : "Other";
       const categoryId = categoryObj ? categoryObj.id : "lifestyle-travel";
 
-      // Retrieve input/output markup configurations
       const io = getCalculatorInputsOutputs(calc.id, calc.category);
 
-      // Compile FAQs
       const faqsHtml = calc.faqs
         .map(
           (faq) => `
@@ -589,7 +587,6 @@ function buildCalculators(layoutHtml, categories, calculators) {
         )
         .join("");
 
-      // Related calculators
       const relatedCalcs = calculators
         .filter((c) => c.category === calc.category && c.id !== calc.id)
         .slice(0, 5);
@@ -602,12 +599,46 @@ function buildCalculators(layoutHtml, categories, calculators) {
         )
         .join("");
 
+      const introText =
+        calc.desc +
+        ` This ${calc.name.toLowerCase()} provides immediate results.`;
+      const formulaExplanation = `Standard calculation logic applied.`;
+      const workedExample = `Example calculation shown based on inputs.`;
+
+      const calcContent = calculatorTemplate
+        .replace(/{{category_id}}/g, categoryId)
+        .replace(/{{category_name}}/g, categoryName)
+        .replace(/{{calculator_id}}/g, calc.id)
+        .replace(/{{calculator_name}}/g, calc.name)
+        .replace(/{{calculator_description}}/g, calc.desc)
+        .replace(/{{calculator_inputs}}/g, io.inputs)
+        .replace(/{{calculator_results}}/g, io.outputs)
+        .replace(/{{intro_text}}/g, introText)
+        .replace(/{{formula_code}}/g, calc.formula)
+        .replace(/{{formula_explanation}}/g, formulaExplanation)
+        .replace(/{{worked_example}}/g, workedExample)
+        .replace(/{{faqs_html}}/g, faqsHtml)
+        .replace(/{{related_calculators_links}}/g, relatedLinksHtml);
+
+      const calculatorSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        name: calc.name,
+        url: `${SITE_URL}/calculators/${calc.id}/`,
+        description: calc.desc,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "All",
+      };
+
       const finalHtml = layoutHtml
-        .replace(/{{title}}/g, `${calc.name}`)
+        .replace(/{{title}}/g, `${calc.name} - CalculatorHub`)
         .replace(/{{description}}/g, calc.desc)
         .replace(/{{canonical_url}}/g, `${SITE_URL}/calculators/${calc.id}/`)
-        .replace(/{{schema_json}}/g, "{}")
-        .replace(/{{content}}/g, "")
+        .replace(/{{og_type}}/g, "article")
+        .replace(/{{og_image}}/g, defaultOgImage)
+        .replace(/{{additional_head}}/g, "")
+        .replace(/{{schema_json}}/g, JSON.stringify(calculatorSchema, null, 2))
+        .replace(/{{content}}/g, calcContent)
         .replace(/{{additional_scripts}}/g, "");
 
       fs.writeFileSync(
@@ -615,23 +646,9 @@ function buildCalculators(layoutHtml, categories, calculators) {
         finalHtml,
         "utf8",
       );
-
-      // JS file creation
-      const scriptPath = path.join(jsDir, "calculators", `${calc.id}.js`);
-
-      if (!fs.existsSync(scriptPath)) {
-        const genericScript = `
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("Calculator loaded: ${calc.id}");
-});
-      `;
-
-        fs.writeFileSync(scriptPath, genericScript, "utf8");
-      }
     } catch (err) {
       console.error(`❌ Failed building calculator: ${calc.id}`);
       console.error(err);
-      throw err;
     }
   });
 
