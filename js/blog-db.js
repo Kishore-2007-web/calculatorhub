@@ -103,37 +103,27 @@ const topics = [
 
 // Helper to generate slug from title
 function getSlug(title) {
-  return title.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, '-');
+  return title.trim().toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, '-');
 }
 
 export const articles = [];
+const seenSlugs = new Set();
 
-// Populate 100 SEO blog article structures programmatically to fulfill requirement
-for (let i = 0; i < 100; i++) {
-  // Cycle through the 80 custom topics, or construct dynamic ones if i >= 80
-  let topic;
-  if (i < topics.length) {
-    topic = topics[i];
-  } else {
-    // Generate dynamic topics to hit the 100-article quota
-    const extensionIndex = i - topics.length;
-    const fallbacks = [
-      { title: `Advanced Analysis of ${i} Calculator Implementations`, calc: "simple-calculator" },
-      { title: `How to Verify Equation Accuracies for ${i} Math Calculations`, calc: "scientific-calculator" },
-      { title: `Statistical Modeling and Error margins in ${i} Simulations`, calc: "standard-deviation-calculator" },
-      { title: `Top 10 High-Demand Calculators for Everyday Financial Decisions`, calc: "compound-interest-calculator" },
-      { title: `Why Pre-Rendered Calculation Pages Boost Web Core Vitals`, calc: "simple-calculator" }
-    ];
-    topic = fallbacks[extensionIndex % fallbacks.length];
+// Populate unique, high-quality topics
+topics.forEach(topic => {
+  const cleanTitle = topic.title.trim();
+  const slug = getSlug(cleanTitle);
+
+  if (seenSlugs.has(slug)) {
+    throw new Error(`Duplicate slug detected in blog database: ${slug}`);
   }
+  seenSlugs.add(slug);
 
-  const slug = getSlug(topic.title);
-  
   articles.push({
     slug: slug,
-    title: topic.title,
-    description: `Read our comprehensive guide: ${topic.title}. Discover formulas, step-by-step worked examples, and internal links to calculators.`,
-    keywords: [topic.title.split(' ')[0].toLowerCase(), 'calculator', 'formula', 'calculation'],
+    title: cleanTitle,
+    description: `Read our comprehensive guide: ${cleanTitle}. Discover formulas, step-by-step worked examples, and internal links to calculators.`,
+    keywords: [cleanTitle.split(' ')[0].toLowerCase(), 'calculator', 'formula', 'calculation'],
     calculatorId: topic.calc,
     outline: [
       "Introduction to the Topic",
@@ -143,7 +133,7 @@ for (let i = 0; i < 100; i++) {
       "Frequently Asked Questions (FAQs)"
     ],
     content: `
-      <p>Welcome to our comprehensive guide on <strong>${topic.title}</strong>. Solving math, finance, and engineering problems can often feel intimidating, but using standard processes and dedicated tools streamlines the execution.</p>
+      <p>Welcome to our comprehensive guide on <strong>${cleanTitle}</strong>. Solving math, finance, and engineering problems can often feel intimidating, but using standard processes and dedicated tools streamlines the execution.</p>
       
       <h2>1. Introduction</h2>
       <p>In everyday tasks, numerical analysis plays a vital role. Understanding the underlying metrics allows you to make informed decisions, whether you are planning household painting budgets, estimating car loan schedules, or analyzing nutritional intake ratios.</p>
@@ -154,12 +144,13 @@ for (let i = 0; i < 100; i++) {
       <h2>3. Why Using a Dedicated Calculator Saves Time</h2>
       <p>Performing these equations manually is prone to arithmetic errors. Our free online calculator handles these formulas client-side, returning instant feedback with zero lag.</p>
       
-      <p>Calculate now using the related tool: <a href="/calculators/${topic.calc}/" style="font-weight:600;">Open the ${topic.title.replace('How to ', '').replace('Guide', '')} &rarr;</a></p>
+      <p>Calculate now using the related tool: <a href="/calculators/${topic.calc}" style="font-weight:600;">Open the ${cleanTitle.replace('How to ', '').replace('Guide', '')} &rarr;</a></p>
       
       <h2>4. Frequently Asked Questions (FAQs)</h2>
       <p><strong>Is this formula accurate?</strong> Yes, all math formulations on CalculatorHub are vetted against industry-standard academic guidelines to guarantee reliability.</p>
     `
   });
-}
+});
 
 console.log(`📝 Initialized ${articles.length} SEO blog posts in memory database.`);
+
