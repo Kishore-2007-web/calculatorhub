@@ -746,7 +746,7 @@ function buildStaticPages(layoutHtml, categories, calculators, articles) {
       <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
         <h3 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 0.5rem;"><a href="/categories/${cat.id}">${cat.name}</a></h3>
         <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 1rem;">${cat.desc}</p>
-        <ul style="list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; font-size: 0.9rem; padding-left: 0;">
+        <ul class="grid grid-cols-3" style="list-style: none; gap: 0.5rem; font-size: 0.9rem; padding-left: 0;">
           ${linksList}
         </ul>
       </div>
@@ -773,7 +773,7 @@ function buildStaticPages(layoutHtml, categories, calculators, articles) {
 
         <section style="margin-bottom: 2rem;">
           <h2 style="font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">Calculation Insights & Blog Posts</h2>
-          <ul style="list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: 0.9rem; padding-left: 0;">
+          <ul class="grid grid-cols-2" style="list-style: none; gap: 0.5rem; font-size: 0.9rem; padding-left: 0;">
             ${sitemapArticlesHtml}
           </ul>
         </section>

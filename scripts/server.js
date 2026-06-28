@@ -66,7 +66,7 @@ const server = http.createServer(async (req, res) => {
   let filePath = path.join(rootDir, req.url === '/' ? 'index.html' : req.url.split('?')[0]);
   
   // Clean URL support (e.g. /about -> /about.html)
-  if (!fs.existsSync(filePath) && !path.extname(filePath)) {
+  if (!path.extname(filePath)) {
     if (fs.existsSync(filePath + '.html')) {
       filePath += '.html';
     } else if (fs.existsSync(path.join(filePath, 'index.html'))) {

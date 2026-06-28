@@ -348,3 +348,117 @@ input:checked+.theme-slider:before {
 .animate-fade-in {
   animation: fadeIn var(--transition-normal) ease-out forwards;
 }
+
+/* Mobile Hamburger Menu button styling */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: opacity var(--transition-fast);
+}
+
+.mobile-menu-btn:hover {
+  opacity: 0.7;
+}
+
+/* Responsive layouts for dashboard and categories */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1.1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.category-layout {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Typography styles matching breakpoints */
+.hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Mobile Media Queries for layout.html navbar and custom layouts */
+@media (max-width: 992px) {
+  .dashboard-layout,
+  .category-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .navbar {
+    height: auto;
+    padding: 0.75rem 0;
+  }
+
+  .navbar .container {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Make search container full width below logo and menu */
+  .navbar .search-container {
+    order: 3;
+    max-width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  /* Hide navigation links by default on mobile, display as drawer */
+  #nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg-surface);
+    border-bottom: 1.5px solid var(--color-border);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    align-items: stretch !important;
+    box-shadow: var(--shadow-lg);
+    z-index: 99;
+  }
+
+  #nav-links.active {
+    display: flex;
+    animation: slideDown var(--transition-fast) ease-out;
+  }
+
+  #nav-links a {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  #nav-links a:last-child {
+    border-bottom: none;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+}

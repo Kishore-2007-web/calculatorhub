@@ -71,6 +71,15 @@
 
       <!-- Settings & Links -->
       <div class="flex items-center gap-md">
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
         <nav id="nav-links" class="flex gap-md" style="align-items: center;">
           <a href="/" style="font-weight: 500;">Home</a>
           <a href="/categories" style="font-weight: 500;">Categories</a>
@@ -105,10 +114,10 @@
   </ol>
 </nav>
 
-<div class="grid" style="grid-template-columns: 2.2fr 1.1fr; gap: 2rem; align-items: start;">
+<div class="dashboard-layout">
   <!-- Calculator Dashboard -->
   <div>
-    <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">Flow Rate Converter</h1>
+    <h1 class="page-title">Flow Rate Converter</h1>
     <p style="font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: 1.5rem;">Professional, free, fast, and accurate calculation tool to compute flow rate converter.</p>
 
     <!-- Interactive Card Layout -->
