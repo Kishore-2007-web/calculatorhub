@@ -1,22 +1,22 @@
 /* Dark Mode Theme Custom Properties */
 
 body.dark-theme {
-  --color-bg-base: hsl(222, 47%, 6%);
-  --color-bg-surface: hsl(222, 47%, 10%);
-  --color-bg-surface-glass: rgba(15, 23, 42, 0.75);
-  --color-border: hsl(222, 25%, 16%);
-  --color-border-hover: hsl(222, 25%, 26%);
+  --color-bg-base: hsl(0, 0%, 4%);
+  --color-bg-surface: hsl(0, 0%, 8%);
+  --color-bg-surface-glass: rgba(18, 18, 18, 0.75);
+  --color-border: hsl(0, 0%, 16%);
+  --color-border-hover: hsl(0, 0%, 26%);
 
-  --color-text-primary: hsl(210, 40%, 98%);
-  --color-text-secondary: hsl(215, 20%, 78%);
-  --color-text-tertiary: hsl(215, 13%, 58%);
+  --color-text-primary: hsl(0, 0%, 98%);
+  --color-text-secondary: hsl(0, 0%, 78%);
+  --color-text-tertiary: hsl(0, 0%, 58%);
 
-  /* Accent Adjustments for Dark Contrast - Violet/Indigo */
-  --color-primary-hsl: 243, 100%, 72%;
+  /* Accent Adjustments for Dark Contrast - Emerald/Mint Green */
+  --color-primary-hsl: 161, 84%, 48%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(243, 100%, 80%);
-  --color-primary-light: hsl(243, 30%, 18%);
-  --color-primary-glow: rgba(129, 140, 248, 0.2);
+  --color-primary-hover: hsl(161, 84%, 58%);
+  --color-primary-light: hsl(161, 30%, 14%);
+  --color-primary-glow: rgba(16, 185, 129, 0.2);
 
   /* Status Colors */
   --color-success: hsl(150, 84%, 45%);
@@ -27,11 +27,11 @@ body.dark-theme {
   --color-error-light: hsl(356, 84%, 8%);
 
   /* Shadows adjustments for dark mode */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.5), 0 2px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 24px 38px -8px rgba(0, 0, 0, 0.7), 0 10px 20px -5px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 24px 0 rgba(129, 140, 248, 0.15);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.6), 0 2px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 24px 38px -8px rgba(0, 0, 0, 0.8), 0 10px 20px -5px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 24px 0 rgba(16, 185, 129, 0.15);
 }
 
 /* Base adjustment overrides for dark mode elements */
