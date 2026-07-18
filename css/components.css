@@ -564,4 +564,36 @@ input:checked + .theme-slider:before {
   #nav-links a:last-child {
     border-bottom: none;
   }
+
+  /* Reduce card padding on mobile screens to reclaim usable width */
+  .card {
+    padding: 1.25rem;
+  }
+}
+
+/* Calculator form actions wrapper */
+.calculator-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.calculator-actions .btn-primary {
+  flex: 2;
+}
+
+.calculator-actions .btn-secondary {
+  flex: 1;
+}
+
+@media (max-width: 480px) {
+  .calculator-actions {
+    flex-direction: column;
+  }
+  .calculator-actions .btn {
+    width: 100%;
+  }
+  .logo {
+    font-size: 1.2rem;
+  }
 }
