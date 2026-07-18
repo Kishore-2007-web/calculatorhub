@@ -22,7 +22,7 @@
         <div>
           <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.01em;">⚙️ Parameters</h2>
           <form id="calculator-form" onsubmit="return false;">
-            {{calculator_inputs}}
+            <div id="dynamic-inputs-container" class="flex flex-col gap-md"></div>
             
             <div class="calculator-actions" style="margin-top: 1.5rem;">
               <button type="submit" id="calculate-btn" class="btn btn-primary">Calculate</button>
@@ -37,8 +37,10 @@
         <div>
           <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; letter-spacing: -0.01em;">📊 Results</h2>
           <div id="calculator-results">
-            {{calculator_results}}
+            <div id="dynamic-outputs-container"></div>
           </div>
+          <!-- Dynamic explanation details -->
+          <div id="dynamic-explanation-container" style="margin-top: 1.5rem; border-top: 1px solid var(--color-border); padding-top: 1rem; display: none;"></div>
         </div>
         <!-- Alert placeholder for errors -->
         <div id="calculator-alert" style="margin-top: 1.5rem;"></div>
@@ -101,6 +103,9 @@
   </aside>
 </div>
 
-<!-- Dynamic Calculator Calculation Module Import -->
-<script type="module" src="/js/calculators/{{calculator_id}}.js"></script>
-
+<!-- UCE Registry config and loaders variables -->
+<script>
+  window.CURRENT_CALCULATOR_ID = "{{calculator_id}}";
+  window.CURRENT_CALCULATOR_CATEGORY = "{{category_id}}";
+</script>
+<script type="module" src="/js/engine/index.js"></script>

@@ -127,16 +127,7 @@
         <div>
           <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.01em;">⚙️ Parameters</h2>
           <form id="calculator-form" onsubmit="return false;">
-            
-          <div class="form-group">
-            <label for="birth-date">Date of Birth</label>
-            <input type="date" id="birth-date" class="input-control" required value="1995-01-01">
-          </div>
-          <div class="form-group">
-            <label for="target-date">Calculate Age At</label>
-            <input type="date" id="target-date" class="input-control" required value="2026-07-18">
-          </div>
-        
+            <div id="dynamic-inputs-container" class="flex flex-col gap-md"></div>
             
             <div class="calculator-actions" style="margin-top: 1.5rem;">
               <button type="submit" id="calculate-btn" class="btn btn-primary">Calculate</button>
@@ -151,20 +142,10 @@
         <div>
           <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; letter-spacing: -0.01em;">📊 Results</h2>
           <div id="calculator-results">
-            
-          <div style="text-align: center; padding: 1rem 0;">
-            <div style="font-size: 0.9rem; color: var(--color-text-secondary); font-weight: 600;">YOUR AGE IS</div>
-            <div id="result-years" style="font-size: 3rem; font-weight: 800; color: var(--color-primary); line-height: 1;">0</div>
-            <div style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem;">years, <span id="result-months-remain">0</span> months, <span id="result-days-remain">0</span> days</div>
-            <div style="border-top: 1px solid var(--color-border); padding-top: 1rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; text-align: left; font-size: 0.9rem;">
-              <div><strong>Months:</strong> <span id="result-months">0</span></div>
-              <div><strong>Weeks:</strong> <span id="result-weeks">0</span></div>
-              <div><strong>Days:</strong> <span id="result-days">0</span></div>
-              <div><strong>Hours:</strong> <span id="result-hours">0</span></div>
-            </div>
+            <div id="dynamic-outputs-container"></div>
           </div>
-        
-          </div>
+          <!-- Dynamic explanation details -->
+          <div id="dynamic-explanation-container" style="margin-top: 1.5rem; border-top: 1px solid var(--color-border); padding-top: 1rem; display: none;"></div>
         </div>
         <!-- Alert placeholder for errors -->
         <div id="calculator-alert" style="margin-top: 1.5rem;"></div>
@@ -244,9 +225,12 @@
   </aside>
 </div>
 
-<!-- Dynamic Calculator Calculation Module Import -->
-<script type="module" src="/js/calculators/age-calculator.js"></script>
-
+<!-- UCE Registry config and loaders variables -->
+<script>
+  window.CURRENT_CALCULATOR_ID = "age-calculator";
+  window.CURRENT_CALCULATOR_CATEGORY = "time-date";
+</script>
+<script type="module" src="/js/engine/index.js"></script>
 
   </main>
 
