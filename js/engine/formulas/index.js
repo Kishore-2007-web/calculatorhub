@@ -35,6 +35,9 @@ export class UceFormulaEngine {
 
       const formulaFn = formulas[calculator.id];
       if (typeof formulaFn !== 'function') {
+        if (typeof formulas._fallback === 'function') {
+          return formulas._fallback(calculator.id, inputs);
+        }
         throw new Error(`Formula execution script [${calculator.id}] not found in formulas category [${categoryId}].`);
       }
 

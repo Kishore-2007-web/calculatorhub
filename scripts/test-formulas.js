@@ -148,6 +148,15 @@ async function runTests() {
 
     const sciVal = mathFormulas['scientific-calculator']({ expression: 'sqrt(64) + sin(0) + pow(2, 3)' });
     assert(sciVal === 16, `Pocket Scientific Calculator evaluation (sqrt(64) + sin(0) + pow(2, 3) = ${sciVal})`);
+
+    const fallbackSqrt = mathFormulas._fallback('square-root-calculator', { val_a: 9 });
+    assert(fallbackSqrt === 3, `Fallback square root calculator (Expected 3, got ${fallbackSqrt})`);
+
+    const fallbackGcd = mathFormulas._fallback('gcd-calculator', { val_a: 12, val_b: 8 });
+    assert(fallbackGcd === 4, `Fallback GCD calculator (Expected 4, got ${fallbackGcd})`);
+
+    const fallbackPrime = mathFormulas._fallback('prime-number-checker', { val_a: 7 });
+    assert(fallbackPrime === 1, `Fallback prime checker (Expected 1, got ${fallbackPrime})`);
   } catch (err) {
     console.error('❌ Crash in Math Formula Tests:', err);
     failedTestsCount++;
