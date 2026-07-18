@@ -66,6 +66,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -150,9 +151,18 @@ textarea:focus-visible {
 }
 
 @media (max-width: 768px) {
+  .grid-cols-2 { grid-template-columns: 1fr; }
   .grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
   body { font-size: 0.95rem; }
+  
+  /* Fix auto-zoom scaling on mobile browsers when focusing inputs */
+  .input-control,
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 @media (max-width: 600px) {
