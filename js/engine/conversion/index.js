@@ -148,16 +148,26 @@ export class UceConverter {
     const activeUnitSystem = unitSelectorId ? rawInputs[unitSelectorId] : null;
 
     inputsConfig.forEach(input => {
-      let val = Utils.parseFloat(rawInputs[input.id], input.defaultValue || 0);
-
-      // Determine units based on current system
-      let unit = input.unit;
-      if (activeUnitSystem && input.unitSystem) {
-        unit = input.unitSystem[activeUnitSystem];
+      let rawVal = rawInputs[input.id];
+      if (rawVal === undefined) {
+        rawVal = input.defaultValue !== undefined ? input.defaultValue : '';
       }
 
-      if (unit && input.unitType) {
-        val = this.convertToBase(val, input.unitType, unit);
+      let val = rawVal;
+      const numericTypes = ['number', 'currency', 'percentage', 'slider', 'range'];
+
+      if (numericTypes.includes(input.type)) {
+        val = Utils.parseFloat(rawVal, typeof input.defaultValue === 'number' ? input.defaultValue : 0);
+
+        // Determine units based on current system
+        let unit = input.unit;
+        if (activeUnitSystem && input.unitSystem) {
+          unit = input.unitSystem[activeUnitSystem];
+        }
+
+        if (unit && input.unitType) {
+          val = this.convertToBase(val, input.unitType, unit);
+        }
       }
 
       normalized[input.id] = val;
