@@ -54,40 +54,59 @@ export const mathRegistry = [
   },
   {
     id: 'simple-calculator',
-    version: '1.0.0',
+    version: '1.1.0',
     name: 'Simple Calculator',
     category: 'math',
-    desc: 'Perform basic math additions.',
-    formulaType: 'fdl',
-    formula: 'val_a + val_b',
+    desc: 'Perform basic math operations including addition, subtraction, multiplication, and division.',
+    formulaType: 'function',
     inputs: [
       {
-        id: 'val_a',
-        label: 'Input Value A',
-        type: 'number',
-        defaultValue: 25,
-        required: true
-      },
-      {
-        id: 'val_b',
-        label: 'Input Value B',
-        type: 'number',
-        defaultValue: 5,
-        required: true
+        id: 'expression',
+        type: 'hidden',
+        defaultValue: '0'
       }
     ],
     outputs: [
       {
         id: 'result',
-        label: 'Calculated Sum',
+        label: 'Result Outcome',
         primary: true,
         format: 'number',
-        decimals: 2
+        decimals: 6
       }
     ],
     explanation: `
       <div style="font-size: 0.95rem;">
-        <p>The sum of <strong>{input_val_a}</strong> and <strong>{input_val_b}</strong> is <strong>{result}</strong>.</p>
+        <p>The standard arithmetic evaluation result is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'scientific-calculator',
+    version: '1.1.0',
+    name: 'Scientific Calculator',
+    category: 'math',
+    desc: 'Advanced scientific calculator supporting trigonometry, exponents, and logs.',
+    formulaType: 'function',
+    inputs: [
+      {
+        id: 'expression',
+        type: 'hidden',
+        defaultValue: '0'
+      }
+    ],
+    outputs: [
+      {
+        id: 'result',
+        label: 'Scientific Outcome',
+        primary: true,
+        format: 'number',
+        decimals: 6
+      }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>Scientific equation evaluation result: <strong>{result}</strong></p>
       </div>
     `
   }

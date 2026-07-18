@@ -87,7 +87,7 @@ export class UceEngine {
       const renderer = container.get('Renderer');
       renderer.renderForm(this.inputsContainer, this.calculator.inputs, () => {
         eventBus.emit('InputChanged', { calculatorId: this.calculator.id });
-      });
+      }, this.calculator);
 
       // 3. WARM UP CACHE WITH DEFAULT INPUTS OR URL QUERY PARAMETERS
       const historyManager = container.get('History');
@@ -138,6 +138,14 @@ export class UceEngine {
    */
   gatherInputs() {
     const inputs = {};
+
+    // Check if pocket calculator style is running
+    if (this.calculator.id === 'simple-calculator' || this.calculator.id === 'scientific-calculator') {
+      const calcCurrent = document.querySelector('.calc-current');
+      inputs.expression = calcCurrent ? calcCurrent.getAttribute('data-expression') || '0' : '0';
+      return inputs;
+    }
+
     this.calculator.inputs.forEach(input => {
       const el = document.getElementById(input.id);
       if (!el) {

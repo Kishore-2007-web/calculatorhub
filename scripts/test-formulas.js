@@ -142,6 +142,12 @@ async function runTests() {
       'pct-y': 150
     });
     assert(pctChange === 50, `Percentage change (100 to 150 = 50% increase)`);
+
+    const simpleVal = mathFormulas['simple-calculator']({ expression: '25 + 5 * 2' });
+    assert(simpleVal === 35, `Pocket Simple Calculator evaluation (25 + 5 * 2 = ${simpleVal})`);
+
+    const sciVal = mathFormulas['scientific-calculator']({ expression: 'sqrt(64) + sin(0) + pow(2, 3)' });
+    assert(sciVal === 16, `Pocket Scientific Calculator evaluation (sqrt(64) + sin(0) + pow(2, 3) = ${sciVal})`);
   } catch (err) {
     console.error('❌ Crash in Math Formula Tests:', err);
     failedTestsCount++;

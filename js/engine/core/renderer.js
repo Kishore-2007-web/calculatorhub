@@ -26,8 +26,15 @@ export class UceRenderer {
   /**
    * Render dynamic input form fields
    */
-  renderForm(containerEl, inputs, onChangeCallback) {
+  renderForm(containerEl, inputs, onChangeCallback, calculator) {
     if (!containerEl) return;
+
+    // Check if pocket calculator style is requested
+    if (calculator && (calculator.id === 'simple-calculator' || calculator.id === 'scientific-calculator')) {
+      this.renderPocketCalculator(containerEl, calculator, onChangeCallback);
+      return;
+    }
+
     containerEl.innerHTML = '';
 
     const comp = this.getComponents();
@@ -98,19 +105,392 @@ export class UceRenderer {
   }
 
   /**
+   * Render pocket calculator keypad interface
+   */
+  renderPocketCalculator(containerEl, calculator, onChangeCallback) {
+    containerEl.innerHTML = '';
+    
+    const isSci = calculator.id === 'scientific-calculator';
+    const gridCols = isSci ? 'repeat(5, 1fr)' : 'repeat(4, 1fr)';
+    
+    let buttons = [];
+    if (isSci) {
+      buttons = [
+        { label: 'sin', action: 'func', value: 'sin(' },
+        { label: 'cos', action: 'func', value: 'cos(' },
+        { label: 'tan', action: 'func', value: 'tan(' },
+        { label: 'C', action: 'clear', class: 'btn-danger' },
+        { label: '⌫', action: 'backspace', class: 'btn-warning' },
+
+        { label: 'log', action: 'func', value: 'log(' },
+        { label: 'ln', action: 'func', value: 'ln(' },
+        { label: 'sqrt', action: 'func', value: 'sqrt(' },
+        { label: '(', action: 'append', value: '(' },
+        { label: ')', action: 'append', value: ')' },
+
+        { label: '7', action: 'append', value: '7', class: 'btn-num' },
+        { label: '8', action: 'append', value: '8', class: 'btn-num' },
+        { label: '9', action: 'append', value: '9', class: 'btn-num' },
+        { label: '^', action: 'append', value: '^' },
+        { label: '/', action: 'append', value: '/' },
+
+        { label: '4', action: 'append', value: '4', class: 'btn-num' },
+        { label: '5', action: 'append', value: '5', class: 'btn-num' },
+        { label: '6', action: 'append', value: '6', class: 'btn-num' },
+        { label: 'π', action: 'append', value: 'pi' },
+        { label: '*', action: 'append', value: '*' },
+
+        { label: '1', action: 'append', value: '1', class: 'btn-num' },
+        { label: '2', action: 'append', value: '2', class: 'btn-num' },
+        { label: '3', action: 'append', value: '3', class: 'btn-num' },
+        { label: 'e', action: 'append', value: 'e' },
+        { label: '-', action: 'append', value: '-' },
+
+        { label: '0', action: 'append', value: '0', class: 'btn-num' },
+        { label: '.', action: 'append', value: '.' },
+        { label: 'exp', action: 'func', value: 'exp(' },
+        { label: '=', action: 'calculate', class: 'btn-success' },
+        { label: '+', action: 'append', value: '+' }
+      ];
+    } else {
+      buttons = [
+        { label: 'C', action: 'clear', class: 'btn-danger' },
+        { label: '(', action: 'append', value: '(' },
+        { label: ')', action: 'append', value: ')' },
+        { label: '⌫', action: 'backspace', class: 'btn-warning' },
+
+        { label: '7', action: 'append', value: '7', class: 'btn-num' },
+        { label: '8', action: 'append', value: '8', class: 'btn-num' },
+        { label: '9', action: 'append', value: '9', class: 'btn-num' },
+        { label: '/', action: 'append', value: '/' },
+
+        { label: '4', action: 'append', value: '4', class: 'btn-num' },
+        { label: '5', action: 'append', value: '5', class: 'btn-num' },
+        { label: '6', action: 'append', value: '6', class: 'btn-num' },
+        { label: '*', action: 'append', value: '*' },
+
+        { label: '1', action: 'append', value: '1', class: 'btn-num' },
+        { label: '2', action: 'append', value: '2', class: 'btn-num' },
+        { label: '3', action: 'append', value: '3', class: 'btn-num' },
+        { label: '-', action: 'append', value: '-' },
+
+        { label: '0', action: 'append', value: '0', class: 'btn-num' },
+        { label: '.', action: 'append', value: '.' },
+        { label: '=', action: 'calculate', class: 'btn-success' },
+        { label: '+', action: 'append', value: '+' }
+      ];
+    }
+
+    const calcWrapper = document.createElement('div');
+    calcWrapper.className = 'pocket-calc-wrapper animate-fade-in';
+    calcWrapper.style.cssText = `
+      width: 100%;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-lg);
+      margin: 0 auto;
+    `;
+
+    // Display
+    const display = document.createElement('div');
+    display.className = 'pocket-calc-display';
+    display.style.cssText = `
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      text-align: right;
+      margin-bottom: 1.25rem;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    `;
+
+    const exprDiv = document.createElement('div');
+    exprDiv.className = 'pocket-calc-expr';
+    exprDiv.style.cssText = `
+      font-size: 0.95rem;
+      color: #94a3b8;
+      font-family: monospace;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    `;
+    exprDiv.innerText = '';
+
+    const currentDiv = document.createElement('div');
+    currentDiv.className = 'calc-current';
+    currentDiv.style.cssText = `
+      font-size: 2.15rem;
+      font-weight: 700;
+      font-family: monospace;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    `;
+    currentDiv.setAttribute('data-expression', '0');
+    currentDiv.innerText = '0';
+
+    display.appendChild(exprDiv);
+    display.appendChild(currentDiv);
+    calcWrapper.appendChild(display);
+
+    // Keypad grid
+    const keypad = document.createElement('div');
+    keypad.style.cssText = `
+      display: grid;
+      grid-template-columns: ${gridCols};
+      gap: 0.65rem;
+    `;
+
+    // Help function to update display
+    let currentExpression = '0';
+    let displayExpression = '0';
+    let isResultDisplayed = false;
+
+    const updateDisplay = () => {
+      exprDiv.innerText = isResultDisplayed ? '' : (displayExpression === '0' ? '' : displayExpression);
+      currentDiv.innerText = displayExpression;
+      currentDiv.setAttribute('data-expression', currentExpression);
+      
+      exprDiv.scrollLeft = exprDiv.scrollWidth;
+      currentDiv.scrollLeft = currentDiv.scrollWidth;
+    };
+
+    buttons.forEach(btn => {
+      const bEl = document.createElement('button');
+      bEl.type = 'button';
+      bEl.innerText = btn.label;
+      
+      let bgStyle = 'background: var(--color-bg-base); color: var(--color-text-primary); border: 1px solid var(--color-border);';
+      if (btn.class === 'btn-danger') {
+        bgStyle = 'background: #ef4444; color: #fff; border: 1px solid #dc2626;';
+      } else if (btn.class === 'btn-warning') {
+        bgStyle = 'background: #f97316; color: #fff; border: 1px solid #ea580c;';
+      } else if (btn.class === 'btn-success') {
+        bgStyle = 'background: #10b981; color: #fff; border: 1px solid #059669;';
+      } else if (!btn.class && ['/', '*', '-', '+', '^'].includes(btn.value)) {
+        bgStyle = 'background: rgba(var(--color-primary-rgb), 0.15); color: var(--color-primary); border: 1px solid var(--color-border-hover);';
+      }
+
+      bEl.style.cssText = `
+        ${bgStyle}
+        font-size: 1.15rem;
+        font-weight: 700;
+        padding: 0.75rem 0;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.1s ease, filter 0.15s ease;
+      `;
+
+      bEl.addEventListener('mousedown', () => {
+        bEl.style.transform = 'scale(0.95)';
+      });
+      bEl.addEventListener('mouseup', () => {
+        bEl.style.transform = 'scale(1)';
+      });
+      bEl.addEventListener('mouseleave', () => {
+        bEl.style.transform = 'scale(1)';
+      });
+
+      bEl.addEventListener('click', () => {
+        if (btn.action === 'clear') {
+          currentExpression = '0';
+          displayExpression = '0';
+          isResultDisplayed = false;
+          updateDisplay();
+        } else if (btn.action === 'backspace') {
+          if (isResultDisplayed) {
+            currentExpression = '0';
+            displayExpression = '0';
+            isResultDisplayed = false;
+          } else {
+            if (currentExpression.length <= 1) {
+              currentExpression = '0';
+              displayExpression = '0';
+            } else {
+              currentExpression = currentExpression.slice(0, -1);
+              displayExpression = displayExpression.slice(0, -1);
+            }
+          }
+          updateDisplay();
+        } else if (btn.action === 'append' || btn.action === 'func') {
+          if (isResultDisplayed) {
+            if (btn.action === 'func' || ['/', '*', '-', '+', '^'].includes(btn.value)) {
+              isResultDisplayed = false;
+            } else {
+              currentExpression = '0';
+              displayExpression = '0';
+              isResultDisplayed = false;
+            }
+          }
+
+          const val = btn.value;
+          const label = btn.label;
+
+          if (currentExpression === '0' && !['/', '*', '-', '+', '^', '.'].includes(val)) {
+            currentExpression = val;
+            displayExpression = label;
+          } else {
+            currentExpression += val;
+            displayExpression += label;
+          }
+          updateDisplay();
+        } else if (btn.action === 'calculate') {
+          if (onChangeCallback) onChangeCallback();
+          isResultDisplayed = true;
+        }
+      });
+
+      keypad.appendChild(bEl);
+    });
+
+    const handleKeyPress = (e) => {
+      const key = e.key;
+      let targetBtn = null;
+      if (key >= '0' && key <= '9') {
+        targetBtn = buttons.find(b => b.label === key);
+      } else if (key === '+') {
+        targetBtn = buttons.find(b => b.value === '+');
+      } else if (key === '-') {
+        targetBtn = buttons.find(b => b.value === '-');
+      } else if (key === '*') {
+        targetBtn = buttons.find(b => b.value === '*');
+      } else if (key === '/') {
+        targetBtn = buttons.find(b => b.value === '/');
+      } else if (key === '.') {
+        targetBtn = buttons.find(b => b.value === '.');
+      } else if (key === '(') {
+        targetBtn = buttons.find(b => b.value === '(');
+      } else if (key === ')') {
+        targetBtn = buttons.find(b => b.value === ')');
+      } else if (key === '^') {
+        targetBtn = buttons.find(b => b.value === '^');
+      } else if (key === 'Backspace') {
+        targetBtn = buttons.find(b => b.action === 'backspace');
+      } else if (key === 'Enter' || key === '=') {
+        targetBtn = buttons.find(b => b.action === 'calculate');
+      } else if (key === 'Escape') {
+        targetBtn = buttons.find(b => b.action === 'clear');
+      }
+
+      if (targetBtn) {
+        e.preventDefault();
+        const matchedBtn = Array.from(keypad.children).find(el => el.innerText === targetBtn.label);
+        if (matchedBtn) {
+          matchedBtn.click();
+          matchedBtn.style.transform = 'scale(0.9)';
+          setTimeout(() => { matchedBtn.style.transform = 'scale(1)'; }, 100);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    
+    const observer = new MutationObserver((mutations, obs) => {
+      if (!document.contains(calcWrapper)) {
+        window.removeEventListener('keydown', handleKeyPress);
+        obs.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    calcWrapper.appendChild(keypad);
+    containerEl.appendChild(calcWrapper);
+  }
+
+  /**
+   * Helper function to convert decimals to Roman Numerals
+   */
+  toRoman(num) {
+    const val = Math.floor(num);
+    if (val <= 0 || val >= 4000) return 'N/A';
+    const lookup = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 };
+    let roman = '';
+    let n = val;
+    for (let i in lookup) {
+      while (n >= lookup[i]) {
+        roman += i;
+        n -= lookup[i];
+      }
+    }
+    return roman;
+  }
+
+  /**
    * Render outputs / results panel
    */
   renderResults(containerEl, resultsObj, calculatorConfig) {
     if (!containerEl) return;
     containerEl.innerHTML = '';
 
+    // Handle interactive pocket calculators results overlay
+    if (calculatorConfig && (calculatorConfig.id === 'simple-calculator' || calculatorConfig.id === 'scientific-calculator')) {
+      const calcCurrent = document.querySelector('.calc-current');
+      if (calcCurrent) {
+        calcCurrent.innerText = resultsObj.formattedResult;
+        calcCurrent.setAttribute('data-expression', resultsObj.rawResult !== undefined ? resultsObj.rawResult.toString() : '0');
+      }
+
+      const val = parseFloat(resultsObj.rawResult);
+      let resultsHtml = '';
+      if (isNaN(val)) {
+        resultsHtml = `
+          <div style="text-align: center; padding: 2rem 0; color: var(--color-text-secondary);">
+            Invalid expression format.
+          </div>
+        `;
+      } else {
+        const roman = this.toRoman(val);
+        const isInteger = Number.isInteger(val);
+        const binary = isInteger ? val.toString(2) : 'N/A';
+        const hex = isInteger ? '0x' + val.toString(16).toUpperCase() : 'N/A';
+        const octal = isInteger ? '0o' + val.toString(8) : 'N/A';
+        const sci = val.toExponential(4);
+
+        resultsHtml = `
+          <div style="padding: 0.5rem 0; width: 100%;">
+            <div style="text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--color-border);">
+              <div style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Decimal Outcome</div>
+              <div style="font-size: 2.25rem; color: var(--color-primary); font-weight: 800; word-break: break-all;">${resultsObj.formattedResult}</div>
+            </div>
+            <div class="flex justify-between items-center" style="border-bottom: 1px solid var(--color-border); padding: 0.65rem 0; gap: 1rem;">
+              <span style="color: var(--color-text-secondary); font-size: 0.95rem;">Scientific Notation:</span>
+              <strong style="color: var(--color-text-primary); font-family: monospace; word-break: break-all;">${sci}</strong>
+            </div>
+            <div class="flex justify-between items-center" style="border-bottom: 1px solid var(--color-border); padding: 0.65rem 0; gap: 1rem;">
+              <span style="color: var(--color-text-secondary); font-size: 0.95rem;">Binary (Base 2):</span>
+              <strong style="color: var(--color-text-primary); font-family: monospace; word-break: break-all;">${binary}</strong>
+            </div>
+            <div class="flex justify-between items-center" style="border-bottom: 1px solid var(--color-border); padding: 0.65rem 0; gap: 1rem;">
+              <span style="color: var(--color-text-secondary); font-size: 0.95rem;">Hexadecimal (Base 16):</span>
+              <strong style="color: var(--color-text-primary); font-family: monospace; word-break: break-all;">${hex}</strong>
+            </div>
+            <div class="flex justify-between items-center" style="border-bottom: 1px solid var(--color-border); padding: 0.65rem 0; gap: 1rem;">
+              <span style="color: var(--color-text-secondary); font-size: 0.95rem;">Octal (Base 8):</span>
+              <strong style="color: var(--color-text-primary); font-family: monospace; word-break: break-all;">${octal}</strong>
+            </div>
+            <div class="flex justify-between items-center" style="border-bottom: 1px solid var(--color-border); padding: 0.65rem 0; gap: 1rem;">
+              <span style="color: var(--color-text-secondary); font-size: 0.95rem;">Roman Numeral:</span>
+              <strong style="color: var(--color-text-primary); font-family: monospace; word-break: break-all;">${roman}</strong>
+            </div>
+          </div>
+        `;
+      }
+      containerEl.innerHTML = resultsHtml;
+      return;
+    }
+
     const comp = this.getComponents();
     if (!comp) return;
 
-    // Render results cards and tables based on the output keys
     let resultsHtml = '';
-    
-    // Check if the resultsObj has structured keys or just a raw result
     if (typeof resultsObj.formattedResult === 'object') {
       resultsHtml = comp.ResultCard(resultsObj, calculatorConfig);
     } else {

@@ -1,6 +1,5 @@
-/**
- * Math category formulas
- */
+import { FdlCompiler } from '../utils/fdl.js';
+
 export const mathFormulas = {
   /**
    * Percentage Calculator formula logic
@@ -37,12 +36,27 @@ export const mathFormulas = {
   },
 
   /**
-   * General fallback double input sum
+   * Interactive pocket calculator formula evaluator
    */
   'simple-calculator'(inputs) {
-    const a = inputs['val-a'] !== undefined ? inputs['val-a'] : 0;
-    const b = inputs['val-b'] !== undefined ? inputs['val-b'] : 0;
-    return a + b;
+    const expr = inputs.expression || '0';
+    try {
+      return FdlCompiler.evaluate(expr, {});
+    } catch (err) {
+      throw new Error('Mathematical syntax error.');
+    }
+  },
+
+  /**
+   * Interactive scientific calculator formula evaluator
+   */
+  'scientific-calculator'(inputs) {
+    const expr = inputs.expression || '0';
+    try {
+      return FdlCompiler.evaluate(expr, {});
+    } catch (err) {
+      throw new Error('Mathematical syntax error.');
+    }
   }
 };
 
