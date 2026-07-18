@@ -77,11 +77,9 @@ function initSearch() {
     items.forEach((item, index) => {
       if (index === activeIndex) {
         item.classList.add('active');
-        item.style.backgroundColor = 'var(--color-bg-base)';
         item.scrollIntoView({ block: 'nearest' });
       } else {
         item.classList.remove('active');
-        item.style.backgroundColor = '';
       }
     });
   }

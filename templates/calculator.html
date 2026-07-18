@@ -1,80 +1,85 @@
 <!-- Calculator Page Breadcrumbs -->
-<nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.9rem;">
-  <ol style="list-style: none; display: flex; gap: 0.5rem; padding: 0;">
-    <li><a href="/">Home</a></li>
+<nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.875rem; font-weight: 500;">
+  <ol style="list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0;">
+    <li><a href="/" style="color: var(--color-text-tertiary);">Home</a></li>
     <li style="color: var(--color-text-tertiary);">&gt;</li>
-    <li><a href="/categories/{{category_id}}/">{{category_name}}</a></li>
+    <li><a href="/categories/{{category_id}}/" style="color: var(--color-text-tertiary);">{{category_name}}</a></li>
     <li style="color: var(--color-text-tertiary);">&gt;</li>
-    <li aria-current="page" style="color: var(--color-text-primary); font-weight: 500;">{{calculator_name}}</li>
+    <li aria-current="page" style="color: var(--color-text-primary);">{{calculator_name}}</li>
   </ol>
 </nav>
 
 <div class="dashboard-layout">
   <!-- Calculator Dashboard -->
   <div>
-    <h1 class="page-title">{{calculator_name}}</h1>
-    <p style="font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: 1.5rem;">{{calculator_description}}</p>
+    <h1 class="page-title" style="font-weight: 800;">{{calculator_name}}</h1>
+    <p style="font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: 2rem; line-height: 1.5;">{{calculator_description}}</p>
 
     <!-- Interactive Card Layout -->
-    <div class="grid grid-cols-2" style="gap: 1.5rem; align-items: stretch; margin-bottom: 3rem;">
+    <div class="grid grid-cols-2" style="gap: 1.5rem; align-items: stretch; margin-bottom: 3.5rem;">
       <!-- Inputs Column -->
-      <div class="card card-premium" style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between;">
+      <div class="card card-premium" style="display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <h2 style="font-size: 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">⚙️ Input Parameters</h2>
+          <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.01em;">⚙️ Parameters</h2>
           <form id="calculator-form" onsubmit="return false;">
             {{calculator_inputs}}
-            <button type="submit" id="calculate-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Calculate Now</button>
+            
+            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; width: 100%;">
+              <button type="submit" id="calculate-btn" class="btn btn-primary" style="flex: 2;">Calculate</button>
+              <button type="button" id="reset-btn" class="btn btn-secondary" style="flex: 1;">Reset</button>
+            </div>
           </form>
         </div>
       </div>
 
       <!-- Outputs / Results Column -->
-      <div class="card card-glass" style="padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; border-color: var(--color-primary-glow);">
+      <div class="card card-glass" style="display: flex; flex-direction: column; justify-content: space-between; border-color: var(--color-border-hover);">
         <div>
-          <h2 style="font-size: 1.25rem; margin-bottom: 1.25rem;">📊 Results</h2>
+          <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; letter-spacing: -0.01em;">📊 Results</h2>
           <div id="calculator-results">
             {{calculator_results}}
           </div>
         </div>
         <!-- Alert placeholder for errors -->
-        <div id="calculator-alert" style="margin-top: auto;"></div>
+        <div id="calculator-alert" style="margin-top: 1.5rem;"></div>
       </div>
     </div>
 
     <!-- SEO Rich Text Copy Section -->
-    <article class="card" style="padding: 2.5rem; line-height: 1.8;">
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">What is the {{calculator_name}}?</h2>
-        <p>{{intro_text}}</p>
+    <article class="card" style="padding: 3rem 2.5rem; line-height: 1.8;">
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--color-text-primary); letter-spacing: -0.02em;">What is the {{calculator_name}}?</h2>
+        <p style="color: var(--color-text-secondary); font-size: 1.025rem;">{{intro_text}}</p>
       </section>
 
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">How to Use the Calculator</h2>
-        <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
-          <li>Enter the required inputs in the left parameter panel.</li>
-          <li>Click the "Calculate Now" button.</li>
-          <li>Review the calculated outputs instantly in the results panel.</li>
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--color-text-primary); letter-spacing: -0.02em;">How to Use the Calculator</h2>
+        <ol style="margin-left: 1.25rem; margin-bottom: 1rem; color: var(--color-text-secondary); display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>Enter the required variables in the parameters card.</li>
+          <li>Click the <strong>"Calculate"</strong> button to execute calculations.</li>
+          <li>Review the computed outcomes in the results panel instantly.</li>
+          <li>Click the <strong>"Reset"</strong> button to clear variables and start over.</li>
         </ol>
       </section>
 
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">The Mathematical Formula</h2>
-        <div style="background-color: var(--color-bg-base); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--color-primary); font-family: monospace; font-size: 1.1rem; margin-bottom: 1rem;">
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--color-text-primary); letter-spacing: -0.02em;">The Mathematical Formula</h2>
+        <div style="background-color: var(--color-bg-base); padding: 1.25rem 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--color-primary); font-family: monospace; font-size: 1.1rem; color: var(--color-text-primary); font-weight: 600; overflow-x: auto; margin-bottom: 1.25rem; white-space: pre-wrap; word-break: break-word;">
           {{formula_code}}
         </div>
-        <p>{{formula_explanation}}</p>
+        <p style="color: var(--color-text-secondary);">{{formula_explanation}}</p>
       </section>
 
-      <section style="margin-bottom: 2rem;">
-        <h2 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">Worked Example</h2>
-        <div style="background-color: var(--color-bg-base); padding: 1.5rem; border-radius: var(--radius-md); font-size: 0.95rem; border: 1px solid var(--color-border);">
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--color-text-primary); letter-spacing: -0.02em;">Worked Example</h2>
+        <div style="background-color: var(--color-bg-base); padding: 1.5rem; border-radius: var(--radius-md); border: 1.5px solid var(--color-border); color: var(--color-text-secondary);">
           {{worked_example}}
         </div>
       </section>
 
       <section>
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--color-text-primary);">Frequently Asked Questions (FAQs)</h2>
-        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <h2 style="font-size: 1.6rem; margin-bottom: 1.5rem; color: var(--color-text-primary); letter-spacing: -0.02em;">Frequently Asked Questions (FAQs)</h2>
+        <div>
           {{faqs_html}}
         </div>
       </section>
@@ -82,14 +87,14 @@
   </div>
 
   <!-- Sidebar Column -->
-  <aside style="position: sticky; top: 90px; display: flex; flex-direction: column; gap: 1.5rem;">
+  <aside style="position: sticky; top: 94px; display: flex; flex-direction: column; gap: 1.5rem;">
     <!-- Sidebar Advertisement -->
     <div class="ad-slot ad-slot-sidebar"></div>
 
     <!-- Related Calculators -->
-    <div class="card" style="padding: 1.25rem;">
-      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">Related Calculators</h3>
-      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+    <div class="card" style="padding: 1.5rem;">
+      <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem; border-bottom: 1.5px solid var(--color-border); padding-bottom: 0.65rem; letter-spacing: -0.01em;">Related Calculators</h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.95rem; padding: 0;">
         {{related_calculators_links}}
       </ul>
     </div>
@@ -98,3 +103,4 @@
 
 <!-- Dynamic Calculator Calculation Module Import -->
 <script type="module" src="/js/calculators/{{calculator_id}}.js"></script>
+

@@ -378,13 +378,13 @@ function buildHomepage(layoutHtml, categories, calculators) {
 
   // Categories Grid Compilation
   const categoriesGrid = categories.map(cat => `
-    <a href="/categories/${cat.id}" class="card flex flex-col justify-between" style="text-align: left; padding: 1.5rem; min-height: 160px;">
+    <a href="/categories/${cat.id}" class="card flex flex-col justify-between" style="min-height: 170px;">
       <div>
-        <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+        <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">
           ${getCategoryIcon(cat.icon)}
         </div>
-        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;">${cat.name}</h3>
-        <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 0; line-height: 1.4;">${cat.desc}</p>
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem;">${cat.name}</h3>
+        <p style="font-size: 0.875rem; line-height: 1.4; margin-bottom: 0;">${cat.desc}</p>
       </div>
     </a>
   `).join('');
@@ -392,13 +392,13 @@ function buildHomepage(layoutHtml, categories, calculators) {
   // Popular Grid Compilation
   const popularCalcs = calculators.filter(c => c.popular).slice(0, 8);
   const popularGrid = popularCalcs.map(calc => `
-    <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="text-align: left; padding: 1.5rem; border-color: var(--color-border);">
+    <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="border-color: var(--color-border);">
       <div>
-        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
-        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;">${calc.name}</h3>
-        <p style="font-size: 0.825rem; color: var(--color-text-secondary); margin-bottom: 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${calc.desc}</p>
+        <div style="font-size: 1.75rem; margin-bottom: 0.75rem;">⚡</div>
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem;">${calc.name}</h3>
+        <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${calc.desc}</p>
       </div>
-      <div style="font-size: 0.8rem; font-weight: 700; color: var(--color-primary); margin-top: 1rem; align-self: flex-start; text-transform: uppercase;">Compute Now &rarr;</div>
+      <div style="font-size: 0.825rem; font-weight: 700; color: var(--color-primary); margin-top: 1.25rem; align-self: flex-start; text-transform: uppercase; letter-spacing: 0.05em;">Compute Now &rarr;</div>
     </a>
   `).join('');
 
@@ -449,10 +449,10 @@ function buildCategories(layoutHtml, categories, calculators) {
     // Get calculators belonging to this category
     const catCalcs = calculators.filter(c => c.category === cat.id);
     const calcListHtml = catCalcs.map(calc => `
-      <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">${calc.name}</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">${calc.desc}</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">${calc.name}</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">${calc.desc}</p>
         </div>
       </a>
     `).join('');
@@ -567,10 +567,12 @@ function buildCalculators(layoutHtml, categories, calculators) {
 
     // Compile FAQs
     const faqsHtml = calc.faqs.map(faq => `
-      <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
-        <h4 style="font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Q: ${faq.q}</h4>
-        <p style="font-size: 0.95rem; color: var(--color-text-secondary); margin: 0;">${faq.a}</p>
-      </div>
+      <details class="accordion">
+        <summary>${faq.q}</summary>
+        <div class="accordion-content">
+          ${faq.a}
+        </div>
+      </details>
     `).join('');
 
     // Compile related calculators

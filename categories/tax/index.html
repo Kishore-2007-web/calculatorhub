@@ -43,7 +43,7 @@
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Header Section -->
-  <header class="navbar">
+  <header class="navbar" id="main-navbar">
     <div class="container flex justify-between items-center" style="width: 100%;">
       <a href="/" class="logo" aria-label="CalculatorHub Home">
         <span>🧮 CalculatorHub</span>
@@ -58,15 +58,6 @@
 
       <!-- Settings & Links -->
       <div class="flex items-center gap-md">
-        <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-
         <nav id="nav-links" class="flex gap-md" style="align-items: center;">
           <a href="/" style="font-weight: 500;">Home</a>
           <a href="/categories" style="font-weight: 500;">Categories</a>
@@ -75,10 +66,19 @@
         </nav>
 
         <!-- Theme Toggle slider -->
-        <label class="theme-switch" aria-label="Toggle light and dark mode">
+        <label class="theme-switch" aria-label="Toggle light and dark mode" style="margin-left: 0.25rem;">
           <input type="checkbox" id="theme-toggle">
           <span class="theme-slider"></span>
         </label>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
@@ -89,7 +89,7 @@
   </div>
 
   <!-- Main Content Insertion -->
-  <main id="main-content" class="container animate-fade-in" style="margin-top: 1rem; margin-bottom: 2rem;">
+  <main id="main-content" class="container animate-fade-in" style="margin-top: 1.5rem; margin-bottom: 2.5rem;">
     <!-- Category Header & Breadcrumbs -->
 <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.9rem;">
   <ol style="list-style: none; display: flex; gap: 0.5rem; padding: 0;">
@@ -104,170 +104,184 @@
 <div class="category-layout">
   <!-- Main Category Content -->
   <div>
-    <header style="margin-bottom: 2rem;">
-      <h1 class="page-title">Tax & Salary Calculators</h1>
-      <p style="font-size: 1.1rem; color: var(--color-text-secondary); max-width: 800px;">GST, VAT, sales tax, income tax, and take-home salary.</p>
+    <header style="margin-bottom: 2rem; padding: 3rem 2rem; background: linear-gradient(135deg, var(--color-primary-light), var(--color-bg-surface)); border: 1.5px solid var(--color-border); border-radius: var(--radius-lg); position: relative; overflow: hidden; box-shadow: var(--shadow-sm);">
+      <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--color-primary-glow); filter: blur(60px); border-radius: 50%;"></div>
+      <h1 class="page-title" style="margin-bottom: 0.5rem; font-weight: 800;">Tax & Salary Calculators</h1>
+      <p style="font-size: 1.05rem; color: var(--color-text-secondary); max-width: 720px; line-height: 1.5; margin: 0;">GST, VAT, sales tax, income tax, and take-home salary.</p>
     </header>
+
+    <!-- Search within Category -->
+    <div style="margin-bottom: 2rem;">
+      <input type="text" id="category-search" class="input-control" placeholder="Search within Tax & Salary calculators..." aria-label="Search within category" style="border-color: var(--color-border);">
+    </div>
 
     <!-- Category Calculators List -->
     <section style="margin-bottom: 3rem;">
-      <h2 style="font-size: 1.5rem; margin-bottom: 1.25rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem;">Available Calculators</h2>
-      <div class="grid grid-cols-2" style="gap: 1.25rem;">
+      <div id="category-calculators-grid" class="grid grid-cols-2" style="gap: 1.25rem;">
         
-      <a href="/calculators/gst-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/gst-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">GST Calculator</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Add or remove Goods and Services Tax (GST) easily from gross or net prices.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">GST Calculator</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Add or remove Goods and Services Tax (GST) easily from gross or net prices.</p>
         </div>
       </a>
     
-      <a href="/calculators/income-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/income-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Income Tax Calculator</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Estimate your yearly income tax liability, deductions, and bracket calculations.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Income Tax Calculator</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Estimate your yearly income tax liability, deductions, and bracket calculations.</p>
         </div>
       </a>
     
-      <a href="/calculators/salary-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/salary-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Salary Calculator</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Convert your salary between hourly, daily, weekly, bi-weekly, monthly, and yearly wage rates.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Salary Calculator</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Convert your salary between hourly, daily, weekly, bi-weekly, monthly, and yearly wage rates.</p>
         </div>
       </a>
     
-      <a href="/calculators/sales-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/sales-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Sales Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute sales tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Sales Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute sales tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/vat-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/vat-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Vat</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute vat.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Vat</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute vat.</p>
         </div>
       </a>
     
-      <a href="/calculators/property-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/property-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Property Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute property tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Property Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute property tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/corporate-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/corporate-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Corporate Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute corporate tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Corporate Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute corporate tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/inheritance-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/inheritance-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Inheritance Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute inheritance tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Inheritance Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute inheritance tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/paycheck-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/paycheck-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Paycheck Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute paycheck tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Paycheck Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute paycheck tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/capital-gains-tax-estimator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/capital-gains-tax-estimator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Capital Gains Tax Estimator</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute capital gains tax estimator.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Capital Gains Tax Estimator</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute capital gains tax estimator.</p>
         </div>
       </a>
     
-      <a href="/calculators/self-employment-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/self-employment-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Self Employment Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute self employment tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Self Employment Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute self employment tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/fica-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/fica-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Fica Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute fica tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Fica Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute fica tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/w4-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/w4-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">W4</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute w4.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">W4</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute w4.</p>
         </div>
       </a>
     
-      <a href="/calculators/marginal-tax-rate-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/marginal-tax-rate-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Marginal Tax Rate</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute marginal tax rate.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Marginal Tax Rate</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute marginal tax rate.</p>
         </div>
       </a>
     
-      <a href="/calculators/effective-tax-rate-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/effective-tax-rate-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Effective Tax Rate</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute effective tax rate.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Effective Tax Rate</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute effective tax rate.</p>
         </div>
       </a>
     
-      <a href="/calculators/gift-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/gift-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Gift Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute gift tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Gift Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute gift tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/customs-duty-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/customs-duty-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Customs Duty</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute customs duty.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Customs Duty</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute customs duty.</p>
         </div>
       </a>
     
-      <a href="/calculators/luxury-tax-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/luxury-tax-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Luxury Tax</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute luxury tax.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Luxury Tax</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute luxury tax.</p>
         </div>
       </a>
     
-      <a href="/calculators/capital-gains-tax-liability-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/capital-gains-tax-liability-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Capital Gains Tax Liability</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute capital gains tax liability.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Capital Gains Tax Liability</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute capital gains tax liability.</p>
         </div>
       </a>
     
-      <a href="/calculators/inheritance-tax-rate-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/inheritance-tax-rate-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Inheritance Tax Rate</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute inheritance tax rate.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Inheritance Tax Rate</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute inheritance tax rate.</p>
         </div>
       </a>
     
-      <a href="/calculators/vat-refund-calculator" class="card flex flex-col justify-between" style="padding: 1.25rem; height: 100%;">
+      <a href="/calculators/vat-refund-calculator" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-primary);">Vat Refund</h3>
-          <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.4; margin: 0;">Professional, free, fast, and accurate calculation tool to compute vat refund.</p>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">Vat Refund</h3>
+          <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">Professional, free, fast, and accurate calculation tool to compute vat refund.</p>
         </div>
       </a>
     
       </div>
+      
+      <!-- Pagination load more button -->
+      <div id="pagination-container" style="text-align: center; margin-top: 2rem; display: none;">
+        <button id="load-more-btn" class="btn btn-secondary" style="padding: 0.75rem 2rem; font-size: 0.95rem;">Load More Calculators</button>
+      </div>
+      <div id="no-category-results" style="text-align: center; padding: 3rem 1rem; display: none; color: var(--color-text-secondary);">
+        <span style="font-size: 2rem;">🔍</span>
+        <p style="margin-top: 1rem; font-size: 1rem; font-weight: 500;">No calculators found matching that query.</p>
+      </div>
     </section>
 
-    <!-- Comprehensive Guide content compiled statically per category -->
-    <section class="card" style="padding: 2rem; margin-top: 2rem;">
-      <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Guide to Tax & Salary Calculations</h2>
-      <div style="font-size: 1rem; color: var(--color-text-secondary); line-height: 1.7;">
+    <!-- Comprehensive Guide -->
+    <section class="card" style="padding: 2.5rem; margin-top: 2rem;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem; letter-spacing: -0.02em;">Guide to Tax & Salary Calculations</h2>
+      <div style="font-size: 1rem; color: var(--color-text-secondary); line-height: 1.75;">
         
       <p style="margin-bottom: 1rem;">This section lists all core <strong>Tax & Salary</strong> calculators designed to assist your daily research. These tools are constructed based on standardized methods to ensure exact calculations.</p>
       <p>Whether you require instant arithmetic analysis, complex conversion operations, or parameter optimization, selecting any calculator above provides detailed instructions, active math formulas, worked examples, and relevant FAQs.</p>
@@ -277,19 +291,91 @@
   </div>
 
   <!-- Sidebar -->
-  <aside style="position: sticky; top: 90px; display: flex; flex-direction: column; gap: 1.5rem;">
+  <aside style="position: sticky; top: 94px; display: flex; flex-direction: column; gap: 1.5rem;">
     <!-- Sidebar Ad Slot -->
     <div class="ad-slot ad-slot-sidebar"></div>
 
     <!-- Other Categories Card -->
-    <div class="card" style="padding: 1.25rem;">
-      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">Other Categories</h3>
-      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem;">
+    <div class="card" style="padding: 1.5rem;">
+      <h3 style="font-size: 1.15rem; margin-bottom: 1.25rem; border-bottom: 1.5px solid var(--color-border); padding-bottom: 0.65rem; letter-spacing: -0.01em;">Other Categories</h3>
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.95rem; padding: 0;">
         <li><a href="/categories/math">Mathematics</a></li><li><a href="/categories/finance">Personal Finance</a></li><li><a href="/categories/banking">Banking & Loans</a></li><li><a href="/categories/business">Business & Sales</a></li><li><a href="/categories/health-fitness">Health & Fitness</a></li><li><a href="/categories/medical">Medical & Clinical</a></li><li><a href="/categories/education">Education & Grades</a></li><li><a href="/categories/statistics">Statistics & Probability</a></li><li><a href="/categories/engineering-science">Engineering & Physics</a></li><li><a href="/categories/construction-civil">Construction & Civil</a></li><li><a href="/categories/time-date">Time & Date</a></li><li><a href="/categories/unit-conversion">Unit Converters</a></li><li><a href="/categories/lifestyle-travel">Lifestyle & Travel</a></li>
       </ul>
     </div>
   </aside>
 </div>
+
+<!-- Pagination & Instant Category Search Script -->
+<script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('category-calculators-grid');
+    const cards = Array.from(grid.querySelectorAll('a.card'));
+    const searchInput = document.getElementById('category-search');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const paginationContainer = document.getElementById('pagination-container');
+    const noResultsDiv = document.getElementById('no-category-results');
+
+    const ITEMS_PER_PAGE = 12;
+    let visibleCards = [...cards];
+    let currentPageLimit = ITEMS_PER_PAGE;
+
+    function render() {
+      // Hide all first
+      cards.forEach(card => card.style.display = 'none');
+
+      // Filter matches
+      const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      if (query === '') {
+        visibleCards = [...cards];
+      } else {
+        visibleCards = cards.filter(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          const desc = card.querySelector('p').textContent.toLowerCase();
+          return title.includes(query) || desc.includes(query);
+        });
+      }
+
+      if (visibleCards.length === 0) {
+        grid.style.display = 'none';
+        if (noResultsDiv) noResultsDiv.style.display = 'block';
+        if (paginationContainer) paginationContainer.style.display = 'none';
+        return;
+      }
+
+      grid.style.display = 'grid';
+      if (noResultsDiv) noResultsDiv.style.display = 'none';
+
+      // Show limited cards
+      const slice = visibleCards.slice(0, currentPageLimit);
+      slice.forEach(card => card.style.display = 'flex');
+
+      // Update Pagination button visibility
+      if (visibleCards.length > currentPageLimit) {
+        if (paginationContainer) paginationContainer.style.display = 'block';
+      } else {
+        if (paginationContainer) paginationContainer.style.display = 'none';
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        currentPageLimit = ITEMS_PER_PAGE; // Reset paging
+        render();
+      });
+    }
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        currentPageLimit += ITEMS_PER_PAGE;
+        render();
+      });
+    }
+
+    // Initial render
+    render();
+  });
+</script>
+
 
   </main>
 
@@ -299,43 +385,40 @@
   </div>
 
   <!-- Footer Section -->
-  <footer
-    style="border-top: 1px solid var(--color-border); padding: 3rem 0; background-color: var(--color-bg-surface); margin-top: 4rem;">
-    <div class="container grid grid-cols-4">
+  <footer style="border-top: 1px solid var(--color-border); padding: 4rem 0; background-color: var(--color-bg-surface); margin-top: 5rem;">
+    <div class="container grid grid-cols-4" style="gap: 2.5rem;">
       <div>
-        <h4 style="margin-bottom: 1rem;">CalculatorHub</h4>
-        <p style="font-size: 0.9rem;">Every Calculator You Need — Free, Fast & Accurate. Covering math, finance, tax,
-          conversion, and construction.</p>
-        <p style="font-size: 0.85rem; margin-top: 1rem; color: var(--color-text-secondary); line-height: 1.4;">
-          send your mail to "<a href="mailto:itsmekishore00@gmail.com"
-            style="color: var(--color-primary); text-decoration: underline;">itsmekishore00@gmail.com</a>" for feed back
-          and tell me if you found any errors or mistakes
+        <h4 style="margin-bottom: 1.25rem; font-size: 1.2rem;">CalculatorHub</h4>
+        <p style="font-size: 0.925rem; line-height: 1.5; color: var(--color-text-secondary); margin-bottom: 1rem;">
+          Every Calculator You Need — Free, Fast & Accurate. Covering mathematics, personal finance, loans, taxation, fitness, and construction.
         </p>
-        <p style="font-size: 0.85rem; margin-top: 1rem;">&copy; 2026 CalculatorHub. All rights reserved.</p>
+        <p style="font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5;">
+          For feedback or reports, contact us at: <a href="mailto:itsmekishore00@gmail.com"
+            style="color: var(--color-primary); text-decoration: underline; font-weight: 500;">itsmekishore00@gmail.com</a>
+        </p>
+        <p style="font-size: 0.825rem; margin-top: 1.25rem; color: var(--color-text-tertiary); font-weight: 500;">&copy; 2026 CalculatorHub. All rights reserved.</p>
       </div>
       <div>
-        <h4 style="margin-bottom: 1rem;">Categories</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+        <h4 style="margin-bottom: 1.25rem; font-size: 1.1rem;">Categories</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.925rem; padding: 0;">
           <li><a href="/categories/math" style="color: var(--color-text-secondary);">Mathematics</a></li>
-          <li><a href="/categories/finance" style="color: var(--color-text-secondary);">Finance</a></li>
+          <li><a href="/categories/finance" style="color: var(--color-text-secondary);">Personal Finance</a></li>
           <li><a href="/categories/banking" style="color: var(--color-text-secondary);">Banking & Loans</a></li>
-          <li><a href="/categories/health-fitness" style="color: var(--color-text-secondary);">Health & Fitness</a>
-          </li>
+          <li><a href="/categories/health-fitness" style="color: var(--color-text-secondary);">Health & Fitness</a></li>
         </ul>
       </div>
       <div>
-        <h4 style="margin-bottom: 1rem;">Popular Calculators</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+        <h4 style="margin-bottom: 1.25rem; font-size: 1.1rem;">Popular Calculators</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.925rem; padding: 0;">
           <li><a href="/calculators/age-calculator" style="color: var(--color-text-secondary);">Age Calculator</a></li>
           <li><a href="/calculators/bmi-calculator" style="color: var(--color-text-secondary);">BMI Calculator</a></li>
-          <li><a href="/calculators/percentage-calculator" style="color: var(--color-text-secondary);">Percentage
-              Calculator</a></li>
+          <li><a href="/calculators/percentage-calculator" style="color: var(--color-text-secondary);">Percentage Calculator</a></li>
           <li><a href="/calculators/emi-calculator" style="color: var(--color-text-secondary);">EMI Calculator</a></li>
         </ul>
       </div>
       <div>
-        <h4 style="margin-bottom: 1rem;">Legal & Support</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+        <h4 style="margin-bottom: 1.25rem; font-size: 1.1rem;">Legal & Support</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.925rem; padding: 0;">
           <li><a href="/contact" style="color: var(--color-text-secondary);">Contact Us</a></li>
           <li><a href="/privacy-policy" style="color: var(--color-text-secondary);">Privacy Policy</a></li>
           <li><a href="/terms" style="color: var(--color-text-secondary);">Terms & Conditions</a></li>

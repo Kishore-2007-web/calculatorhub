@@ -6,6 +6,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initMobileMenu();
+  initStickyNavbar();
+  initResetButton();
   trackCalculatorVisit();
 });
 
@@ -38,6 +40,62 @@ function initTheme() {
         document.body.classList.remove('dark-theme');
         localStorage.setItem('theme', 'light');
       }
+    });
+  }
+}
+
+/**
+ * Sticky Navbar Handler on scroll
+ */
+function initStickyNavbar() {
+  const navbar = document.getElementById('main-navbar');
+  if (!navbar) return;
+
+  const checkScroll = () => {
+    if (window.scrollY > 15) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  };
+
+  window.addEventListener('scroll', checkScroll);
+  checkScroll();
+}
+
+/**
+ * Global Calculator Input Reset handler
+ */
+function initResetButton() {
+  const resetBtn = document.getElementById('reset-btn');
+  const form = document.getElementById('calculator-form');
+  const resultsContainer = document.getElementById('calculator-results');
+  const alertContainer = document.getElementById('calculator-alert');
+
+  if (resetBtn && form) {
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      Utils.clearAlert(alertContainer);
+
+      // Programmatic outputs lookup and cleanup
+      const outputElements = resultsContainer ? resultsContainer.querySelectorAll('[id^="result-"]') : [];
+      outputElements.forEach(elem => {
+        if (elem.id === 'result-bmi') {
+          elem.innerText = '0.0';
+        } else if (elem.id === 'result-bmi-cat') {
+          elem.innerText = 'Normal Weight';
+        } else if (elem.id === 'result-pct') {
+          elem.innerText = '30';
+        } else if (elem.id === 'result-emi') {
+          elem.innerText = '$0.00';
+        } else if (['result-emi-principal', 'result-emi-interest', 'result-emi-total', 'result-gst-net', 'result-gst-tax', 'result-gst-gross'].includes(elem.id)) {
+          elem.innerText = '$0.00';
+        } else if (elem.id.includes('years') || elem.id.includes('months') || elem.id.includes('days') || elem.id.includes('weeks') || elem.id.includes('hours')) {
+          elem.innerText = '0';
+        } else {
+          elem.innerText = '0.00';
+        }
+      });
     });
   }
 }
@@ -126,3 +184,4 @@ export const Utils = {
     container.innerHTML = alertHTML;
   }
 };
+
