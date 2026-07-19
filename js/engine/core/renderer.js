@@ -72,6 +72,10 @@ export class UceRenderer {
         case 'percentage':
           fieldHtml = comp.PercentageInput(input);
           break;
+        case 'text':
+        case 'string':
+          fieldHtml = comp.TextInput(input);
+          break;
         default:
           fieldHtml = comp.NumberInput(input);
       }

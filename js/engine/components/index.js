@@ -257,6 +257,25 @@ export const Components = {
         }
       </style>
     `;
+  },
+
+  /**
+   * Render Standard Text Input Field
+   */
+  TextInput(input) {
+    return `
+      <div class="form-group animate-fade-in" id="group-${input.id}">
+        <label for="${input.id}">
+          ${input.label} ${input.required ? '<span style="color: var(--color-error);">*</span>' : ''}
+          ${input.tooltip ? `<span class="tooltip-trigger" title="${input.tooltip}" style="cursor:help; margin-left:4px;">ℹ️</span>` : ''}
+        </label>
+        <input type="text" id="${input.id}" class="input-control" 
+          placeholder="${input.placeholder || ''}" 
+          value="${input.defaultValue !== undefined ? input.defaultValue : (input.default || '')}"
+          ${input.required ? 'required' : ''}>
+        ${input.helpText ? `<p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0.25rem 0 0;">${input.helpText}</p>` : ''}
+      </div>
+    `;
   }
 };
 

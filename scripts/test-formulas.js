@@ -10,6 +10,8 @@ import { uceValidator } from '../js/engine/validation/index.js';
 import { uceConverter } from '../js/engine/conversion/index.js';
 import { uceFormatter } from '../js/engine/formatting/index.js';
 import { uceExplanationGenerator } from '../js/engine/explanation/index.js';
+import fs from 'fs';
+import path from 'path';
 
 // Load registries for configuration tests
 import { healthRegistry } from '../js/engine/registry/health.js';
@@ -157,6 +159,26 @@ async function runTests() {
 
     const fallbackPrime = mathFormulas._fallback('prime-number-checker', { val_a: 7 });
     assert(fallbackPrime === 1, `Fallback prime checker (Expected 1, got ${fallbackPrime})`);
+
+    // Added Math Calculator Tests
+    const fractionResult = mathFormulas['fraction-calculator']({
+      'frac-op': '+', 'frac-n1': 1, 'frac-d1': 2, 'frac-n2': 1, 'frac-d2': 3
+    });
+    assert(fractionResult.result === '5/6', `Fraction addition (1/2 + 1/3 = ${fractionResult.result})`);
+
+    const matrixResult = mathFormulas['matrix-calculator']({
+      'matrix-op': 'add', a11: 1, a12: 2, a21: 3, a22: 4, b11: 5, b12: 6, b21: 7, b22: 8
+    });
+    assert(matrixResult.result.includes('[ 6.00, 8.00 ]'), `Matrix addition (1,2;3,4 + 5,6;7,8 = ${matrixResult.result})`);
+
+    const pctDiff = mathFormulas['percentage-difference-calculator']({ val_a: 10, val_b: 15 });
+    assert(Math.abs(pctDiff - 40) < 0.01, `Percentage Difference (10 & 15 = ${pctDiff}%)`);
+
+    const pctInc = mathFormulas['percentage-increase-calculator']({ val_a: 10, val_b: 15 });
+    assert(pctInc === 50, `Percentage Increase (10 to 15 = ${pctInc}%)`);
+
+    const pctDec = mathFormulas['percentage-decrease-calculator']({ val_a: 15, val_b: 10 });
+    assert(Math.abs(pctDec - 33.33) < 0.01, `Percentage Decrease (15 to 10 = ${pctDec}%)`);
   } catch (err) {
     console.error('❌ Crash in Math Formula Tests:', err);
     failedTestsCount++;

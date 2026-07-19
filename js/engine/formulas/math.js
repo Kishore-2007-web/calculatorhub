@@ -1,4 +1,5 @@
 import { FdlCompiler } from '../utils/fdl.js';
+import { MathUtils } from '../utils/math.js';
 
 export const mathFormulas = {
   /**
@@ -33,6 +34,173 @@ export const mathFormulas = {
     }
 
     return result;
+  },
+
+  /**
+   * Fraction Calculator
+   */
+  'fraction-calculator'(inputs) {
+    const op = inputs['frac-op'] || '+';
+    const n1 = Math.round(Number(inputs['frac-n1'] !== undefined ? inputs['frac-n1'] : 1));
+    const d1 = Math.round(Number(inputs['frac-d1'] !== undefined ? inputs['frac-d1'] : 2));
+    const n2 = Math.round(Number(inputs['frac-n2'] !== undefined ? inputs['frac-n2'] : 1));
+    const d2 = Math.round(Number(inputs['frac-d2'] !== undefined ? inputs['frac-d2'] : 3));
+
+    if (d1 === 0 || d2 === 0) {
+      throw new Error('Denominator cannot be zero.');
+    }
+
+    let num = 0;
+    let den = 1;
+
+    switch (op) {
+      case '+':
+        num = n1 * d2 + n2 * d1;
+        den = d1 * d2;
+        break;
+      case '-':
+        num = n1 * d2 - n2 * d1;
+        den = d1 * d2;
+        break;
+      case '*':
+        num = n1 * n2;
+        den = d1 * d2;
+        break;
+      case '/':
+        if (n2 === 0) {
+          throw new Error('Cannot divide by zero fraction.');
+        }
+        num = n1 * d2;
+        den = d1 * n2;
+        break;
+      default:
+        throw new Error('Invalid operator.');
+    }
+
+    if (den === 0) {
+      throw new Error('Calculated denominator became zero.');
+    }
+
+    // Simplify fraction
+    const divisor = MathUtils.gcd(num, den);
+    num = num / divisor;
+    den = den / divisor;
+
+    // Adjust signs
+    if (den < 0) {
+      num = -num;
+      den = -den;
+    }
+
+    let fracStr = '';
+    if (num === 0) {
+      fracStr = '0';
+    } else if (den === 1) {
+      fracStr = num.toString();
+    } else {
+      const absNum = Math.abs(num);
+      if (absNum > den) {
+        const whole = Math.floor(absNum / den);
+        const rem = absNum % den;
+        fracStr = `${num < 0 ? '-' : ''}${whole} ${rem}/${den}`;
+      } else {
+        fracStr = `${num}/${den}`;
+      }
+    }
+
+    return {
+      result: fracStr,
+      decimal: num / den
+    };
+  },
+
+  /**
+   * Matrix Calculator for 2x2 matrices
+   */
+  'matrix-calculator'(inputs) {
+    const op = inputs['matrix-op'] || 'add';
+    const a11 = Number(inputs.a11 !== undefined ? inputs.a11 : 0);
+    const a12 = Number(inputs.a12 !== undefined ? inputs.a12 : 0);
+    const a21 = Number(inputs.a21 !== undefined ? inputs.a21 : 0);
+    const a22 = Number(inputs.a22 !== undefined ? inputs.a22 : 0);
+    const b11 = Number(inputs.b11 !== undefined ? inputs.b11 : 0);
+    const b12 = Number(inputs.b12 !== undefined ? inputs.b12 : 0);
+    const b21 = Number(inputs.b21 !== undefined ? inputs.b21 : 0);
+    const b22 = Number(inputs.b22 !== undefined ? inputs.b22 : 0);
+
+    let res = [];
+    switch (op) {
+      case 'add':
+        res = [
+          [a11 + b11, a12 + b12],
+          [a21 + b21, a22 + b22]
+        ];
+        break;
+      case 'subtract':
+        res = [
+          [a11 - b11, a12 - b12],
+          [a21 - b21, a22 - b22]
+        ];
+        break;
+      case 'multiply':
+        res = [
+          [a11 * b11 + a12 * b21, a11 * b12 + a12 * b22],
+          [a21 * b11 + a22 * b21, a21 * b12 + a22 * b22]
+        ];
+        break;
+      case 'det': {
+        const det = a11 * a22 - a12 * a21;
+        return { result: `det(A) = ${det}` };
+      }
+      case 'transpose':
+        res = [
+          [a11, a21],
+          [a12, a22]
+        ];
+        break;
+      default:
+        throw new Error('Unsupported matrix operation.');
+    }
+
+    const formatMatrix = (m) => {
+      return `[ ${m[0][0].toFixed(2)}, ${m[0][1].toFixed(2)} ]\n[ ${m[1][0].toFixed(2)}, ${m[1][1].toFixed(2)} ]`;
+    };
+
+    return { result: formatMatrix(res) };
+  },
+
+  /**
+   * Percentage Difference Calculator
+   */
+  'percentage-difference-calculator'(inputs) {
+    const a = Math.abs(Number(inputs.val_a !== undefined ? inputs.val_a : 0));
+    const b = Math.abs(Number(inputs.val_b !== undefined ? inputs.val_b : 0));
+    if (a + b === 0) return 0;
+    return (Math.abs(a - b) / ((a + b) / 2)) * 100;
+  },
+
+  /**
+   * Percentage Increase Calculator
+   */
+  'percentage-increase-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 0);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 0);
+    if (a === 0) {
+      throw new Error('Initial value cannot be zero.');
+    }
+    return ((b - a) / a) * 100;
+  },
+
+  /**
+   * Percentage Decrease Calculator
+   */
+  'percentage-decrease-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 0);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 0);
+    if (a === 0) {
+      throw new Error('Initial value cannot be zero.');
+    }
+    return ((a - b) / a) * 100;
   },
 
   /**
@@ -73,27 +241,27 @@ export const mathFormulas = {
       case 'cube-root-calculator':
         return Math.cbrt(a);
       case 'factorial-calculator':
-        return mathHelpers.factorial(a);
+        return MathUtils.factorial(a);
       case 'prime-number-checker':
-        return mathHelpers.isPrime(a) ? 1 : 0; // Returns 1 for Prime, 0 for Composite
+        return MathUtils.isPrime(a) ? 1 : 0; // Returns 1 for Prime, 0 for Composite
       case 'gcd-calculator':
-        return mathHelpers.gcd(a, b);
+        return MathUtils.gcd(a, b);
       case 'lcm-calculator':
-        return mathHelpers.lcm(a, b);
+        return MathUtils.lcm(a, b);
       case 'modulo-calculator':
         if (b === 0) throw new Error('Division by zero.');
         return a % b;
       case 'exponent-calculator':
         return Math.pow(a, b);
       case 'fibonacci-calculator':
-        return mathHelpers.fibonacci(a);
+        return MathUtils.fibonacci(a);
       case 'sine-calculator':
-        return Math.sin(a * Math.PI / 180);
+        return Math.sin(MathUtils.degToRad(a));
       case 'cosine-calculator':
-        return Math.cos(a * Math.PI / 180);
+        return Math.cos(MathUtils.degToRad(a));
       case 'tangent-calculator':
         if ((a - 90) % 180 === 0) throw new Error('Tangent is undefined for this angle.');
-        return Math.tan(a * Math.PI / 180);
+        return Math.tan(MathUtils.degToRad(a));
       case 'logarithm-calculator':
         if (a <= 0) throw new Error('Logarithm is undefined for non-positive numbers.');
         return Math.log10(a);
@@ -115,57 +283,6 @@ export const mathFormulas = {
         // Default math operation is addition
         return a + b;
     }
-  }
-};
-
-// Math helper algorithms
-const mathHelpers = {
-  factorial(n) {
-    if (n < 0) return NaN;
-    if (n === 0 || n === 1) return 1;
-    let res = 1;
-    for (let i = 2; i <= Math.min(n, 170); i++) res *= i;
-    return res;
-  },
-
-  gcd(x, y) {
-    x = Math.abs(Math.floor(x));
-    y = Math.abs(Math.floor(y));
-    while (y) {
-      const t = y;
-      y = x % y;
-      x = t;
-    }
-    return x;
-  },
-
-  lcm(x, y) {
-    if (x === 0 || y === 0) return 0;
-    return Math.abs(x * y) / this.gcd(x, y);
-  },
-
-  isPrime(n) {
-    const val = Math.floor(n);
-    if (val <= 1) return false;
-    if (val <= 3) return true;
-    if (val % 2 === 0 || val % 3 === 0) return false;
-    for (let i = 5; i * i <= val; i += 6) {
-      if (val % i === 0 || val % (i + 2) === 0) return false;
-    }
-    return true;
-  },
-
-  fibonacci(n) {
-    const val = Math.floor(n);
-    if (val < 0) return NaN;
-    if (val === 0) return 0;
-    let a = 0, b = 1, temp;
-    for (let i = 2; i <= Math.min(val, 75); i++) {
-      temp = a + b;
-      a = b;
-      b = temp;
-    }
-    return b;
   }
 };
 
