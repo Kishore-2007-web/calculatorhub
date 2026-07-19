@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="/css/main.min.css">
   <link rel="stylesheet" href="/css/components.min.css">
   <link rel="stylesheet" href="/css/dark-theme.min.css">
+  <link rel="stylesheet" href="/css/auth.min.css">
   
   <!-- JSON-LD Structured Data Schema -->
   <script type="application/ld+json">
@@ -62,6 +63,11 @@
           <a href="/categories" style="font-weight: 500;">Categories</a>
           <a href="/blog" style="font-weight: 500;">Blog</a>
           <a href="/about" style="font-weight: 500;">About</a>
+          <button id="nav-login-btn" class="btn btn-outline" style="padding: 0.35rem 0.85rem; font-size: 0.9rem; min-height: 38px; display: inline-flex; align-items: center; justify-content: center; height: 38px;">Sign In</button>
+          <div id="nav-user-profile" style="display: none; align-items: center; gap: 0.75rem;">
+            <div id="user-display-name" style="display: flex; align-items: center; gap: 0.5rem;"></div>
+            <button id="nav-logout-btn" class="btn btn-ghost" style="padding: 0.35rem 0.65rem; font-size: 0.9rem; min-height: 38px; height: 38px; color: var(--color-error); font-weight: 600;">Sign Out</button>
+          </div>
         </nav>
 
         <!-- Theme Toggle slider -->
@@ -149,9 +155,60 @@
   <!-- Mobile Sticky Ad Slot Banner -->
   <div class="ad-slot ad-slot-mobile-sticky"></div>
 
+  <!-- Auth Modal Overlay -->
+  <div id="auth-modal" class="auth-modal-overlay">
+    <div class="auth-modal-container">
+      <button id="auth-close" class="auth-close-btn" aria-label="Close authentication modal">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <div class="auth-tabs">
+        <button id="tab-signin" class="auth-tab active">Sign In</button>
+        <button id="tab-signup" class="auth-tab">Sign Up</button>
+      </div>
+
+      <div id="auth-alert"></div>
+
+      <!-- Sign In Form -->
+      <form id="form-signin" class="auth-form active">
+        <div class="form-group">
+          <label for="signin-email">Email Address</label>
+          <input type="email" id="signin-email" class="input-control" required placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+          <label for="signin-pass">Password</label>
+          <input type="password" id="signin-pass" class="input-control" required placeholder="••••••••">
+        </div>
+        <a href="#" id="btn-forgot" class="auth-forgot-link">Forgot Password?</a>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Sign In</button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="form-signup" class="auth-form">
+        <div class="form-group">
+          <label for="signup-name">Full Name</label>
+          <input type="text" id="signup-name" class="input-control" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email Address</label>
+          <input type="email" id="signup-email" class="input-control" required placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+          <label for="signup-pass">Password</label>
+          <input type="password" id="signup-pass" class="input-control" required placeholder="Min 6 characters">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Global scripts -->
   <script type="module" src="/js/app.min.js"></script>
   <script type="module" src="/js/search.min.js"></script>
+  <script type="module" src="/js/auth.min.js"></script>
   
 </body>
 

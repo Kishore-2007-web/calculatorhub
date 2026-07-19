@@ -32,8 +32,10 @@ async function runBuild() {
     .replace(/\/css\/main\.css/g, '/css/main.min.css')
     .replace(/\/css\/components\.css/g, '/css/components.min.css')
     .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css')
+    .replace(/\/css\/auth\.css/g, '/css/auth.min.css')
     .replace(/\/js\/app\.js/g, '/js/app.min.js')
-    .replace(/\/js\/search\.js/g, '/js/search.min.js');
+    .replace(/\/js\/search\.js/g, '/js/search.min.js')
+    .replace(/\/js\/auth\.js/g, '/js/auth.min.js');
 
   // Verify and create root output directories
   ensureDir(path.join(rootDir, 'categories'));
@@ -1165,7 +1167,7 @@ function minifyAssets() {
   console.log('📦 Minifying asset files (CSS & JS) for production performance...');
   
   // Minify CSS files
-  const cssFiles = ['main.css', 'components.css', 'dark-theme.css'];
+  const cssFiles = ['main.css', 'components.css', 'dark-theme.css', 'auth.css'];
   cssFiles.forEach(file => {
     const rawCss = fs.readFileSync(path.join(cssDir, file), 'utf8');
     const minifiedCss = rawCss
@@ -1178,7 +1180,7 @@ function minifyAssets() {
   });
 
   // Minify JS files
-  const jsFiles = ['app.js', 'search.js'];
+  const jsFiles = ['app.js', 'search.js', 'auth.js'];
   jsFiles.forEach(file => {
     const rawJs = fs.readFileSync(path.join(jsDir, file), 'utf8');
     const minifiedJs = rawJs
