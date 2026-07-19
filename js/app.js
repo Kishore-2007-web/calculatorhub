@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyNavbar();
   initResetButton();
   trackCalculatorVisit();
+  initAdSenseCleanup();
 });
 
 /**
@@ -184,4 +185,24 @@ export const Utils = {
     container.innerHTML = alertHTML;
   }
 };
+
+/**
+ * Automatically handle layout cleanup for empty ad slots
+ */
+function initAdSenseCleanup() {
+  setTimeout(() => {
+    document.querySelectorAll(".ad-slot").forEach(slot => {
+      // Check if slot has children (i.e. an ad tag or iframe was created by AdSense)
+      if (slot.children.length === 0 || (slot.children.length === 1 && slot.children[0].tagName === 'SCRIPT')) {
+        // If empty or only contains script tags, hide the empty border box
+        slot.style.display = "none";
+      } else {
+        // If ads are loaded, remove mock placeholders styles
+        slot.style.border = "none";
+        slot.style.padding = "0";
+        slot.style.background = "transparent";
+      }
+    });
+  }, 3000);
+}
 
