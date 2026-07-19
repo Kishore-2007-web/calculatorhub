@@ -6,7 +6,9 @@ import {
   signOut, 
   onAuthStateChanged, 
   sendPasswordResetEmail, 
-  updateProfile 
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -179,6 +181,21 @@ function initAuthUI() {
         await signOut(auth);
       } catch (err) {
         console.error("Sign out failed:", err);
+      }
+    });
+  }
+
+  // Google Sign In
+  const googleBtn = document.getElementById("btn-google");
+  if (googleBtn && auth) {
+    const googleProvider = new GoogleAuthProvider();
+    googleBtn.addEventListener("click", async () => {
+      clearAlert();
+      try {
+        await signInWithPopup(auth, googleProvider);
+        modalOverlay.classList.remove("active");
+      } catch (err) {
+        showAlert(err.message.replace("Firebase: ", ""));
       }
     });
   }
