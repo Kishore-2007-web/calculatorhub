@@ -505,6 +505,265 @@ export const mathRegistry = [
         <p style="font-size: 0.85rem; color: var(--color-text-secondary); white-space: nowrap; overflow-x: auto;">Sequence: <strong>{sequence}</strong></p>
       </div>
     `
+  },
+  {
+    id: 'trigonometry-calculator',
+    version: '1.0.0',
+    name: 'Trigonometry Calculator',
+    category: 'math',
+    desc: 'Calculate sine, cosine, tangent, and their reciprocal functions.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Angle Value', type: 'number', defaultValue: 45, required: true },
+      { id: 'trig-func', label: 'Function', type: 'dropdown', defaultValue: 'sin', required: true, options: [
+        { label: 'Sine (sin)', value: 'sin' },
+        { label: 'Cosine (cos)', value: 'cos' },
+        { label: 'Tangent (tan)', value: 'tan' },
+        { label: 'Cosecant (csc)', value: 'csc' },
+        { label: 'Secant (sec)', value: 'sec' },
+        { label: 'Cotangent (cot)', value: 'cot' }
+      ]},
+      { id: 'angle-unit', label: 'Angle Unit', type: 'dropdown', defaultValue: 'degrees', required: true, options: [
+        { label: 'Degrees', value: 'degrees' },
+        { label: 'Radians', value: 'radians' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'Calculated Value', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The trigonometric result is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'sine-calculator',
+    version: '1.0.0',
+    name: 'Sine Calculator',
+    category: 'math',
+    desc: 'Calculate the sine (sin) of a given angle.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Angle Value', type: 'number', defaultValue: 30, required: true },
+      { id: 'angle-unit', label: 'Angle Unit', type: 'dropdown', defaultValue: 'degrees', required: true, options: [
+        { label: 'Degrees', value: 'degrees' },
+        { label: 'Radians', value: 'radians' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'sin(x)', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>sin({val_a} {angle-unit}) = <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'cosine-calculator',
+    version: '1.0.0',
+    name: 'Cosine Calculator',
+    category: 'math',
+    desc: 'Calculate the cosine (cos) of a given angle.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Angle Value', type: 'number', defaultValue: 60, required: true },
+      { id: 'angle-unit', label: 'Angle Unit', type: 'dropdown', defaultValue: 'degrees', required: true, options: [
+        { label: 'Degrees', value: 'degrees' },
+        { label: 'Radians', value: 'radians' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'cos(x)', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>cos({val_a} {angle-unit}) = <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'tangent-calculator',
+    version: '1.0.0',
+    name: 'Tangent Calculator',
+    category: 'math',
+    desc: 'Calculate the tangent (tan) of a given angle.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Angle Value', type: 'number', defaultValue: 45, required: true },
+      { id: 'angle-unit', label: 'Angle Unit', type: 'dropdown', defaultValue: 'degrees', required: true, options: [
+        { label: 'Degrees', value: 'degrees' },
+        { label: 'Radians', value: 'radians' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'tan(x)', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>tan({val_a} {angle-unit}) = <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'division-calculator',
+    version: '1.0.0',
+    name: 'Division Calculator',
+    category: 'math',
+    desc: 'Perform division of two numbers (a / b) and find quotient and remainder.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Dividend (a)', type: 'number', defaultValue: 10, required: true },
+      { id: 'val_b', label: 'Divisor (b)', type: 'number', defaultValue: 3, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Quotient (Decimal)', primary: true, format: 'number', decimals: 4 },
+      { id: 'integer-quotient', label: 'Integer Quotient', format: 'number', decimals: 0 },
+      { id: 'remainder', label: 'Remainder', format: 'number', decimals: 0 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The result of {val_a} / {val_b} is:</p>
+        <p>Decimal: <strong>{result}</strong></p>
+        <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Quotient: <strong>{integer-quotient}</strong>, Remainder: <strong>{remainder}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'exponent-calculator',
+    version: '1.0.0',
+    name: 'Exponent Calculator',
+    category: 'math',
+    desc: 'Calculate a number raised to the power of an exponent (a^b).',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Base (a)', type: 'number', defaultValue: 2, required: true },
+      { id: 'val_b', label: 'Exponent (b)', type: 'number', defaultValue: 3, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Result (a^b)', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>{val_a} raised to the power of {val_b} is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'square-root-calculator',
+    version: '1.0.0',
+    name: 'Square Root Calculator',
+    category: 'math',
+    desc: 'Calculate the square root of a non-negative number.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Number', type: 'number', defaultValue: 16, required: true, min: 0 }
+    ],
+    outputs: [
+      { id: 'result', label: 'Square Root', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The square root of {val_a} is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'cube-root-calculator',
+    version: '1.0.0',
+    name: 'Cube Root Calculator',
+    category: 'math',
+    desc: 'Calculate the cube root of any real number.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Number', type: 'number', defaultValue: 27, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Cube Root', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The cube root of {val_a} is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'pi-calculator',
+    version: '1.0.0',
+    name: 'Pi Calculator',
+    category: 'math',
+    desc: 'Generate digits of the mathematical constant Pi (π).',
+    formulaType: 'function',
+    inputs: [
+      { id: 'digits', label: 'Number of decimal digits', type: 'number', defaultValue: 100, required: true, min: 1, max: 1000 }
+    ],
+    outputs: [
+      { id: 'result', label: 'Value of Pi', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p style="word-break: break-all;">Pi to {digits} decimal places is:<br><strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'prime-number-checker',
+    version: '1.0.0',
+    name: 'Prime Number Checker',
+    category: 'math',
+    desc: 'Check if a number is prime or composite.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Number to check', type: 'number', defaultValue: 17, required: true, min: 1 }
+    ],
+    outputs: [
+      { id: 'result', label: 'Classification', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The number {val_a} is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'fraction-to-decimal',
+    version: '1.0.0',
+    name: 'Fraction to Decimal Calculator',
+    category: 'math',
+    desc: 'Convert any fraction to its decimal equivalent.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'frac-n', label: 'Numerator', type: 'number', defaultValue: 3, required: true },
+      { id: 'frac-d', label: 'Denominator', type: 'number', defaultValue: 4, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Decimal Value', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The fraction {frac-n} / {frac-d} is equal to <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'decimal-to-fraction',
+    version: '1.0.0',
+    name: 'Decimal to Fraction Calculator',
+    category: 'math',
+    desc: 'Convert any decimal value to a simplified fraction.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'dec-val', label: 'Decimal Value', type: 'number', defaultValue: 0.75, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Simplified Fraction', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The decimal value {dec-val} is equal to <strong>{result}</strong>.</p>
+      </div>
+    `
   }
 ];
 

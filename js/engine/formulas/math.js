@@ -404,6 +404,187 @@ export const mathFormulas = {
   },
 
   /**
+   * Trigonometry Calculator
+   */
+  'trigonometry-calculator'(inputs) {
+    const val = Number(inputs.val_a !== undefined ? inputs.val_a : 45);
+    const unit = inputs['angle-unit'] || 'degrees';
+    const func = inputs['trig-func'] || 'sin';
+
+    const rad = unit === 'degrees' ? MathUtils.degToRad(val) : val;
+
+    let res = 0;
+    switch (func) {
+      case 'sin': res = Math.sin(rad); break;
+      case 'cos': res = Math.cos(rad); break;
+      case 'tan': {
+        if (unit === 'degrees' && (val - 90) % 180 === 0) {
+          throw new Error('Tangent is undefined for this angle.');
+        }
+        res = Math.tan(rad);
+        break;
+      }
+      case 'csc': {
+        const sin = Math.sin(rad);
+        if (sin === 0) throw new Error('Cosecant is undefined (sine is zero).');
+        res = 1 / sin;
+        break;
+      }
+      case 'sec': {
+        const cos = Math.cos(rad);
+        if (cos === 0) throw new Error('Secant is undefined (cosine is zero).');
+        res = 1 / cos;
+        break;
+      }
+      case 'cot': {
+        const tan = Math.tan(rad);
+        if (tan === 0) throw new Error('Cotangent is undefined (tangent is zero).');
+        res = 1 / tan;
+        break;
+      }
+      default:
+        throw new Error('Unsupported trigonometric function.');
+    }
+    return res;
+  },
+
+  /**
+   * Sine Calculator
+   */
+  'sine-calculator'(inputs) {
+    const val = Number(inputs.val_a !== undefined ? inputs.val_a : 30);
+    const unit = inputs['angle-unit'] || 'degrees';
+    const rad = unit === 'degrees' ? MathUtils.degToRad(val) : val;
+    return Math.sin(rad);
+  },
+
+  /**
+   * Cosine Calculator
+   */
+  'cosine-calculator'(inputs) {
+    const val = Number(inputs.val_a !== undefined ? inputs.val_a : 60);
+    const unit = inputs['angle-unit'] || 'degrees';
+    const rad = unit === 'degrees' ? MathUtils.degToRad(val) : val;
+    return Math.cos(rad);
+  },
+
+  /**
+   * Tangent Calculator
+   */
+  'tangent-calculator'(inputs) {
+    const val = Number(inputs.val_a !== undefined ? inputs.val_a : 45);
+    const unit = inputs['angle-unit'] || 'degrees';
+    const rad = unit === 'degrees' ? MathUtils.degToRad(val) : val;
+    if (unit === 'degrees' && (val - 90) % 180 === 0) {
+      throw new Error('Tangent is undefined for this angle.');
+    }
+    return Math.tan(rad);
+  },
+
+  /**
+   * Division Calculator
+   */
+  'division-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 10);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 3);
+    if (b === 0) throw new Error('Division by zero.');
+    return {
+      result: a / b,
+      'integer-quotient': Math.floor(a / b),
+      remainder: a % b
+    };
+  },
+
+  /**
+   * Exponent Calculator
+   */
+  'exponent-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 2);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 3);
+    return Math.pow(a, b);
+  },
+
+  /**
+   * Square Root Calculator
+   */
+  'square-root-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 16);
+    if (a < 0) throw new Error('Cannot calculate square root of a negative number.');
+    return Math.sqrt(a);
+  },
+
+  /**
+   * Cube Root Calculator
+   */
+  'cube-root-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 27);
+    return Math.cbrt(a);
+  },
+
+  /**
+   * Pi Calculator
+   */
+  'pi-calculator'(inputs) {
+    const digits = Math.round(Number(inputs.digits !== undefined ? inputs.digits : 100));
+    if (digits < 0 || digits > 1000) {
+      throw new Error('Digits count must be between 0 and 1000.');
+    }
+    const PI_STR = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989";
+    if (digits === 0) return { result: "3" };
+    return { result: PI_STR.slice(0, digits + 2) };
+  },
+
+  /**
+   * Prime Number Checker
+   */
+  'prime-number-checker'(inputs) {
+    const val = Number(inputs.val_a !== undefined ? inputs.val_a : 17);
+    return MathUtils.isPrime(val) ? 'Prime Number' : 'Composite Number';
+  },
+
+  /**
+   * Fraction to Decimal Calculator
+   */
+  'fraction-to-decimal'(inputs) {
+    const n = Number(inputs['frac-n'] !== undefined ? inputs['frac-n'] : 3);
+    const d = Number(inputs['frac-d'] !== undefined ? inputs['frac-d'] : 4);
+    if (d === 0) throw new Error('Denominator cannot be zero.');
+    return n / d;
+  },
+
+  /**
+   * Decimal to Fraction Calculator
+   */
+  'decimal-to-fraction'(inputs) {
+    const val = Number(inputs['dec-val'] !== undefined ? inputs['dec-val'] : 0.75);
+    if (isNaN(val)) throw new Error('Invalid number.');
+    
+    if (Number.isInteger(val)) {
+      return { result: `${val}/1` };
+    }
+
+    const sign = val < 0 ? '-' : '';
+    const absVal = Math.abs(val);
+    
+    const str = absVal.toString();
+    const decIndex = str.indexOf('.');
+    let decPlaces = 0;
+    if (decIndex !== -1) {
+      decPlaces = str.length - decIndex - 1;
+    }
+    decPlaces = Math.min(decPlaces, 9);
+
+    const den = Math.pow(10, decPlaces);
+    const num = Math.round(absVal * den);
+
+    const divisor = MathUtils.gcd(num, den);
+    const simplifiedNum = num / divisor;
+    const simplifiedDen = den / divisor;
+
+    return { result: `${sign}${simplifiedNum}/${simplifiedDen}` };
+  },
+
+  /**
    * Interactive pocket calculator formula evaluator
    */
   'simple-calculator'(inputs) {

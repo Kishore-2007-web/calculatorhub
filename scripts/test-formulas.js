@@ -204,6 +204,43 @@ async function runTests() {
 
     const fibVal = mathFormulas['fibonacci-calculator']({ val_a: 6 });
     assert(fibVal.result === 8, `Fibonacci index 6 is 8 (Result: ${fibVal.result})`);
+
+    // Added Batch 3 tests
+    const trigVal = mathFormulas['trigonometry-calculator']({ val_a: 30, 'trig-func': 'sin', 'angle-unit': 'degrees' });
+    assert(Math.abs(trigVal - 0.5) < 0.01, `Trig sin(30 deg) is 0.5 (Result: ${trigVal})`);
+
+    const sinVal = mathFormulas['sine-calculator']({ val_a: 30, 'angle-unit': 'degrees' });
+    assert(Math.abs(sinVal - 0.5) < 0.01, `Sine 30 deg is 0.5 (Result: ${sinVal})`);
+
+    const cosVal = mathFormulas['cosine-calculator']({ val_a: 60, 'angle-unit': 'degrees' });
+    assert(Math.abs(cosVal - 0.5) < 0.01, `Cosine 60 deg is 0.5 (Result: ${cosVal})`);
+
+    const tanVal = mathFormulas['tangent-calculator']({ val_a: 45, 'angle-unit': 'degrees' });
+    assert(Math.abs(tanVal - 1.0) < 0.01, `Tangent 45 deg is 1.0 (Result: ${tanVal})`);
+
+    const divVal = mathFormulas['division-calculator']({ val_a: 10, val_b: 3 });
+    assert(divVal.remainder === 1, `Division 10/3 remainder is 1 (Result: ${divVal.remainder})`);
+
+    const expVal = mathFormulas['exponent-calculator']({ val_a: 2, val_b: 3 });
+    assert(expVal === 8, `Exponent 2^3 is 8 (Result: ${expVal})`);
+
+    const sqrtVal = mathFormulas['square-root-calculator']({ val_a: 16 });
+    assert(sqrtVal === 4, `Square Root of 16 is 4 (Result: ${sqrtVal})`);
+
+    const cbrtVal = mathFormulas['cube-root-calculator']({ val_a: 27 });
+    assert(cbrtVal === 3, `Cube Root of 27 is 3 (Result: ${cbrtVal})`);
+
+    const piVal = mathFormulas['pi-calculator']({ digits: 5 });
+    assert(piVal.result === '3.14159', `Pi to 5 digits is 3.14159 (Result: ${piVal.result})`);
+
+    const primeVal = mathFormulas['prime-number-checker']({ val_a: 17 });
+    assert(primeVal === 'Prime Number', `Prime checker 17 is Prime (Result: ${primeVal})`);
+
+    const fracToDecVal = mathFormulas['fraction-to-decimal']({ 'frac-n': 3, 'frac-d': 4 });
+    assert(fracToDecVal === 0.75, `Fraction to decimal 3/4 is 0.75 (Result: ${fracToDecVal})`);
+
+    const decToFracVal = mathFormulas['decimal-to-fraction']({ 'dec-val': 0.75 });
+    assert(decToFracVal.result === '3/4', `Decimal to fraction 0.75 is 3/4 (Result: ${decToFracVal.result})`);
   } catch (err) {
     console.error('❌ Crash in Math Formula Tests:', err);
     failedTestsCount++;
