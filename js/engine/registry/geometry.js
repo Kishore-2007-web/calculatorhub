@@ -7,37 +7,49 @@ export const geometryRegistry = [
     version: '1.0.0',
     name: 'Geometry Calculator',
     category: 'geometry',
-    desc: 'Calculate geometric properties of rectangles.',
-    formulaType: 'fdl',
-    formula: 'val_a * val_b',
+    desc: 'Calculate geometric properties of rectangles, circles, triangles, spheres, and cylinders.',
+    formulaType: 'function',
     inputs: [
       {
+        id: 'geom-shape',
+        label: 'Shape',
+        type: 'dropdown',
+        defaultValue: 'rectangle',
+        required: true,
+        options: [
+          { label: 'Rectangle', value: 'rectangle' },
+          { label: 'Circle', value: 'circle' },
+          { label: 'Triangle', value: 'triangle' },
+          { label: 'Sphere', value: 'sphere' },
+          { label: 'Cylinder', value: 'cylinder' }
+        ]
+      },
+      {
         id: 'val_a',
-        label: 'Width',
+        label: 'Width / Radius / Base',
         type: 'number',
         defaultValue: 10,
         required: true
       },
       {
         id: 'val_b',
-        label: 'Height',
+        label: 'Height / Length (Optional)',
         type: 'number',
-        defaultValue: 5,
-        required: true
+        defaultValue: 5
       }
     ],
     outputs: [
       {
         id: 'result',
-        label: 'Calculated Area',
+        label: 'Calculated Value',
         primary: true,
         format: 'number',
-        decimals: 2
+        decimals: 4
       }
     ],
     explanation: `
       <div style="font-size: 0.95rem;">
-        <p>The rectangle area is <strong>{result}</strong>.</p>
+        <p>The calculated outcome for {geom-shape} is <strong>{result}</strong>.</p>
       </div>
     `
   }

@@ -764,6 +764,190 @@ export const mathRegistry = [
         <p>The decimal value {dec-val} is equal to <strong>{result}</strong>.</p>
       </div>
     `
+  },
+  {
+    id: 'roman-numeral-converter',
+    version: '1.0.0',
+    name: 'Roman Numeral Converter',
+    category: 'math',
+    desc: 'Convert between decimal numbers and Roman numerals.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'roman-val', label: 'Input Value', type: 'text', defaultValue: 'XIV', required: true },
+      { id: 'conv-dir', label: 'Conversion Direction', type: 'dropdown', defaultValue: 'rom-to-dec', required: true, options: [
+        { label: 'Roman to Decimal', value: 'rom-to-dec' },
+        { label: 'Decimal to Roman', value: 'dec-to-rom' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'Converted Result', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The converted value is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'linear-equation-solver',
+    version: '1.0.0',
+    name: 'Linear Equation Solver',
+    category: 'math',
+    desc: 'Solve simple linear equations in form ax + b = 0.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'eq-a', label: 'Coefficient a', type: 'number', defaultValue: 2, required: true },
+      { id: 'eq-b', label: 'Coefficient b', type: 'number', defaultValue: -4, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Solution (x)', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The solved variable x is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'cubic-equation-solver',
+    version: '1.0.0',
+    name: 'Cubic Equation Solver',
+    category: 'math',
+    desc: 'Solve cubic equations in form ax^3 + bx^2 + cx + d = 0.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'eq-a', label: 'Coefficient a', type: 'number', defaultValue: 1, required: true },
+      { id: 'eq-b', label: 'Coefficient b', type: 'number', defaultValue: -6, required: true },
+      { id: 'eq-c', label: 'Coefficient c', type: 'number', defaultValue: 11, required: true },
+      { id: 'eq-d', label: 'Coefficient d', type: 'number', defaultValue: -6, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Roots (Solutions)', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The roots of the cubic equation are:</p>
+        <pre style="background: var(--color-bg-base); padding: 0.75rem; border-radius: var(--radius-sm); font-family: monospace;">{result}</pre>
+      </div>
+    `
+  },
+  {
+    id: 'algebraic-expression-simplifier',
+    version: '1.0.0',
+    name: 'Algebraic Expression Simplifier',
+    category: 'math',
+    desc: 'Simplify polynomials and group terms like x^2, x, and numbers.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'expression', label: 'Algebraic Expression', type: 'text', defaultValue: '3*x + 2*x - 5 + 10', required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Simplified Expression', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The simplified algebraic expression is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'partial-fraction-decomposition-calculator',
+    version: '1.0.0',
+    name: 'Partial Fraction Decomposition Calculator',
+    category: 'math',
+    desc: 'Decompose (px + q)/((x - a)(x - b)) into simpler fractions.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'num-expr', label: 'Numerator (px + q)', type: 'text', defaultValue: '3*x + 5', required: true },
+      { id: 'den-expr', label: 'Denominator (x - a)(x - b)', type: 'text', defaultValue: '(x - 1)*(x + 2)', required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Decomposition Result', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The decomposed fraction is:</p>
+        <pre style="background: var(--color-bg-base); padding: 0.75rem; border-radius: var(--radius-sm); font-family: monospace;">{result}</pre>
+      </div>
+    `
+  },
+  {
+    id: 'complex-number-calculator',
+    version: '1.0.0',
+    name: 'Complex Number Calculator',
+    category: 'math',
+    desc: 'Perform basic arithmetic operations on complex numbers (a + bi).',
+    formulaType: 'function',
+    inputs: [
+      { id: 'real-1', label: 'Real Part 1', type: 'number', defaultValue: 3, required: true },
+      { id: 'imag-1', label: 'Imaginary Part 1', type: 'number', defaultValue: 4, required: true },
+      { id: 'complex-op', label: 'Operation', type: 'dropdown', defaultValue: 'add', required: true, options: [
+        { label: 'Add (+)', value: 'add' },
+        { label: 'Subtract (-)', value: 'subtract' },
+        { label: 'Multiply (*)', value: 'multiply' },
+        { label: 'Divide (/)', value: 'divide' }
+      ]},
+      { id: 'real-2', label: 'Real Part 2', type: 'number', defaultValue: 1, required: true },
+      { id: 'imag-2', label: 'Imaginary Part 2', type: 'number', defaultValue: -2, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Complex Result', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The resulting complex number is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'vector-addition-calculator',
+    version: '1.0.0',
+    name: 'Vector Addition Calculator',
+    category: 'math',
+    desc: 'Add two 3D vectors (V1 + V2) and find the resulting magnitude.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'v1x', label: 'V1 x-component', type: 'number', defaultValue: 3, required: true },
+      { id: 'v1y', label: 'V1 y-component', type: 'number', defaultValue: 4, required: true },
+      { id: 'v1z', label: 'V1 z-component', type: 'number', defaultValue: 0, required: true },
+      { id: 'v2x', label: 'V2 x-component', type: 'number', defaultValue: 1, required: true },
+      { id: 'v2y', label: 'V2 y-component', type: 'number', defaultValue: -2, required: true },
+      { id: 'v2z', label: 'V2 z-component', type: 'number', defaultValue: 2, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Resulting Vector (V1 + V2)', primary: true, format: 'string' },
+      { id: 'magnitude', label: 'Vector Magnitude', format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The added vector is <strong>{result}</strong> with magnitude <strong>{magnitude}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'matrix-inverse-calculator',
+    version: '1.0.0',
+    name: 'Matrix Inverse Calculator',
+    category: 'math',
+    desc: 'Find the determinant and inverse of a 2x2 matrix.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'a11', label: 'Matrix [1,1]', type: 'number', defaultValue: 4, required: true },
+      { id: 'a12', label: 'Matrix [1,2]', type: 'number', defaultValue: 7, required: true },
+      { id: 'a21', label: 'Matrix [2,1]', type: 'number', defaultValue: 2, required: true },
+      { id: 'a22', label: 'Matrix [2,2]', type: 'number', defaultValue: 6, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Inverse Matrix', primary: true, format: 'string' },
+      { id: 'determinant', label: 'Determinant', format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The inverse matrix (if determinant is not zero) is:</p>
+        <pre style="background: var(--color-bg-base); padding: 0.75rem; border-radius: var(--radius-sm); font-family: monospace;">{result}</pre>
+        <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Determinant: <strong>{determinant}</strong></p>
+      </div>
+    `
   }
 ];
 

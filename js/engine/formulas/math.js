@@ -585,6 +585,300 @@ export const mathFormulas = {
   },
 
   /**
+   * Roman Numeral Converter
+   */
+  'roman-numeral-converter'(inputs) {
+    const rawVal = (inputs['roman-val'] || 'XIV').toString().trim();
+    const dir = inputs['conv-dir'] || 'rom-to-dec';
+
+    const romanToDecimal = (str) => {
+      const roman = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+      let num = 0;
+      for (let i = 0; i < str.length; i++) {
+        const current = roman[str[i].toUpperCase()];
+        const next = roman[str[i + 1]?.toUpperCase()];
+        if (current === undefined) throw new Error('Invalid Roman Numeral character.');
+        if (next && current < next) {
+          num += next - current;
+          i++;
+        } else {
+          num += current;
+        }
+      }
+      return num;
+    };
+
+    const decimalToRoman = (num) => {
+      let val = Math.round(Number(num));
+      if (isNaN(val) || val <= 0 || val > 3999) throw new Error('Value must be an integer between 1 and 3999.');
+      const lookup = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 };
+      let roman = '';
+      for (const key in lookup) {
+        while (val >= lookup[key]) {
+          roman += key;
+          val -= lookup[key];
+        }
+      }
+      return roman;
+    };
+
+    if (dir === 'rom-to-dec') {
+      return { result: romanToDecimal(rawVal).toString() };
+    } else {
+      return { result: decimalToRoman(rawVal) };
+    }
+  },
+
+  /**
+   * Linear Equation Solver
+   */
+  'linear-equation-solver'(inputs) {
+    const a = Number(inputs['eq-a'] !== undefined ? inputs['eq-a'] : 2);
+    const b = Number(inputs['eq-b'] !== undefined ? inputs['eq-b'] : -4);
+
+    if (a === 0) {
+      if (b === 0) return { result: 'Infinitely many solutions (0 = 0)' };
+      return { result: 'No solution (equation is inconsistent)' };
+    }
+    return { result: `x = ${(-b / a).toFixed(4)}` };
+  },
+
+  /**
+   * Cubic Equation Solver
+   */
+  'cubic-equation-solver'(inputs) {
+    const a = Number(inputs['eq-a'] !== undefined ? inputs['eq-a'] : 1);
+    const b = Number(inputs['eq-b'] !== undefined ? inputs['eq-b'] : 0);
+    const c = Number(inputs['eq-c'] !== undefined ? inputs['eq-c'] : 0);
+    const d = Number(inputs['eq-d'] !== undefined ? inputs['eq-d'] : 0);
+
+    const solveQuadratic = (qa, qb, qc) => {
+      if (qa === 0) {
+        if (qb === 0) return 'No solution';
+        return `x = ${(-qc / qb).toFixed(4)}`;
+      }
+      const disc = qb * qb - 4 * qa * qc;
+      if (disc > 0) {
+        const r1 = (-qb + Math.sqrt(disc)) / (2 * qa);
+        const r2 = (-qb - Math.sqrt(disc)) / (2 * qa);
+        return `x1 = ${r1.toFixed(4)}, x2 = ${r2.toFixed(4)}`;
+      } else if (disc === 0) {
+        return `x = ${(-qb / (2 * qa)).toFixed(4)}`;
+      } else {
+        const real = -qb / (2 * qa);
+        const imag = Math.sqrt(-disc) / (2 * qa);
+        return `x1 = ${real.toFixed(4)} + ${imag.toFixed(4)}i, x2 = ${real.toFixed(4)} - ${imag.toFixed(4)}i`;
+      }
+    };
+
+    if (a === 0) {
+      return { result: solveQuadratic(b, c, d) };
+    }
+
+    const normB = b / a;
+    const normC = c / a;
+    const normD = d / a;
+
+    const q = (3 * normC - normB * normB) / 9;
+    const r = (9 * normB * normC - 27 * normD - 2 * Math.pow(normB, 3)) / 54;
+    const disc = q * q * q + r * r;
+
+    let roots = [];
+
+    if (disc > 0) {
+      const s = Math.cbrt(r + Math.sqrt(disc));
+      const t = Math.cbrt(r - Math.sqrt(disc));
+      const r1 = -normB / 3 + (s + t);
+      const realPart = -normB / 3 - (s + t) / 2;
+      const imagPart = (Math.sqrt(3) * (s - t)) / 2;
+      roots = [
+        `x1 = ${r1.toFixed(4)}`,
+        `x2 = ${realPart.toFixed(4)} + ${Math.abs(imagPart).toFixed(4)}i`,
+        `x3 = ${realPart.toFixed(4)} - ${Math.abs(imagPart).toFixed(4)}i`
+      ];
+    } else if (disc === 0) {
+      const r13 = Math.cbrt(r);
+      const r1 = -normB / 3 + 2 * r13;
+      const r2 = -normB / 3 - r13;
+      roots = [
+        `x1 = ${r1.toFixed(4)}`,
+        `x2 = ${r2.toFixed(4)} (double root)`
+      ];
+    } else {
+      const theta = Math.acos(r / Math.sqrt(-Math.pow(q, 3)));
+      const sqrtQ = Math.sqrt(-q);
+      const r1 = 2 * sqrtQ * Math.cos(theta / 3) - normB / 3;
+      const r2 = 2 * sqrtQ * Math.cos((theta + 2 * Math.PI) / 3) - normB / 3;
+      const r3 = 2 * sqrtQ * Math.cos((theta + 4 * Math.PI) / 3) - normB / 3;
+      roots = [
+        `x1 = ${r1.toFixed(4)}`,
+        `x2 = ${r2.toFixed(4)}`,
+        `x3 = ${r3.toFixed(4)}`
+      ];
+    }
+
+    return { result: roots.join('\n') };
+  },
+
+  /**
+   * Algebraic Expression Simplifier
+   */
+  'algebraic-expression-simplifier'(inputs) {
+    let expr = (inputs.expression || '3*x + 2*x - 5 + 10').toString();
+    expr = expr.replace(/\s+/g, '').replace(/-/g, '+-');
+    const terms = expr.split('+').filter(Boolean);
+    let xCoeff = 0;
+    let x2Coeff = 0;
+    let constant = 0;
+
+    for (let term of terms) {
+      if (term.includes('x^2') || term.includes('x*x')) {
+        const c = term.replace(/x\^2|x\*x/g, '').replace(/\*/g, '');
+        const val = c === '' ? 1 : (c === '-' ? -1 : parseFloat(c));
+        x2Coeff += isNaN(val) ? 0 : val;
+      } else if (term.includes('x')) {
+        const c = term.replace(/x/g, '').replace(/\*/g, '');
+        const val = c === '' ? 1 : (c === '-' ? -1 : parseFloat(c));
+        xCoeff += isNaN(val) ? 0 : val;
+      } else {
+        const val = parseFloat(term);
+        constant += isNaN(val) ? 0 : val;
+      }
+    }
+
+    const resultParts = [];
+    if (x2Coeff !== 0) resultParts.push(`${x2Coeff === 1 ? '' : (x2Coeff === -1 ? '-' : x2Coeff)}x^2`);
+    if (xCoeff !== 0) resultParts.push(`${xCoeff > 0 && resultParts.length > 0 ? '+' : ''}${xCoeff === 1 ? '' : (xCoeff === -1 ? '-' : xCoeff)}x`);
+    if (constant !== 0) resultParts.push(`${constant > 0 && resultParts.length > 0 ? '+' : ''}${constant}`);
+    
+    return { result: resultParts.join('') || '0' };
+  },
+
+  /**
+   * Partial Fraction Decomposition
+   */
+  'partial-fraction-decomposition-calculator'(inputs) {
+    const numStr = (inputs['num-expr'] || '3*x + 5').toString();
+    const denStr = (inputs['den-expr'] || '(x - 1)*(x + 2)').toString();
+
+    const numMatch = numStr.replace(/\s+/g, '').match(/^([+-]?\d*)\*?x([+-]\d+)?$/);
+    const denMatch = denStr.replace(/\s+/g, '').match(/^\(x([+-]\d+)\)\*?\(x([+-]\d+)\)$/);
+
+    if (!numMatch || !denMatch) {
+      return { result: 'Supported form: Numerator px + q, Denominator (x - a)(x - b)' };
+    }
+
+    const p = parseFloat(numMatch[1] === '' ? 1 : (numMatch[1] === '+' ? 1 : (numMatch[1] === '-' ? -1 : numMatch[1])));
+    const q = parseFloat(numMatch[2] || 0);
+
+    const negA = parseFloat(denMatch[1]);
+    const negB = parseFloat(denMatch[2]);
+
+    const a = -negA;
+    const b = -negB;
+
+    if (a === b) {
+      return { result: 'Roots must be distinct (a !== b).' };
+    }
+
+    const A = (p * a + q) / (a - b);
+    const B = (p * b + q) / (b - a);
+
+    const termA = `(${A.toFixed(2)}) / (x - ${a})`;
+    const termB = `(${B.toFixed(2)}) / (x - ${b})`;
+    return { result: `${termA} + ${termB}` };
+  },
+
+  /**
+   * Complex Number Calculator
+   */
+  'complex-number-calculator'(inputs) {
+    const r1 = Number(inputs['real-1'] !== undefined ? inputs['real-1'] : 0);
+    const i1 = Number(inputs['imag-1'] !== undefined ? inputs['imag-1'] : 0);
+    const r2 = Number(inputs['real-2'] !== undefined ? inputs['real-2'] : 0);
+    const i2 = Number(inputs['imag-2'] !== undefined ? inputs['imag-2'] : 0);
+    const op = inputs['complex-op'] || 'add';
+
+    let r = 0, i = 0;
+    switch (op) {
+      case 'add':
+        r = r1 + r2;
+        i = i1 + i2;
+        break;
+      case 'subtract':
+        r = r1 - r2;
+        i = i1 - i2;
+        break;
+      case 'multiply':
+        r = r1 * r2 - i1 * i2;
+        i = r1 * i2 + r2 * i1;
+        break;
+      case 'divide': {
+        const div = r2 * r2 + i2 * i2;
+        if (div === 0) throw new Error('Division by zero in complex calculation.');
+        r = (r1 * r2 + i1 * i2) / div;
+        i = (i1 * r2 - r1 * i2) / div;
+        break;
+      }
+      default:
+        throw new Error('Unsupported complex operation.');
+    }
+
+    const sign = i >= 0 ? '+' : '-';
+    return { result: `${r.toFixed(4)} ${sign} ${Math.abs(i).toFixed(4)}i` };
+  },
+
+  /**
+   * Vector Addition Calculator
+   */
+  'vector-addition-calculator'(inputs) {
+    const v1x = Number(inputs.v1x !== undefined ? inputs.v1x : 0);
+    const v1y = Number(inputs.v1y !== undefined ? inputs.v1y : 0);
+    const v1z = Number(inputs.v1z !== undefined ? inputs.v1z : 0);
+    const v2x = Number(inputs.v2x !== undefined ? inputs.v2x : 0);
+    const v2y = Number(inputs.v2y !== undefined ? inputs.v2y : 0);
+    const v2z = Number(inputs.v2z !== undefined ? inputs.v2z : 0);
+
+    const rx = v1x + v2x;
+    const ry = v1y + v2y;
+    const rz = v1z + v2z;
+    const mag = Math.sqrt(rx * rx + ry * ry + rz * rz);
+
+    return {
+      result: `[ ${rx.toFixed(2)}, ${ry.toFixed(2)}, ${rz.toFixed(2)} ]`,
+      magnitude: mag
+    };
+  },
+
+  /**
+   * Matrix Inverse Calculator
+   */
+  'matrix-inverse-calculator'(inputs) {
+    const a11 = Number(inputs.a11 !== undefined ? inputs.a11 : 1);
+    const a12 = Number(inputs.a12 !== undefined ? inputs.a12 : 0);
+    const a21 = Number(inputs.a21 !== undefined ? inputs.a21 : 0);
+    const a22 = Number(inputs.a22 !== undefined ? inputs.a22 : 1);
+
+    const det = a11 * a22 - a12 * a21;
+    if (det === 0) {
+      return {
+        result: 'Matrix is singular and has no inverse.',
+        determinant: 0
+      };
+    }
+
+    const inv11 = a22 / det;
+    const inv12 = -a12 / det;
+    const inv21 = -a21 / det;
+    const inv22 = a11 / det;
+
+    return {
+      result: `[ ${inv11.toFixed(4)}, ${inv12.toFixed(4)} ]\n[ ${inv21.toFixed(4)}, ${inv22.toFixed(4)} ]`,
+      determinant: det
+    };
+  },
+
+  /**
    * Interactive pocket calculator formula evaluator
    */
   'simple-calculator'(inputs) {

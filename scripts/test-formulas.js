@@ -18,6 +18,8 @@ import { healthRegistry } from '../js/engine/registry/health.js';
 import { financeRegistry } from '../js/engine/registry/finance.js';
 import { mathRegistry } from '../js/engine/registry/math.js';
 import { dateRegistry } from '../js/engine/registry/date.js';
+import { geometryRegistry } from '../js/engine/registry/geometry.js';
+import { geometryFormulas } from '../js/engine/formulas/geometry.js';
 
 let failedTestsCount = 0;
 
@@ -241,6 +243,37 @@ async function runTests() {
 
     const decToFracVal = mathFormulas['decimal-to-fraction']({ 'dec-val': 0.75 });
     assert(decToFracVal.result === '3/4', `Decimal to fraction 0.75 is 3/4 (Result: ${decToFracVal.result})`);
+
+    // Added Batch 4 tests
+    const romVal = mathFormulas['roman-numeral-converter']({ 'roman-val': 'XIV', 'conv-dir': 'rom-to-dec' });
+    assert(romVal.result === '14', `Roman Numeral XIV to Decimal is 14 (Result: ${romVal.result})`);
+
+    const decRomVal = mathFormulas['roman-numeral-converter']({ 'roman-val': '14', 'conv-dir': 'dec-to-rom' });
+    assert(decRomVal.result === 'XIV', `Decimal 14 to Roman is XIV (Result: ${decRomVal.result})`);
+
+    const linearVal = mathFormulas['linear-equation-solver']({ 'eq-a': 2, 'eq-b': -4 });
+    assert(linearVal.result === 'x = 2.0000', `Linear Equation 2x - 4 = 0 (Result: ${linearVal.result})`);
+
+    const cubicVal = mathFormulas['cubic-equation-solver']({ 'eq-a': 1, 'eq-b': -6, 'eq-c': 11, 'eq-d': -6 });
+    assert(cubicVal.result.includes('3.0000') && cubicVal.result.includes('2.0000') && cubicVal.result.includes('1.0000'), `Cubic Equation solutions (Result: ${cubicVal.result})`);
+
+    const simplVal = mathFormulas['algebraic-expression-simplifier']({ expression: '3*x + 2*x - 5 + 10' });
+    assert(simplVal.result === '5x+5', `Algebraic Expression Simplifier (Result: ${simplVal.result})`);
+
+    const decompVal = mathFormulas['partial-fraction-decomposition-calculator']({ 'num-expr': '3*x + 5', 'den-expr': '(x - 1)*(x + 2)' });
+    assert(decompVal.result.includes('2.67') && decompVal.result.includes('0.33'), `Partial Fraction Decomposition (Result: ${decompVal.result})`);
+
+    const complexVal = mathFormulas['complex-number-calculator']({ 'real-1': 3, 'imag-1': 4, 'complex-op': 'add', 'real-2': 1, 'imag-2': -2 });
+    assert(complexVal.result === '4.0000 + 2.0000i', `Complex addition 3+4i + 1-2i (Result: ${complexVal.result})`);
+
+    const vectorVal = mathFormulas['vector-addition-calculator']({ v1x: 3, v1y: 4, v1z: 0, v2x: 1, v2y: -2, v2z: 2 });
+    assert(vectorVal.result === '[ 4.00, 2.00, 2.00 ]' && Math.abs(vectorVal.magnitude - 4.8989) < 0.01, `Vector addition (Result: ${vectorVal.result}, Magnitude: ${vectorVal.magnitude})`);
+
+    const matInvVal = mathFormulas['matrix-inverse-calculator']({ a11: 4, a12: 7, a21: 2, a22: 6 });
+    assert(matInvVal.result.includes('0.6000') && matInvVal.determinant === 10, `Matrix Inverse (Det: ${matInvVal.determinant}, Inverse: ${matInvVal.result})`);
+
+    const geomVal = geometryFormulas['geometry-calculator']({ 'geom-shape': 'rectangle', val_a: 10, val_b: 5 });
+    assert(geomVal === 50, `Geometry area of 10x5 rectangle is 50 (Result: ${geomVal})`);
   } catch (err) {
     console.error('❌ Crash in Math Formula Tests:', err);
     failedTestsCount++;
@@ -249,7 +282,7 @@ async function runTests() {
   // --- 6. REGISTRY SCHEMA VALIDATION TESTS ---
   console.log('\n6. Registry Config Schema Tests:');
   try {
-    const allRegistries = [...healthRegistry, ...financeRegistry, ...mathRegistry, ...dateRegistry];
+    const allRegistries = [...healthRegistry, ...financeRegistry, ...mathRegistry, ...dateRegistry, ...geometryRegistry];
     allRegistries.forEach(config => {
       assert(config.id !== undefined, `Config has id: ${config.id}`);
       assert(config.version !== undefined, `Config ${config.id} has version v${config.version}`);
