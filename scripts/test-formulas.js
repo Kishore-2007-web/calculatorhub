@@ -179,6 +179,31 @@ async function runTests() {
 
     const pctDec = mathFormulas['percentage-decrease-calculator']({ val_a: 15, val_b: 10 });
     assert(Math.abs(pctDec - 33.33) < 0.01, `Percentage Decrease (15 to 10 = ${pctDec}%)`);
+
+    // Added more Math tests
+    const algebraVal = mathFormulas['algebra-calculator']({ expression: '3 * x + 5', 'x-val': 4 });
+    assert(algebraVal === 17, `Algebra evaluation (3x+5 at x=4 = ${algebraVal})`);
+
+    const quadraticResult = mathFormulas['quadratic-equation-solver']({ 'eq-a': 1, 'eq-b': -5, 'eq-c': 6 });
+    assert(quadraticResult.result.includes('x1 = 3.0000'), `Quadratic root x1 is 3 (Result: ${quadraticResult.result})`);
+
+    const logVal = mathFormulas['logarithm-calculator']({ val_a: 100, 'log-base': '10' });
+    assert(logVal === 2, `Logarithm base 10 of 100 is 2 (Result: ${logVal})`);
+
+    const antilogVal = mathFormulas['antilogarithm-calculator']({ val_a: 3, 'log-base': '10' });
+    assert(antilogVal === 1000, `Antilogarithm base 10 of 3 is 1000 (Result: ${antilogVal})`);
+
+    const binVal = mathFormulas['binary-converter']({ 'num-val': '10', 'conv-dir': 'dec-to-bin' });
+    assert(binVal.result === '1010', `Binary converter 10 is 1010 (Result: ${binVal.result})`);
+
+    const hexVal = mathFormulas['hex-converter']({ 'num-val': '255', 'conv-dir': 'dec-to-hex' });
+    assert(hexVal.result === 'FF', `Hex converter 255 is FF (Result: ${hexVal.result})`);
+
+    const baseVal = mathFormulas['base-converter']({ 'num-val': 'A', 'from-base': 16, 'to-base': 10 });
+    assert(baseVal.result === '10', `Base converter A (16) to 10 is 10 (Result: ${baseVal.result})`);
+
+    const fibVal = mathFormulas['fibonacci-calculator']({ val_a: 6 });
+    assert(fibVal.result === 8, `Fibonacci index 6 is 8 (Result: ${fibVal.result})`);
   } catch (err) {
     console.error('❌ Crash in Math Formula Tests:', err);
     failedTestsCount++;

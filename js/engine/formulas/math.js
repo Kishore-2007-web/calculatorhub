@@ -204,6 +204,206 @@ export const mathFormulas = {
   },
 
   /**
+   * Algebra Calculator
+   */
+  'algebra-calculator'(inputs) {
+    const expr = (inputs.expression || '').trim();
+    const x = Number(inputs['x-val'] !== undefined ? inputs['x-val'] : 0);
+    if (!expr) throw new Error('Expression is empty.');
+    try {
+      return FdlCompiler.evaluate(expr, { x: x, X: x });
+    } catch (err) {
+      throw new Error(`Invalid expression: ${err.message}`);
+    }
+  },
+
+  /**
+   * Quadratic Equation Solver
+   */
+  'quadratic-equation-solver'(inputs) {
+    const a = Number(inputs['eq-a'] !== undefined ? inputs['eq-a'] : 1);
+    const b = Number(inputs['eq-b'] !== undefined ? inputs['eq-b'] : 0);
+    const c = Number(inputs['eq-c'] !== undefined ? inputs['eq-c'] : 0);
+
+    if (a === 0) {
+      if (b === 0) {
+        throw new Error('Not a valid equation (a and b are zero).');
+      }
+      return { result: `Linear Root: x = ${(-c / b).toFixed(4)}` };
+    }
+
+    const disc = b * b - 4 * a * c;
+    if (disc > 0) {
+      const r1 = (-b + Math.sqrt(disc)) / (2 * a);
+      const r2 = (-b - Math.sqrt(disc)) / (2 * a);
+      return { result: `Two real roots:\nx1 = ${r1.toFixed(4)}\nx2 = ${r2.toFixed(4)}` };
+    } else if (disc === 0) {
+      const r = -b / (2 * a);
+      return { result: `One double root:\nx = ${r.toFixed(4)}` };
+    } else {
+      const real = -b / (2 * a);
+      const imag = Math.sqrt(-disc) / (2 * a);
+      return { result: `Two complex roots:\nx1 = ${real.toFixed(4)} + ${imag.toFixed(4)}i\nx2 = ${real.toFixed(4)} - ${imag.toFixed(4)}i` };
+    }
+  },
+
+  /**
+   * GCD Calculator
+   */
+  'gcd-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 0);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 0);
+    return MathUtils.gcd(a, b);
+  },
+
+  /**
+   * LCM Calculator
+   */
+  'lcm-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 0);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 0);
+    return MathUtils.lcm(a, b);
+  },
+
+  /**
+   * Factorial Calculator
+   */
+  'factorial-calculator'(inputs) {
+    const n = Number(inputs.val_a !== undefined ? inputs.val_a : 0);
+    return MathUtils.factorial(n);
+  },
+
+  /**
+   * Logarithm Calculator
+   */
+  'logarithm-calculator'(inputs) {
+    const x = Number(inputs.val_a !== undefined ? inputs.val_a : 100);
+    const baseType = inputs['log-base'] || '10';
+    let base = 10;
+
+    if (baseType === 'e') {
+      base = Math.E;
+    } else if (baseType === '2') {
+      base = 2;
+    } else if (baseType === 'custom') {
+      base = Number(inputs['custom-base'] !== undefined ? inputs['custom-base'] : 10);
+    }
+
+    if (x <= 0) {
+      throw new Error('Logarithm value must be greater than zero.');
+    }
+    if (base <= 0 || base === 1) {
+      throw new Error('Logarithm base must be positive and not equal to 1.');
+    }
+
+    return Math.log(x) / Math.log(base);
+  },
+
+  /**
+   * Antilogarithm Calculator
+   */
+  'antilogarithm-calculator'(inputs) {
+    const x = Number(inputs.val_a !== undefined ? inputs.val_a : 2);
+    const baseType = inputs['log-base'] || '10';
+    let base = 10;
+
+    if (baseType === 'e') {
+      base = Math.E;
+    } else if (baseType === '2') {
+      base = 2;
+    }
+
+    return Math.pow(base, x);
+  },
+
+  /**
+   * Binary Converter
+   */
+  'binary-converter'(inputs) {
+    const rawVal = (inputs['num-val'] !== undefined ? inputs['num-val'] : '10').toString().trim();
+    const dir = inputs['conv-dir'] || 'dec-to-bin';
+
+    if (dir === 'dec-to-bin') {
+      const dec = parseInt(rawVal, 10);
+      if (isNaN(dec)) throw new Error('Invalid decimal number.');
+      return { result: dec.toString(2) };
+    } else {
+      const dec = parseInt(rawVal, 2);
+      if (isNaN(dec)) throw new Error('Invalid binary number.');
+      return { result: dec.toString(10) };
+    }
+  },
+
+  /**
+   * Hex Converter
+   */
+  'hex-converter'(inputs) {
+    const rawVal = (inputs['num-val'] !== undefined ? inputs['num-val'] : '255').toString().trim();
+    const dir = inputs['conv-dir'] || 'dec-to-hex';
+
+    if (dir === 'dec-to-hex') {
+      const dec = parseInt(rawVal, 10);
+      if (isNaN(dec)) throw new Error('Invalid decimal number.');
+      return { result: dec.toString(16).toUpperCase() };
+    } else {
+      const dec = parseInt(rawVal, 16);
+      if (isNaN(dec)) throw new Error('Invalid hexadecimal number.');
+      return { result: dec.toString(10) };
+    }
+  },
+
+  /**
+   * Modulo Calculator
+   */
+  'modulo-calculator'(inputs) {
+    const a = Number(inputs.val_a !== undefined ? inputs.val_a : 0);
+    const b = Number(inputs.val_b !== undefined ? inputs.val_b : 0);
+    if (b === 0) throw new Error('Divisor cannot be zero.');
+    return a % b;
+  },
+
+  /**
+   * Base Converter
+   */
+  'base-converter'(inputs) {
+    const rawVal = (inputs['num-val'] !== undefined ? inputs['num-val'] : '1010').toString().trim();
+    const fromBase = Math.round(Number(inputs['from-base'] !== undefined ? inputs['from-base'] : 2));
+    const toBase = Math.round(Number(inputs['to-base'] !== undefined ? inputs['to-base'] : 10));
+
+    if (fromBase < 2 || fromBase > 36 || toBase < 2 || toBase > 36) {
+      throw new Error('Base must be between 2 and 36.');
+    }
+
+    const decimalValue = parseInt(rawVal, fromBase);
+    if (isNaN(decimalValue)) {
+      throw new Error(`Invalid input "${rawVal}" for base ${fromBase}.`);
+    }
+
+    return { result: decimalValue.toString(toBase).toUpperCase() };
+  },
+
+  /**
+   * Fibonacci Calculator
+   */
+  'fibonacci-calculator'(inputs) {
+    const n = Math.round(Number(inputs.val_a !== undefined ? inputs.val_a : 10));
+    if (n < 0) throw new Error('Index must be non-negative.');
+    const result = MathUtils.fibonacci(n);
+
+    const terms = [];
+    for (let i = 0; i <= Math.min(n, 12); i++) {
+      terms.push(MathUtils.fibonacci(i));
+    }
+    let sequence = terms.join(', ');
+    if (n > 12) sequence += ', ...';
+
+    return {
+      result: result,
+      sequence: sequence
+    };
+  },
+
+  /**
    * Interactive pocket calculator formula evaluator
    */
   'simple-calculator'(inputs) {

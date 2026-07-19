@@ -247,6 +247,264 @@ export const mathRegistry = [
         <p>The initial value decreased by <strong>{result}</strong> to become the new value.</p>
       </div>
     `
+  },
+  {
+    id: 'algebra-calculator',
+    version: '1.0.0',
+    name: 'Algebra Calculator',
+    category: 'math',
+    desc: 'Evaluate algebraic expressions containing variable x.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'expression', label: 'Algebraic Expression', type: 'text', defaultValue: '3 * x^2 + 5 * x - 2', required: true },
+      { id: 'x-val', label: 'Value of x', type: 'number', defaultValue: 2, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Evaluated Result', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The expression evaluated at x = {x-val} is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'quadratic-equation-solver',
+    version: '1.0.0',
+    name: 'Quadratic Equation Solver',
+    category: 'math',
+    desc: 'Find the real and complex roots of a quadratic equation ax^2 + bx + c = 0.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'eq-a', label: 'Coefficient a', type: 'number', defaultValue: 1, required: true },
+      { id: 'eq-b', label: 'Coefficient b', type: 'number', defaultValue: -5, required: true },
+      { id: 'eq-c', label: 'Coefficient c', type: 'number', defaultValue: 6, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Roots (Solutions)', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The solutions for the quadratic equation are: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'gcd-calculator',
+    version: '1.0.0',
+    name: 'GCD Calculator',
+    category: 'math',
+    desc: 'Calculate the Greatest Common Divisor (GCD) of two numbers.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Number A', type: 'number', defaultValue: 12, required: true },
+      { id: 'val_b', label: 'Number B', type: 'number', defaultValue: 8, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Greatest Common Divisor', primary: true, format: 'number', decimals: 0 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The Greatest Common Divisor is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'lcm-calculator',
+    version: '1.0.0',
+    name: 'LCM Calculator',
+    category: 'math',
+    desc: 'Calculate the Least Common Multiple (LCM) of two numbers.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Number A', type: 'number', defaultValue: 12, required: true },
+      { id: 'val_b', label: 'Number B', type: 'number', defaultValue: 8, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Least Common Multiple', primary: true, format: 'number', decimals: 0 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The Least Common Multiple is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'factorial-calculator',
+    version: '1.0.0',
+    name: 'Factorial Calculator',
+    category: 'math',
+    desc: 'Calculate the factorial of a positive integer (n!).',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Integer n', type: 'number', defaultValue: 5, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Factorial (n!)', primary: true, format: 'number', decimals: 0 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The factorial value is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'logarithm-calculator',
+    version: '1.0.0',
+    name: 'Logarithm Calculator',
+    category: 'math',
+    desc: 'Calculate the logarithm of a number to base 10, e, 2, or custom base.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Value (x)', type: 'number', defaultValue: 100, required: true },
+      { id: 'log-base', label: 'Log Base', type: 'dropdown', defaultValue: '10', required: true, options: [
+        { label: 'Common Log (Base 10)', value: '10' },
+        { label: 'Natural Log (Base e)', value: 'e' },
+        { label: 'Binary Log (Base 2)', value: '2' },
+        { label: 'Custom Base', value: 'custom' }
+      ]},
+      { id: 'custom-base', label: 'Custom Base Value', type: 'number', defaultValue: 10 }
+    ],
+    outputs: [
+      { id: 'result', label: 'Logarithm Value', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The calculated logarithm is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'antilogarithm-calculator',
+    version: '1.0.0',
+    name: 'Antilogarithm Calculator',
+    category: 'math',
+    desc: 'Calculate the inverse logarithm (antilog) of a number.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Value (x)', type: 'number', defaultValue: 2, required: true },
+      { id: 'log-base', label: 'Log Base', type: 'dropdown', defaultValue: '10', required: true, options: [
+        { label: 'Base 10', value: '10' },
+        { label: 'Base e', value: 'e' },
+        { label: 'Base 2', value: '2' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'Antilogarithm Value', primary: true, format: 'number', decimals: 4 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The calculated antilogarithm is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'binary-converter',
+    version: '1.0.0',
+    name: 'Binary Converter',
+    category: 'math',
+    desc: 'Convert numbers between decimal and binary representations.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'num-val', label: 'Input Value', type: 'text', defaultValue: '10', required: true },
+      { id: 'conv-dir', label: 'Conversion Direction', type: 'dropdown', defaultValue: 'dec-to-bin', required: true, options: [
+        { label: 'Decimal to Binary', value: 'dec-to-bin' },
+        { label: 'Binary to Decimal', value: 'bin-to-dec' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'Converted Value', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The conversion result is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'hex-converter',
+    version: '1.0.0',
+    name: 'Hex Converter',
+    category: 'math',
+    desc: 'Convert numbers between decimal and hexadecimal representations.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'num-val', label: 'Input Value', type: 'text', defaultValue: '255', required: true },
+      { id: 'conv-dir', label: 'Conversion Direction', type: 'dropdown', defaultValue: 'dec-to-hex', required: true, options: [
+        { label: 'Decimal to Hexadecimal', value: 'dec-to-hex' },
+        { label: 'Hexadecimal to Decimal', value: 'hex-to-dec' }
+      ]}
+    ],
+    outputs: [
+      { id: 'result', label: 'Converted Value', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The conversion result is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'modulo-calculator',
+    version: '1.0.0',
+    name: 'Modulo Calculator',
+    category: 'math',
+    desc: 'Calculate the remainder of a division operation (a mod b).',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Dividend (a)', type: 'number', defaultValue: 10, required: true },
+      { id: 'val_b', label: 'Divisor (b)', type: 'number', defaultValue: 3, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'Remainder (Modulo)', primary: true, format: 'number', decimals: 0 }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The modulo remainder is <strong>{result}</strong>.</p>
+      </div>
+    `
+  },
+  {
+    id: 'base-converter',
+    version: '1.0.0',
+    name: 'Base Converter',
+    category: 'math',
+    desc: 'Convert numbers from any base (2 to 36) to any other base.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'num-val', label: 'Input Value', type: 'text', defaultValue: '1010', required: true },
+      { id: 'from-base', label: 'From Base (2-36)', type: 'number', defaultValue: 2, required: true, min: 2, max: 36 },
+      { id: 'to-base', label: 'To Base (2-36)', type: 'number', defaultValue: 10, required: true, min: 2, max: 36 }
+    ],
+    outputs: [
+      { id: 'result', label: 'Converted Value', primary: true, format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The converted value in base {to-base} is: <strong>{result}</strong></p>
+      </div>
+    `
+  },
+  {
+    id: 'fibonacci-calculator',
+    version: '1.0.0',
+    name: 'Fibonacci Calculator',
+    category: 'math',
+    desc: 'Generate the n-th Fibonacci number and list terms in the sequence.',
+    formulaType: 'function',
+    inputs: [
+      { id: 'val_a', label: 'Integer n (Index)', type: 'number', defaultValue: 10, required: true }
+    ],
+    outputs: [
+      { id: 'result', label: 'n-th Fibonacci Number', primary: true, format: 'number', decimals: 0 },
+      { id: 'sequence', label: 'Sequence Preview', format: 'string' }
+    ],
+    explanation: `
+      <div style="font-size: 0.95rem;">
+        <p>The {val_a}-th Fibonacci number is <strong>{result}</strong>.</p>
+        <p style="font-size: 0.85rem; color: var(--color-text-secondary); white-space: nowrap; overflow-x: auto;">Sequence: <strong>{sequence}</strong></p>
+      </div>
+    `
   }
 ];
 
