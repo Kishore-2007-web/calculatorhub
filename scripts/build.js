@@ -14,7 +14,7 @@ const cssDir = path.join(rootDir, 'css');
 const jsDir = path.join(rootDir, 'js');
 
 // Custom layout configurations
-const SITE_URL = 'https://calculatorhub.org';
+const SITE_URL = 'https://calculatorhub-gold.vercel.app';
 const defaultOgImage = `${SITE_URL}/assets/og-image.png`;
 
 async function runBuild() {
@@ -76,7 +76,7 @@ function ensureDir(dirPath) {
 global.obsoleteFoldersDeletedCount = 0;
 function cleanupObsoleteFolders(rootDir, calculators, articles) {
   let deletedCount = 0;
-  
+
   // Clean calculators
   const calcsDir = path.join(rootDir, 'calculators');
   if (fs.existsSync(calcsDir)) {
@@ -256,7 +256,7 @@ function buildCategories(layoutHtml, categories, calculators) {
 
 function buildCategoriesOverview(layoutHtml, categories) {
   ensureDir(path.join(rootDir, 'categories'));
-  
+
   const categoriesListHtml = categories.map(cat => `
     <a href="/categories/${cat.id}" class="card flex items-center gap-md" style="padding: 1.5rem;">
       <div style="font-size: 2.25rem;">${getCategoryIcon(cat.icon)}</div>
@@ -623,7 +623,7 @@ function buildStaticPages(layoutHtml, categories, calculators, articles) {
  */
 function buildBlog(layoutHtml, articles, calculators) {
   console.log('Rendering blog pages...');
-  
+
   // Build blog index listing page
   const articlesListHtml = articles.map(art => `
     <article class="card" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
@@ -670,7 +670,7 @@ function buildBlog(layoutHtml, articles, calculators) {
     ensureDir(path.join(rootDir, 'blog', art.slug));
 
     const relatedCalc = calculators.find(c => c.id === art.calculatorId);
-    const relatedLink = relatedCalc 
+    const relatedLink = relatedCalc
       ? `<div class="alert alert-success" style="margin-top: 2rem;"><strong>Related Calculator:</strong> Solve this problem instantly with our <a href="/calculators/${relatedCalc.id}" style="font-weight:700; color:inherit; text-decoration:underline;">${relatedCalc.name} &rarr;</a></div>`
       : '';
 
@@ -757,7 +757,7 @@ function validateUrl(urlStr) {
     if (urlStr.includes(' ')) return false;
     if (parsed.search !== '') return false;
     if (parsed.hash !== '') return false;
-    
+
     const pathPart = urlStr.replace('https://', '');
     if (pathPart.includes('//')) return false;
     if (urlStr.endsWith('/') && urlStr !== 'https://calculatorhub.org/') return false;
@@ -769,16 +769,16 @@ function validateUrl(urlStr) {
 
 function collectUrls(categories, calculators, articles) {
   const list = [];
-  
+
   // Homepage
   list.push({ loc: `${SITE_URL}`, priority: '1.0', changefreq: 'weekly', type: 'homepage' });
-  
+
   // Categories
   list.push({ loc: `${SITE_URL}/categories`, priority: '0.9', changefreq: 'weekly', type: 'category' });
   categories.forEach(cat => {
     list.push({ loc: `${SITE_URL}/categories/${cat.id}`, priority: '0.9', changefreq: 'weekly', type: 'category' });
   });
-  
+
   // Calculator Index & Calculators
   list.push({ loc: `${SITE_URL}/calculators`, priority: '0.7', changefreq: 'monthly', type: 'calculator_index' });
   calculators.forEach(calc => {
@@ -789,19 +789,19 @@ function collectUrls(categories, calculators, articles) {
       type: 'calculator'
     });
   });
-  
+
   // Blog Index & Articles
   list.push({ loc: `${SITE_URL}/blog`, priority: '0.6', changefreq: 'monthly', type: 'blog_index' });
   articles.forEach(art => {
     list.push({ loc: `${SITE_URL}/blog/${art.slug}`, priority: '0.6', changefreq: 'monthly', type: 'blog' });
   });
-  
+
   // Static Pages
   const staticPageIds = ['about', 'contact', 'privacy-policy', 'terms', 'disclaimer'];
   staticPageIds.forEach(pId => {
     list.push({ loc: `${SITE_URL}/${pId}`, priority: '0.3', changefreq: 'yearly', type: 'static' });
   });
-  
+
   return list;
 }
 
@@ -829,13 +829,13 @@ function sortUrls(urlsList) {
     blog: [],
     static: []
   };
-  
+
   urlsList.forEach(item => {
     if (sections[item.type]) {
       sections[item.type].push(item);
     }
   });
-  
+
   const sortFn = (a, b) => a.loc.localeCompare(b.loc);
   sections.homepage.sort(sortFn);
   sections.category.sort(sortFn);
@@ -844,7 +844,7 @@ function sortUrls(urlsList) {
   sections.blog_index.sort(sortFn);
   sections.blog.sort(sortFn);
   sections.static.sort(sortFn);
-  
+
   return [
     ...sections.homepage,
     ...sections.category,
@@ -920,7 +920,7 @@ function performCanonicalAndOrphanValidation(rootDir, finalUrls) {
   });
 
   const canonicalRegex = /<link\s+rel="canonical"\s+href="([^"]+)"/i;
-  
+
   // 1. Verify sitemap URLs match generated canonical on disk
   for (const [loc, filePath] of Object.entries(urlToFileMap)) {
     if (!fs.existsSync(filePath)) {
@@ -1004,7 +1004,7 @@ function generateSitemaps(categories, calculators, articles) {
 
   // 3. Deduplicate
   const dedupedUrls = deduplicateUrls(validatedUrls, stats);
-  
+
   // Fail if duplicate URLs still exist after deduplication (sanity check)
   const finalCheckSet = new Set(dedupedUrls.map(u => u.loc));
   if (finalCheckSet.size !== dedupedUrls.length) {
@@ -1029,7 +1029,7 @@ function generateSitemaps(categories, calculators, articles) {
   const filesToWrite = {};
   const maxUrlsCount = 50000;
   const maxBytesSize = 50 * 1024 * 1024; // 50MB
-  
+
   const singleXml = generateXml(sortedUrls);
   const singleXmlBuffer = Buffer.from(singleXml, 'utf8');
 
@@ -1037,7 +1037,7 @@ function generateSitemaps(categories, calculators, articles) {
   if (sortedUrls.length > maxUrlsCount || singleXmlBuffer.length > maxBytesSize) {
     isSplit = true;
     console.log('⚖️ Sitemap size or count limit exceeded. Splitting into index sitemap...');
-    
+
     const categoriesUrls = sortedUrls.filter(u => u.type === 'category');
     const calculatorsUrls = sortedUrls.filter(u => u.type === 'calculator' || u.type === 'calculator_index');
     const blogUrls = sortedUrls.filter(u => u.type === 'blog' || u.type === 'blog_index');
@@ -1076,7 +1076,7 @@ function generateSitemaps(categories, calculators, articles) {
         throw new Error(`XML Validation failed for ${filename}`);
       }
     }
-    
+
     // Cross-validate canonical links and detect orphans
     performCanonicalAndOrphanValidation(rootDir, sortedUrls);
   } catch (error) {
@@ -1165,7 +1165,7 @@ function getCategoryIcon(iconName) {
  */
 function minifyAssets() {
   console.log('📦 Minifying asset files (CSS & JS) for production performance...');
-  
+
   // Minify CSS files
   const cssFiles = ['main.css', 'components.css', 'dark-theme.css', 'auth.css'];
   cssFiles.forEach(file => {
