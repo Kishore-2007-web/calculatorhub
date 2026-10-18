@@ -2,34 +2,37 @@
 
 body.dark-theme {
   /* Core Quad-Color Dark Adaptations */
-  --color-summit-stone: hsl(196, 16%, 58%);       /* #859CA6 - Muted mountain stone in dark mode */
-  --color-summit-stone-light: hsl(196, 14%, 22%); /* Elevated stone dividers */
-  --color-lichen-green: hsl(150, 52%, 48%);       /* #3BC780 - Vibrant luminous lichen green */
-  --color-alpine-ice: hsl(192, 50%, 95%);         /* #ECF8FB - Crisp glacial ice glow */
-  --color-volcanic-slag: hsl(195, 26%, 7%);       /* #0D1417 - Deep volcanic basalt canvas */
+  --color-summit-stone: hsl(196, 22%, 58%);       /* #7AA1B0 - Mountain stone in dark mode */
+  --color-summit-stone-light: hsl(196, 20%, 30%); /* #3D535F - Stone dividers & borders */
+  --color-summit-stone-dark: hsl(196, 26%, 18%);  /* #22333B - Deep structural stone */
+  --color-lichen-green: hsl(150, 64%, 48%);       /* #2CD87E - Luminous vibrant lichen green */
+  --color-alpine-ice: hsl(192, 58%, 94%);         /* #E2F6FA - Crisp glacial ice glow */
+  --color-alpine-ice-light: hsl(192, 60%, 98%);   /* Frosty crystalline highlight */
+  --color-volcanic-slag: hsl(195, 30%, 8%);       /* #0F181D - Deep volcanic basalt canvas */
+  --color-volcanic-slag-surface: hsl(195, 26%, 13%); /* #16242C */
 
-  /* Dark Theme Surfaces (Volcanic Slag) */
+  /* Dark Theme Surfaces (Volcanic Slag & Summit Stone) */
   --color-bg-base: var(--color-volcanic-slag);
-  --color-bg-surface: hsl(195, 22%, 11%);
-  --color-bg-surface-glass: rgba(19, 29, 33, 0.88);
-  --color-border: hsl(196, 16%, 20%);
+  --color-bg-surface: hsl(195, 26%, 12%);
+  --color-bg-surface-glass: rgba(18, 30, 37, 0.9);
+  --color-border: hsl(196, 20%, 26%);
   --color-border-hover: var(--color-primary);
 
   /* Typography / Text (Alpine Ice & Summit Stone) */
   --color-text-primary: var(--color-alpine-ice);
-  --color-text-secondary: hsl(195, 16%, 74%);
-  --color-text-tertiary: hsl(195, 12%, 56%);
+  --color-text-secondary: hsl(195, 18%, 76%);
+  --color-text-tertiary: hsl(195, 14%, 58%);
 
   /* Accent Adjustments for Dark Contrast (Lichen Green) */
-  --color-primary-hsl: 150, 52%, 48%;
+  --color-primary-hsl: 150, 64%, 48%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(150, 58%, 58%);
-  --color-primary-light: hsl(150, 32%, 16%);
-  --color-primary-glow: rgba(59, 199, 128, 0.25);
+  --color-primary-hover: hsl(150, 70%, 58%);
+  --color-primary-light: hsl(150, 36%, 16%);
+  --color-primary-glow: rgba(44, 216, 126, 0.28);
 
   /* Status Colors */
   --color-success: var(--color-lichen-green);
-  --color-success-light: hsl(150, 32%, 14%);
+  --color-success-light: hsl(150, 36%, 16%);
   --color-warning: hsl(38, 92%, 52%);
   --color-warning-light: hsl(38, 92%, 8%);
   --color-error: hsl(356, 84%, 60%);
@@ -40,25 +43,30 @@ body.dark-theme {
   --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.7), 0 2px 6px -1px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.8), 0 4px 12px -2px rgba(0, 0, 0, 0.6);
   --shadow-xl: 0 24px 38px -8px rgba(0, 0, 0, 0.85), 0 10px 20px -5px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 24px 0 rgba(63, 186, 123, 0.2);
+  --shadow-glow: 0 0 24px 0 rgba(44, 216, 126, 0.28);
+
+  background: linear-gradient(180deg, #0D161A 0%, #111C22 400px, #0F181D 100%) !important;
+  background-attachment: fixed !important;
 }
 
 /* Base adjustment overrides for dark mode elements */
 body.dark-theme input.input-control {
-  background-color: hsl(195, 22%, 8%);
+  background-color: hsl(195, 24%, 9%);
+  border-color: hsl(196, 20%, 28%);
 }
 
 body.dark-theme select.input-control {
-  background-color: hsl(195, 22%, 8%);
+  background-color: hsl(195, 24%, 9%);
+  border-color: hsl(196, 20%, 28%);
 }
 
 body.dark-theme option {
-  background-color: hsl(195, 20%, 12%);
+  background-color: hsl(195, 22%, 13%);
   color: var(--color-text-primary);
 }
 
 body.dark-theme .alert-success {
-  color: hsl(152, 52%, 82%);
+  color: hsl(152, 60%, 84%);
 }
 
 body.dark-theme .alert-error {
@@ -66,13 +74,13 @@ body.dark-theme .alert-error {
 }
 
 body.dark-theme .btn-secondary {
-  background-color: hsl(196, 16%, 18%);
+  background-color: hsl(196, 22%, 24%);
   color: var(--color-alpine-ice);
-  border: 1.5px solid hsl(196, 14%, 28%);
+  border: 1.5px solid hsl(196, 20%, 36%);
 }
 
 body.dark-theme .btn-secondary:hover {
-  background-color: hsl(196, 18%, 24%);
-  border-color: hsl(196, 16%, 38%);
+  background-color: hsl(196, 24%, 30%);
+  border-color: hsl(196, 22%, 46%);
 }
 
