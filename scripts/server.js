@@ -94,6 +94,23 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`🚀 Dev server running at http://localhost:${PORT}`);
+let currentPort = Number(PORT);
+
+function startServer(port) {
+  server.listen(port, () => {
+    console.log(`🚀 Dev server running at http://localhost:${port}`);
+  });
+}
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    currentPort += 1;
+    console.log(`⚠️ Port ${currentPort - 1} in use, trying port ${currentPort}...`);
+    startServer(currentPort);
+  } else {
+    console.error('Server error:', err);
+  }
 });
+
+startServer(currentPort);
+

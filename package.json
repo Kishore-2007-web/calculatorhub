@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
+    "dev": "node --env-file=.env scripts/server.js",
     "start": "node --env-file=.env scripts/server.js"
   },
   "keywords": [
