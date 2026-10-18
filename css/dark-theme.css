@@ -1,55 +1,64 @@
 /* Dark Mode Theme Custom Properties */
 
 body.dark-theme {
-  --color-bg-base: hsl(0, 0%, 4%);
-  --color-bg-surface: hsl(0, 0%, 8%);
-  --color-bg-surface-glass: rgba(18, 18, 18, 0.75);
-  --color-border: hsl(0, 0%, 16%);
-  --color-border-hover: hsl(0, 0%, 26%);
+  /* Core Quad-Color Dark Adaptations */
+  --color-summit-stone: hsl(196, 14%, 60%);       /* #899DA5 - Muted mountain stone in dark mode */
+  --color-summit-stone-light: hsl(196, 12%, 22%); /* Elevated stone dividers */
+  --color-lichen-green: hsl(152, 48%, 48%);       /* #3FBA7B - Luminous vibrant lichen green */
+  --color-alpine-ice: hsl(192, 45%, 96%);         /* #F0F9FB - Crisp glacial ice glow */
+  --color-volcanic-slag: hsl(195, 22%, 7%);       /* #0E1416 - Deep volcanic basalt canvas */
 
-  --color-text-primary: hsl(0, 0%, 98%);
-  --color-text-secondary: hsl(0, 0%, 78%);
-  --color-text-tertiary: hsl(0, 0%, 58%);
+  /* Dark Theme Surfaces (Volcanic Slag) */
+  --color-bg-base: var(--color-volcanic-slag);
+  --color-bg-surface: hsl(195, 18%, 11%);
+  --color-bg-surface-glass: rgba(23, 32, 35, 0.82);
+  --color-border: hsl(195, 14%, 20%);
+  --color-border-hover: hsl(196, 16%, 32%);
 
-  /* Accent Adjustments for Dark Contrast - Emerald/Mint Green */
-  --color-primary-hsl: 161, 84%, 48%;
+  /* Typography / Text (Alpine Ice & Summit Stone) */
+  --color-text-primary: var(--color-alpine-ice);
+  --color-text-secondary: hsl(195, 14%, 74%);
+  --color-text-tertiary: hsl(195, 10%, 56%);
+
+  /* Accent Adjustments for Dark Contrast (Lichen Green) */
+  --color-primary-hsl: 152, 48%, 48%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(161, 84%, 58%);
-  --color-primary-light: hsl(161, 30%, 14%);
-  --color-primary-glow: rgba(16, 185, 129, 0.2);
+  --color-primary-hover: hsl(152, 54%, 58%);
+  --color-primary-light: hsl(152, 30%, 15%);
+  --color-primary-glow: rgba(63, 186, 123, 0.22);
 
   /* Status Colors */
-  --color-success: hsl(150, 84%, 45%);
-  --color-success-light: hsl(150, 84%, 8%);
+  --color-success: var(--color-lichen-green);
+  --color-success-light: hsl(152, 30%, 12%);
   --color-warning: hsl(38, 92%, 52%);
   --color-warning-light: hsl(38, 92%, 8%);
   --color-error: hsl(356, 84%, 60%);
   --color-error-light: hsl(356, 84%, 8%);
 
   /* Shadows adjustments for dark mode */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.6), 0 2px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.7), 0 4px 12px -2px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 24px 38px -8px rgba(0, 0, 0, 0.8), 0 10px 20px -5px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 24px 0 rgba(16, 185, 129, 0.15);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.7), 0 2px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.8), 0 4px 12px -2px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 24px 38px -8px rgba(0, 0, 0, 0.85), 0 10px 20px -5px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 24px 0 rgba(63, 186, 123, 0.2);
 }
 
 /* Base adjustment overrides for dark mode elements */
 body.dark-theme input.input-control {
-  background-color: hsl(222, 47%, 4%);
+  background-color: hsl(195, 22%, 8%);
 }
 
 body.dark-theme select.input-control {
-  background-color: hsl(222, 47%, 4%);
+  background-color: hsl(195, 22%, 8%);
 }
 
 body.dark-theme option {
-  background-color: hsl(222, 47%, 10%);
+  background-color: hsl(195, 20%, 12%);
   color: var(--color-text-primary);
 }
 
 body.dark-theme .alert-success {
-  color: hsl(150, 84%, 80%);
+  color: hsl(152, 52%, 82%);
 }
 
 body.dark-theme .alert-error {

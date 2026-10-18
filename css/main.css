@@ -6,38 +6,46 @@
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* HSL Tailored Colors - Light Theme (Emerald/Green Palette - NO BLUE) */
-  --color-bg-base: hsl(0, 0%, 97%);
+  /* Core Quad-Color Tokens: Summit Stone, Lichen Green, Alpine Ice, Volcanic Slag */
+  --color-summit-stone: hsl(196, 12%, 54%);       /* #798B92 - Natural mountain slate mineral stone */
+  --color-summit-stone-light: hsl(196, 15%, 86%); /* #D4DEE2 - Subtle stone structure & borders */
+  --color-lichen-green: hsl(152, 38%, 38%);       /* #3C8663 - Organic mossy lichen green accent */
+  --color-alpine-ice: hsl(192, 38%, 96%);         /* #F0F8FA - Crisp, glacial alpine ice base */
+  --color-volcanic-slag: hsl(195, 20%, 12%);      /* #182124 - Deep volcanic basalt charcoal */
+
+  /* Light Theme Surface & Base */
+  --color-bg-base: var(--color-alpine-ice);
   --color-bg-surface: hsl(0, 0%, 100%);
-  --color-bg-surface-glass: rgba(255, 255, 255, 0.75);
-  --color-border: hsl(0, 0%, 90%);
-  --color-border-hover: hsl(0, 0%, 80%);
+  --color-bg-surface-glass: rgba(240, 248, 250, 0.82);
+  --color-border: var(--color-summit-stone-light);
+  --color-border-hover: hsl(196, 16%, 70%);
 
-  --color-text-primary: hsl(0, 0%, 4%);
-  --color-text-secondary: hsl(0, 0%, 36%);
-  --color-text-tertiary: hsl(0, 0%, 56%);
+  /* Typography / Text Colors (Volcanic Slag & Summit Stone) */
+  --color-text-primary: var(--color-volcanic-slag);
+  --color-text-secondary: hsl(195, 12%, 36%);
+  --color-text-tertiary: hsl(195, 10%, 54%);
 
-  /* Primary Accent & Brand */
-  --color-primary-hsl: 161, 84%, 37%;
+  /* Primary Accent & Brand (Lichen Green) */
+  --color-primary-hsl: 152, 38%, 38%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(161, 84%, 29%);
-  --color-primary-light: hsl(161, 84%, 96%);
-  --color-primary-glow: rgba(16, 185, 129, 0.08);
+  --color-primary-hover: hsl(152, 42%, 30%);
+  --color-primary-light: hsl(152, 32%, 94%);
+  --color-primary-glow: rgba(60, 134, 99, 0.14);
 
   /* Status Colors */
-  --color-success: hsl(150, 84%, 37%);
-  --color-success-light: hsl(150, 84%, 96%);
-  --color-warning: hsl(38, 92%, 50%);
+  --color-success: var(--color-lichen-green);
+  --color-success-light: hsl(152, 32%, 94%);
+  --color-warning: hsl(38, 92%, 48%);
   --color-warning-light: hsl(38, 92%, 96%);
-  --color-error: hsl(356, 84%, 55%);
-  --color-error-light: hsl(356, 84%, 96%);
+  --color-error: hsl(356, 80%, 54%);
+  --color-error-light: hsl(356, 80%, 96%);
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 4px 12px -2px rgba(16, 185, 129, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-  --shadow-lg: 0 12px 24px -4px rgba(16, 185, 129, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
-  --shadow-xl: 0 24px 38px -8px rgba(16, 185, 129, 0.1), 0 10px 20px -5px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 24px 0 rgba(16, 185, 129, 0.12);
+  /* Harmonious Quad-Color Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(24, 33, 36, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(60, 134, 99, 0.05), 0 2px 6px -1px rgba(24, 33, 36, 0.04);
+  --shadow-lg: 0 12px 24px -4px rgba(60, 134, 99, 0.08), 0 4px 12px -2px rgba(24, 33, 36, 0.05);
+  --shadow-xl: 0 24px 38px -8px rgba(60, 134, 99, 0.12), 0 10px 20px -5px rgba(24, 33, 36, 0.06);
+  --shadow-glow: 0 0 24px 0 rgba(60, 134, 99, 0.18);
 
   /* Borders & Radius */
   --radius-xs: 6px;

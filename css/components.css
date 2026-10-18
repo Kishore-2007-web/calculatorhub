@@ -26,7 +26,7 @@
 
 .card-premium {
   border: 1.5px solid transparent;
-  background-image: linear-gradient(var(--color-bg-surface), var(--color-bg-surface)), linear-gradient(135deg, var(--color-primary), var(--color-success));
+  background-image: linear-gradient(var(--color-bg-surface), var(--color-bg-surface)), linear-gradient(135deg, var(--color-primary), var(--color-summit-stone));
   background-origin: border-box;
   background-clip: padding-box, border-box;
   box-shadow: var(--shadow-md);
@@ -230,8 +230,9 @@ input:checked + .theme-slider:before {
 }
 
 .logo span {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-success));
+  background: linear-gradient(135deg, var(--color-primary), var(--color-summit-stone));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -249,8 +250,8 @@ input:checked + .theme-slider:before {
 
 .alert-success {
   background-color: var(--color-success-light);
-  border-color: rgba(16, 185, 129, 0.2);
-  color: hsl(150, 84%, 20%);
+  border-color: rgba(60, 134, 99, 0.25);
+  color: hsl(152, 42%, 24%);
 }
 
 .alert-error {

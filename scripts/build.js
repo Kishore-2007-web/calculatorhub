@@ -742,7 +742,9 @@ function escapeXml(unsafe) {
 function normalizeUrl(urlStr) {
   let u = urlStr.trim().toLowerCase();
   u = u.replace(/(https?:\/\/)|(\/)+/g, "$1$2");
-  if (u.endsWith('/') && u !== 'https://calculatorhub.org/') {
+  const siteUrlNorm = SITE_URL.toLowerCase();
+  const rootWithSlash = siteUrlNorm.endsWith('/') ? siteUrlNorm : `${siteUrlNorm}/`;
+  if (u.endsWith('/') && u !== rootWithSlash) {
     u = u.slice(0, -1);
   }
   return u;
@@ -751,8 +753,9 @@ function normalizeUrl(urlStr) {
 function validateUrl(urlStr) {
   try {
     const parsed = new URL(urlStr);
+    const siteUrlParsed = new URL(SITE_URL);
     if (parsed.protocol !== 'https:') return false;
-    if (parsed.hostname !== 'calculatorhub.org') return false;
+    if (parsed.hostname !== siteUrlParsed.hostname) return false;
     if (urlStr !== urlStr.toLowerCase()) return false;
     if (urlStr.includes(' ')) return false;
     if (parsed.search !== '') return false;
@@ -760,7 +763,9 @@ function validateUrl(urlStr) {
 
     const pathPart = urlStr.replace('https://', '');
     if (pathPart.includes('//')) return false;
-    if (urlStr.endsWith('/') && urlStr !== 'https://calculatorhub.org/') return false;
+    const siteUrlNorm = SITE_URL.toLowerCase();
+    const rootWithSlash = siteUrlNorm.endsWith('/') ? siteUrlNorm : `${siteUrlNorm}/`;
+    if (urlStr.endsWith('/') && urlStr !== rootWithSlash) return false;
     return true;
   } catch (e) {
     return false;
