@@ -7,30 +7,30 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Core Quad-Color Tokens: Summit Stone, Lichen Green, Alpine Ice, Volcanic Slag */
-  --color-summit-stone: hsl(196, 12%, 54%);       /* #798B92 - Natural mountain slate mineral stone */
-  --color-summit-stone-light: hsl(196, 15%, 86%); /* #D4DEE2 - Subtle stone structure & borders */
-  --color-lichen-green: hsl(152, 38%, 38%);       /* #3C8663 - Organic mossy lichen green accent */
-  --color-alpine-ice: hsl(192, 38%, 96%);         /* #F0F8FA - Crisp, glacial alpine ice base */
-  --color-volcanic-slag: hsl(195, 20%, 12%);      /* #182124 - Deep volcanic basalt charcoal */
+  --color-summit-stone: hsl(196, 16%, 50%);       /* #6B8089 - Mountain slate mineral stone */
+  --color-summit-stone-light: hsl(196, 18%, 82%); /* #C8D7DC - Distinct stone structure & borders */
+  --color-lichen-green: hsl(150, 44%, 35%);       /* #327E57 - Organic mossy lichen green accent */
+  --color-alpine-ice: hsl(190, 40%, 93%);         /* #E2F1F4 - Crisp glacial alpine ice backdrop */
+  --color-volcanic-slag: hsl(195, 24%, 11%);      /* #152024 - Deep volcanic basalt charcoal */
 
   /* Light Theme Surface & Base */
   --color-bg-base: var(--color-alpine-ice);
   --color-bg-surface: hsl(0, 0%, 100%);
-  --color-bg-surface-glass: rgba(240, 248, 250, 0.82);
+  --color-bg-surface-glass: rgba(226, 241, 244, 0.88);
   --color-border: var(--color-summit-stone-light);
-  --color-border-hover: hsl(196, 16%, 70%);
+  --color-border-hover: hsl(196, 20%, 65%);
 
   /* Typography / Text Colors (Volcanic Slag & Summit Stone) */
   --color-text-primary: var(--color-volcanic-slag);
-  --color-text-secondary: hsl(195, 12%, 36%);
-  --color-text-tertiary: hsl(195, 10%, 54%);
+  --color-text-secondary: hsl(195, 14%, 35%);
+  --color-text-tertiary: hsl(195, 12%, 52%);
 
   /* Primary Accent & Brand (Lichen Green) */
-  --color-primary-hsl: 152, 38%, 38%;
+  --color-primary-hsl: 150, 44%, 35%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(152, 42%, 30%);
-  --color-primary-light: hsl(152, 32%, 94%);
-  --color-primary-glow: rgba(60, 134, 99, 0.14);
+  --color-primary-hover: hsl(150, 48%, 27%);
+  --color-primary-light: hsl(150, 36%, 92%);
+  --color-primary-glow: rgba(50, 126, 87, 0.15);
 
   /* Status Colors */
   --color-success: var(--color-lichen-green);
