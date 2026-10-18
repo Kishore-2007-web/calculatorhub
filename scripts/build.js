@@ -29,13 +29,13 @@ async function runBuild() {
 
   // Replace links with minified references for production performance (with cache buster)
   const layoutHtml = rawLayoutHtml
-    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=2')
-    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=2')
-    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=2')
-    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=2')
-    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=2')
-    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=2')
-    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=2');
+    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=3')
+    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=3')
+    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=3')
+    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=3')
+    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=3')
+    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=3')
+    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=3');
 
   // Verify and create root output directories
   ensureDir(path.join(rootDir, 'categories'));
@@ -132,25 +132,26 @@ function buildHomepage(layoutHtml, categories, calculators) {
 
   // Categories Grid Compilation
   const categoriesGrid = categories.map(cat => `
-    <a href="/categories/${cat.id}" class="card flex flex-col justify-between" style="min-height: 170px;">
+    <a href="/categories/${cat.id}" class="card flex flex-col justify-between" style="min-height: 185px;">
       <div>
-        <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">
+        <div class="icon-badge">
           ${getCategoryIcon(cat.icon)}
         </div>
-        <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem;">${cat.name}</h3>
-        <p style="font-size: 0.875rem; line-height: 1.4; margin-bottom: 0;">${cat.desc}</p>
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem; color: var(--color-text-primary); font-weight: 700;">${cat.name}</h3>
+        <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0; color: var(--color-text-secondary);">${cat.desc}</p>
       </div>
+      <div style="font-size: 0.825rem; font-weight: 700; color: var(--color-primary); margin-top: 1.25rem; align-self: flex-start; text-transform: uppercase; letter-spacing: 0.05em;">Explore &rarr;</div>
     </a>
   `).join('');
 
   // Popular Grid Compilation
   const popularCalcs = calculators.filter(c => c.popular).slice(0, 8);
   const popularGrid = popularCalcs.map(calc => `
-    <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="border-color: var(--color-border);">
+    <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="border-top: 3.5px solid var(--color-primary);">
       <div>
-        <div style="font-size: 1.75rem; margin-bottom: 0.75rem;">⚡</div>
-        <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem;">${calc.name}</h3>
-        <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${calc.desc}</p>
+        <div class="icon-badge" style="width: 44px; height: 44px; font-size: 1.35rem;">⚡</div>
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem; color: var(--color-text-primary); font-weight: 700;">${calc.name}</h3>
+        <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--color-text-secondary);">${calc.desc}</p>
       </div>
       <div style="font-size: 0.825rem; font-weight: 700; color: var(--color-primary); margin-top: 1.25rem; align-self: flex-start; text-transform: uppercase; letter-spacing: 0.05em;">Compute Now &rarr;</div>
     </a>
@@ -258,10 +259,10 @@ function buildCategoriesOverview(layoutHtml, categories) {
   ensureDir(path.join(rootDir, 'categories'));
 
   const categoriesListHtml = categories.map(cat => `
-    <a href="/categories/${cat.id}" class="card flex items-center gap-md" style="padding: 1.5rem;">
-      <div style="font-size: 2.25rem;">${getCategoryIcon(cat.icon)}</div>
+    <a href="/categories/${cat.id}" class="card flex items-center gap-md" style="padding: 1.5rem; border-left: 4px solid var(--color-primary);">
+      <div class="icon-badge" style="width: 54px; height: 54px; font-size: 1.85rem; margin-bottom: 0; flex-shrink: 0;">${getCategoryIcon(cat.icon)}</div>
       <div>
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem;">${cat.name}</h3>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-text-primary);">${cat.name}</h3>
         <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin: 0;">${cat.desc}</p>
       </div>
     </a>
