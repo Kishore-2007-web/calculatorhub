@@ -101,12 +101,15 @@
 }
 
 .btn-secondary {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  background-color: hsl(196, 20%, 88%);
+  color: hsl(196, 26%, 24%);
+  border: 1.5px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-border);
+  background-color: hsl(196, 22%, 80%);
+  color: hsl(196, 30%, 18%);
+  border-color: var(--color-border-hover);
   transform: translateY(-1px);
 }
 
