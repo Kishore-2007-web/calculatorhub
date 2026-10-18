@@ -65,3 +65,14 @@ body.dark-theme .alert-error {
   color: hsl(356, 84%, 80%);
 }
 
+body.dark-theme .btn-secondary {
+  background-color: hsl(196, 16%, 18%);
+  color: var(--color-alpine-ice);
+  border: 1.5px solid hsl(196, 14%, 28%);
+}
+
+body.dark-theme .btn-secondary:hover {
+  background-color: hsl(196, 18%, 24%);
+  border-color: hsl(196, 16%, 38%);
+}
+

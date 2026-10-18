@@ -27,15 +27,15 @@ async function runBuild() {
   // Load layout shell
   const rawLayoutHtml = fs.readFileSync(path.join(templatesDir, 'layout.html'), 'utf8');
 
-  // Replace links with minified references for production performance
+  // Replace links with minified references for production performance (with cache buster)
   const layoutHtml = rawLayoutHtml
-    .replace(/\/css\/main\.css/g, '/css/main.min.css')
-    .replace(/\/css\/components\.css/g, '/css/components.min.css')
-    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css')
-    .replace(/\/css\/auth\.css/g, '/css/auth.min.css')
-    .replace(/\/js\/app\.js/g, '/js/app.min.js')
-    .replace(/\/js\/search\.js/g, '/js/search.min.js')
-    .replace(/\/js\/auth\.js/g, '/js/auth.min.js');
+    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=2')
+    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=2')
+    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=2')
+    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=2')
+    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=2')
+    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=2')
+    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=2');
 
   // Verify and create root output directories
   ensureDir(path.join(rootDir, 'categories'));
