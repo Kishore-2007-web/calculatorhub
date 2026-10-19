@@ -1,8 +1,8 @@
 /* Reusable UI Components */
 
-/* Cards with Summit Stone structure, Lichen Green accent, and Volcanic Slag elevated slab */
+/* Cards with Dark Charcoal Grey structure, Lime Green border, and elevated slab */
 .card {
-  background: hsl(195, 26%, 12%);
+  background: var(--color-bg-surface);
   border: 1.5px solid var(--color-lime-border);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
@@ -25,8 +25,8 @@
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
-  background-color: hsl(195, 24%, 16%);
-  border: 1.5px solid #34505E;
+  background-color: #262626;
+  border: 1.5px solid #383838;
   font-size: 1.75rem;
   margin-bottom: 0.85rem;
   transition: all var(--transition-fast);
@@ -34,12 +34,12 @@
 
 .card:hover .icon-badge {
   transform: scale(1.08);
-  background-color: hsl(195, 24%, 20%);
-  border-color: hsl(196, 26%, 45%);
+  background-color: #2E2E2E;
+  border-color: #4C4C4C;
 }
 
 body.dark-theme .card {
-  background: hsl(195, 26%, 12%);
+  background: var(--color-bg-surface);
   border: 1.5px solid var(--color-lime-border);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
@@ -50,13 +50,13 @@ body.dark-theme .card:hover {
 }
 
 body.dark-theme .icon-badge {
-  background-color: hsl(195, 24%, 16%);
-  border-color: #34505E;
+  background-color: #262626;
+  border-color: #383838;
 }
 
 body.dark-theme .card:hover .icon-badge {
-  background-color: hsl(195, 24%, 20%);
-  border-color: hsl(196, 26%, 45%);
+  background-color: #2E2E2E;
+  border-color: #4C4C4C;
 }
 
 .card-glass {
@@ -200,8 +200,8 @@ body.dark-theme .card:hover .icon-badge {
 /* Header Navbar */
 .navbar {
   height: 74px;
-  background: hsl(195, 30%, 8%);
-  border-bottom: 2px solid hsl(196, 20%, 22%);
+  background: var(--color-bg-base);
+  border-bottom: 2px solid #282828;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -211,13 +211,13 @@ body.dark-theme .card:hover .icon-badge {
 }
 
 body.dark-theme .navbar {
-  background: hsl(195, 30%, 8%);
-  border-bottom: 2px solid hsl(196, 20%, 22%);
+  background: var(--color-bg-base);
+  border-bottom: 2px solid #282828;
 }
 
 .navbar.scrolled {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  border-bottom-color: hsl(196, 20%, 30%);
+  border-bottom-color: #333333;
 }
 
 .logo {
@@ -462,29 +462,29 @@ body.dark-theme .logo span {
 
 /* Accordions for FAQs (HTML details) */
 .accordion {
-  border: 1.5px solid hsl(196, 20%, 25%);
+  border: 1.5px solid #2B2B2B;
   border-radius: var(--radius-md);
   margin-bottom: 0.85rem;
-  background-color: hsl(195, 26%, 12%);
+  background-color: var(--color-bg-surface);
   overflow: hidden;
   transition: all var(--transition-fast);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 .accordion:hover {
-  border-color: hsl(196, 30%, 38%);
+  border-color: #404040;
   transform: translateX(3px);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-theme .accordion {
-  border-color: hsl(196, 20%, 25%);
-  background-color: hsl(195, 26%, 12%);
+  border-color: #2B2B2B;
+  background-color: var(--color-bg-surface);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-theme .accordion:hover {
-  border-color: hsl(196, 30%, 38%);
+  border-color: #404040;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
 
@@ -643,7 +643,7 @@ body.dark-theme .hero-banner {
   align-items: center;
   gap: 0.5rem;
   padding: 0.45rem 1.35rem;
-  background-color: hsl(195, 24%, 18%);
+  background-color: #262626;
   color: #FFFFFF;
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -652,21 +652,21 @@ body.dark-theme .hero-banner {
   text-transform: uppercase;
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  border: 1.5px solid hsl(196, 20%, 30%);
+  border: 1.5px solid #383838;
 }
 
 body.dark-theme .hero-pill-badge {
-  background-color: hsl(195, 24%, 18%);
+  background-color: #262626;
   color: #FFFFFF;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  border-color: hsl(196, 20%, 30%);
+  border-color: #383838;
 }
 
-/* Site Footer Grounded in Volcanic Slag */
+/* Site Footer Grounded in Dark Charcoal Grey */
 .site-footer {
-  border-top: 1.5px solid hsl(196, 20%, 22%);
+  border-top: 1.5px solid #282828;
   padding: 4.5rem 0 3.5rem;
-  background-color: var(--color-volcanic-slag) !important;
+  background-color: var(--color-bg-base) !important;
   color: var(--color-alpine-ice) !important;
   margin-top: 5rem;
 }
@@ -678,12 +678,12 @@ body.dark-theme .hero-pill-badge {
 }
 
 .site-footer p {
-  color: #A3C5D0 !important;
+  color: #9C9C9C !important;
   line-height: 1.6;
 }
 
 .site-footer ul li a {
-  color: #A3C5D0 !important;
+  color: #B4B4B4 !important;
   transition: all var(--transition-fast);
   text-decoration: none;
 }
@@ -695,7 +695,7 @@ body.dark-theme .hero-pill-badge {
 }
 
 .site-footer a[href^="mailto"] {
-  color: #A3C5D0 !important;
+  color: #B4B4B4 !important;
 }
 
 .site-footer a[href^="mailto"]:hover {
@@ -703,5 +703,5 @@ body.dark-theme .hero-pill-badge {
 }
 
 .site-footer .copyright {
-  color: #688B98 !important;
+  color: #707070 !important;
 }

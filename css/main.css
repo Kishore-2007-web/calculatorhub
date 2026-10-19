@@ -7,39 +7,40 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Core Quad-Color Tokens: Summit Stone, Lichen Green, Alpine Ice, Volcanic Slag */
-  /* Core Tokens: Summit Stone, Lime Green Border, Alpine Ice, Volcanic Slag */
-  --color-summit-stone: hsl(196, 22%, 58%);       /* #7AA1B0 - Mountain slate mineral stone */
-  --color-summit-stone-light: hsl(196, 20%, 30%); /* #3D535F - Crisp mineral stone dividers & borders */
-  --color-summit-stone-dark: hsl(196, 26%, 18%);  /* #22333B - Deep structural stone */
+  /* Core Tokens: Dark Charcoal Grey, Lime Green Border, Alpine Ice */
+  --color-dark-charcoal: #161616;                 /* #161616 - True Dark Charcoal Grey background */
+  --color-dark-charcoal-surface: #202020;         /* #202020 - Elevated dark charcoal card slab */
+  --color-dark-charcoal-deep: #111111;            /* #111111 - Recessed charcoal for inputs */
+  --color-summit-stone: hsl(196, 15%, 62%);       /* Clean mineral stone */
+  --color-summit-stone-light: #2E2E2E;            /* Charcoal stone dividers */
+  --color-summit-stone-dark: #1C1C1C;             /* Deep structural stone */
   --color-lichen-green: #2CD87E;                  /* #2CD87E - Luminous vibrant lime green */
   --color-lime-border: #2CD87E;                   /* Dedicated lime green border token for card/container borders */
-  --color-alpine-ice: hsl(192, 58%, 94%);         /* #E2F6FA - Crisp glacial alpine ice highlight */
-  --color-alpine-ice-light: hsl(192, 60%, 98%);   /* Crystalline frosty highlight */
-  --color-volcanic-slag: hsl(195, 30%, 8%);       /* #0F181D - Deep volcanic basalt canvas */
-  --color-volcanic-slag-surface: hsl(195, 26%, 13%); /* #16242C - Elevated basalt slab */
+  --color-alpine-ice: #FFFFFF;                    /* Crisp text highlight */
+  --color-alpine-ice-light: #F8FAFC;              /* Frosty crystalline highlight */
 
-  /* Surface & Base - Grounded in Volcanic Slag */
-  --color-bg-base: var(--color-volcanic-slag);
-  --color-bg-surface: hsl(195, 26%, 12%);
-  --color-bg-surface-glass: rgba(18, 30, 37, 0.9);
-  --color-border: hsl(196, 20%, 26%);
-  --color-border-hover: hsl(196, 45%, 48%);
+  /* Surface & Base - Grounded in Dark Charcoal Grey */
+  --color-bg-base: var(--color-dark-charcoal);
+  --color-bg-surface: var(--color-dark-charcoal-surface);
+  --color-bg-surface-glass: rgba(32, 32, 32, 0.95);
+  --color-border: #2E2E2E;
+  --color-border-hover: #454545;
 
-  /* Typography / Text Colors (Alpine Ice & Summit Stone) */
-  --color-text-primary: var(--color-alpine-ice);
-  --color-text-secondary: hsl(195, 18%, 76%);
-  --color-text-tertiary: hsl(195, 14%, 58%);
+  /* Typography / Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B4B4B4;
+  --color-text-tertiary: #7A7A7A;
 
   /* Primary Accent & Brand (Glacier Blue - Non-Green) */
   --color-primary-hsl: 196, 64%, 55%;
   --color-primary: hsl(var(--color-primary-hsl));
   --color-primary-hover: hsl(196, 75%, 65%);
-  --color-primary-light: hsl(196, 28%, 18%);
+  --color-primary-light: #222B32;
   --color-primary-glow: transparent;
 
   /* Status Colors */
   --color-success: #2CD87E;
-  --color-success-light: hsl(196, 28%, 18%);
+  --color-success-light: #222B32;
   --color-warning: hsl(38, 92%, 48%);
   --color-warning-light: hsl(38, 92%, 96%);
   --color-error: hsl(356, 80%, 54%);
@@ -82,14 +83,14 @@ html {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden !important;
-  background-color: var(--color-volcanic-slag);
+  background-color: var(--color-bg-base);
   color-scheme: dark;
 }
 
 body {
   font-family: var(--font-body);
-  background: var(--color-volcanic-slag) !important;
-  background-color: var(--color-volcanic-slag) !important;
+  background: var(--color-bg-base) !important;
+  background-color: var(--color-bg-base) !important;
   background-attachment: fixed !important;
   color: var(--color-text-primary);
   line-height: 1.6;
