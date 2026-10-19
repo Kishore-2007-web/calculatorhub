@@ -25,11 +25,14 @@ body.dark-theme {
   --color-text-secondary: #B4B4B4;
   --color-text-tertiary: #7A7A7A;
 
-  /* Accent Adjustments for Dark Contrast (Glacier Blue - Non-Green) */
-  --color-primary-hsl: 196, 64%, 55%;
-  --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(196, 75%, 65%);
-  --color-primary-light: #222B32;
+  /* Accent Adjustments for Dark Contrast (Medium Stone Grey) */
+  --color-medium-stone-grey: #9EA2A6;
+  --color-medium-stone-grey-hover: #FFFFFF;
+  --color-primary-hsl: 210, 5%, 64%;
+  --color-primary-rgb: 158, 162, 166;
+  --color-primary: #9EA2A6;
+  --color-primary-hover: #FFFFFF;
+  --color-primary-light: #262626;
   --color-primary-glow: transparent;
 
   /* Status Colors */

@@ -165,7 +165,7 @@ body.dark-theme .card:hover .icon-badge {
 
 .btn-outline:hover {
   background-color: var(--color-primary);
-  color: #FFFFFF;
+  color: #161616;
 }
 
 .btn-ghost {
