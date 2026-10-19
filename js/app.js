@@ -19,8 +19,8 @@ function initTheme() {
   const storedTheme = localStorage.getItem('theme');
   const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  // Establish initial theme state
-  const isDark = storedTheme === 'dark' || (!storedTheme && systemPrefersDark);
+  // Establish initial theme state - default to dark Volcanic Slag theme
+  const isDark = storedTheme !== 'light';
   
   if (isDark) {
     document.body.classList.add('dark-theme');
