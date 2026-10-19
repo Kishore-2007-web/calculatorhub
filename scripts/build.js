@@ -29,13 +29,13 @@ async function runBuild() {
 
   // Replace links with minified references for production performance (with cache buster)
   const layoutHtml = rawLayoutHtml
-    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=12')
-    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=12')
-    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=12')
-    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=12')
-    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=12')
-    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=12')
-    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=12');
+    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=13')
+    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=13')
+    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=13')
+    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=13')
+    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=13')
+    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=13')
+    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=13');
 
   // Verify and create root output directories
   ensureDir(path.join(rootDir, 'categories'));
