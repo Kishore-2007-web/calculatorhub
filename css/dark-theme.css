@@ -8,8 +8,9 @@ body.dark-theme {
   --color-summit-stone: hsl(196, 15%, 62%);       /* Clean mineral stone */
   --color-summit-stone-light: #2E2E2E;            /* Charcoal stone dividers */
   --color-summit-stone-dark: #1C1C1C;             /* Deep structural stone */
-  --color-lichen-green: #2CD87E;                  /* #2CD87E - Luminous vibrant lime green */
-  --color-lime-border: #2CD87E;                   /* Dedicated lime green border token for card/container borders */
+  --color-lichen-green: #C4E326;                  /* #C4E326 - Electric Lime Chartreuse */
+  --color-lime-border: #C4E326;                   /* Dedicated lime green border token matching user spec */
+  --color-lime-border-hover: #D5F237;             /* Brightened hover state */
   --color-alpine-ice: #FFFFFF;                    /* Crisp text highlight */
   --color-alpine-ice-light: #F8FAFC;              /* Frosty crystalline highlight */
 
@@ -36,7 +37,7 @@ body.dark-theme {
   --color-primary-glow: transparent;
 
   /* Status Colors */
-  --color-success: #2CD87E;
+  --color-success: #C4E326;
   --color-success-light: #222B32;
   --color-warning: hsl(38, 92%, 52%);
   --color-warning-light: hsl(38, 92%, 8%);
