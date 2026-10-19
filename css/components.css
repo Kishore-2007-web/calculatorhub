@@ -3,7 +3,7 @@
 /* Cards with Dark Charcoal Grey structure, Lime Green border, and elevated slab */
 .card {
   background: var(--color-bg-surface);
-  border: 1.5px solid var(--color-lime-border);
+  border: 2.5px solid var(--color-lime-border);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -40,7 +40,7 @@
 
 body.dark-theme .card {
   background: var(--color-bg-surface);
-  border: 1.5px solid var(--color-lime-border);
+  border: 2.5px solid var(--color-lime-border);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
@@ -61,12 +61,12 @@ body.dark-theme .card:hover .icon-badge {
 
 .card-glass {
   background: var(--color-bg-surface);
-  border: 1.5px solid var(--color-lime-border);
+  border: 2.5px solid var(--color-lime-border);
   box-shadow: var(--shadow-md);
 }
 
 .card-premium {
-  border: 1.5px solid var(--color-lime-border);
+  border: 2.5px solid var(--color-lime-border);
   background: var(--color-bg-surface);
   box-shadow: var(--shadow-md);
 }
@@ -98,7 +98,7 @@ body.dark-theme .card:hover .icon-badge {
   font-size: 1rem;
   padding: 0.85rem 1.15rem;
   background-color: var(--color-bg-base);
-  border: 1.5px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
   width: 100%;
@@ -626,7 +626,7 @@ body.dark-theme .accordion:hover {
   background-color: var(--color-bg-surface);
   border-radius: var(--radius-xl);
   margin-bottom: 3.5rem;
-  border: 1.5px solid var(--color-lime-border);
+  border: 2.5px solid var(--color-lime-border);
   position: relative;
   overflow: hidden;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
@@ -634,7 +634,7 @@ body.dark-theme .accordion:hover {
 
 body.dark-theme .hero-banner {
   background-color: var(--color-bg-surface);
-  border-color: var(--color-lime-border);
+  border: 2.5px solid var(--color-lime-border);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
 }
 
