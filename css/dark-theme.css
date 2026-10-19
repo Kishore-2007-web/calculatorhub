@@ -5,7 +5,8 @@ body.dark-theme {
   --color-summit-stone: hsl(196, 22%, 58%);       /* #7AA1B0 - Mountain stone in dark mode */
   --color-summit-stone-light: hsl(196, 20%, 30%); /* #3D535F - Stone dividers & borders */
   --color-summit-stone-dark: hsl(196, 26%, 18%);  /* #22333B - Deep structural stone */
-  --color-lichen-green: hsl(150, 64%, 48%);       /* #2CD87E - Luminous vibrant lichen green */
+  --color-lichen-green: #2CD87E;                  /* #2CD87E - Luminous vibrant lime green */
+  --color-lime-border: #2CD87E;                   /* Dedicated lime green border token for card/container borders */
   --color-alpine-ice: hsl(192, 58%, 94%);         /* #E2F6FA - Crisp glacial ice glow */
   --color-alpine-ice-light: hsl(192, 60%, 98%);   /* Frosty crystalline highlight */
   --color-volcanic-slag: hsl(195, 30%, 8%);       /* #0F181D - Deep volcanic basalt canvas */
@@ -16,23 +17,23 @@ body.dark-theme {
   --color-bg-surface: hsl(195, 26%, 12%);
   --color-bg-surface-glass: rgba(18, 30, 37, 0.9);
   --color-border: hsl(196, 20%, 26%);
-  --color-border-hover: var(--color-primary);
+  --color-border-hover: hsl(196, 45%, 48%);
 
   /* Typography / Text (Alpine Ice & Summit Stone) */
   --color-text-primary: var(--color-alpine-ice);
   --color-text-secondary: hsl(195, 18%, 76%);
   --color-text-tertiary: hsl(195, 14%, 58%);
 
-  /* Accent Adjustments for Dark Contrast (Lichen Green) */
-  --color-primary-hsl: 150, 64%, 48%;
+  /* Accent Adjustments for Dark Contrast (Glacier Blue - Non-Green) */
+  --color-primary-hsl: 196, 64%, 55%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(150, 70%, 58%);
-  --color-primary-light: hsl(150, 36%, 16%);
+  --color-primary-hover: hsl(196, 75%, 65%);
+  --color-primary-light: hsl(196, 28%, 18%);
   --color-primary-glow: transparent;
 
   /* Status Colors */
-  --color-success: var(--color-lichen-green);
-  --color-success-light: hsl(150, 36%, 16%);
+  --color-success: #2CD87E;
+  --color-success-light: hsl(196, 28%, 18%);
   --color-warning: hsl(38, 92%, 52%);
   --color-warning-light: hsl(38, 92%, 8%);
   --color-error: hsl(356, 84%, 60%);

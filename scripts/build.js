@@ -29,13 +29,13 @@ async function runBuild() {
 
   // Replace links with minified references for production performance (with cache buster)
   const layoutHtml = rawLayoutHtml
-    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=10')
-    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=10')
-    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=10')
-    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=10')
-    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=10')
-    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=10')
-    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=10');
+    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=11')
+    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=11')
+    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=11')
+    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=11')
+    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=11')
+    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=11')
+    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=11');
 
   // Verify and create root output directories
   ensureDir(path.join(rootDir, 'categories'));
@@ -206,7 +206,7 @@ function buildCategories(layoutHtml, categories, calculators) {
     const calcListHtml = catCalcs.map(calc => `
       <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="height: 100%;">
         <div>
-          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-primary);">${calc.name}</h3>
+          <h3 style="margin-bottom: 0.35rem; font-size: 1.15rem; color: var(--color-text-primary); font-weight: 700;">${calc.name}</h3>
           <p style="font-size: 0.875rem; line-height: 1.45; margin-bottom: 0;">${calc.desc}</p>
         </div>
       </a>
@@ -456,7 +456,7 @@ function buildStaticPages(layoutHtml, categories, calculators, articles) {
     const linksList = catCalcs.map(c => `<li><a href="/calculators/${c.id}">${c.name}</a></li>`).join('');
     return `
       <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
-        <h3 style="font-size: 1.2rem; color: var(--color-primary); margin-bottom: 0.5rem;"><a href="/categories/${cat.id}">${cat.name}</a></h3>
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;"><a href="/categories/${cat.id}" style="color: var(--color-text-primary); font-weight: 700;">${cat.name}</a></h3>
         <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 1rem;">${cat.desc}</p>
         <ul class="grid grid-cols-3" style="list-style: none; gap: 0.5rem; font-size: 0.9rem; padding-left: 0;">
           ${linksList}
@@ -629,7 +629,7 @@ function buildBlog(layoutHtml, articles, calculators) {
   const articlesListHtml = articles.map(art => `
     <article class="card" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
       <div>
-        <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--color-primary);">${art.title}</h2>
+        <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--color-text-primary); font-weight: 700;">${art.title}</h2>
         <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 1.5rem;">${art.description}</p>
       </div>
       <a href="/blog/${art.slug}" style="font-weight: 600; font-size: 0.9rem; align-self: flex-start; text-transform: uppercase;">Read Article &rarr;</a>
