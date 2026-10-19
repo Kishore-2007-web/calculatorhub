@@ -29,13 +29,13 @@ async function runBuild() {
 
   // Replace links with minified references for production performance (with cache buster)
   const layoutHtml = rawLayoutHtml
-    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=6')
-    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=6')
-    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=6')
-    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=6')
-    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=6')
-    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=6')
-    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=6');
+    .replace(/\/css\/main\.css/g, '/css/main.min.css?v=9')
+    .replace(/\/css\/components\.css/g, '/css/components.min.css?v=9')
+    .replace(/\/css\/dark-theme\.css/g, '/css/dark-theme.min.css?v=9')
+    .replace(/\/css\/auth\.css/g, '/css/auth.min.css?v=9')
+    .replace(/\/js\/app\.js/g, '/js/app.min.js?v=9')
+    .replace(/\/js\/search\.js/g, '/js/search.min.js?v=9')
+    .replace(/\/js\/auth\.js/g, '/js/auth.min.js?v=9');
 
   // Verify and create root output directories
   ensureDir(path.join(rootDir, 'categories'));
@@ -147,7 +147,7 @@ function buildHomepage(layoutHtml, categories, calculators) {
   // Popular Grid Compilation
   const popularCalcs = calculators.filter(c => c.popular).slice(0, 8);
   const popularGrid = popularCalcs.map(calc => `
-    <a href="/calculators/${calc.id}" class="card flex flex-col justify-between" style="border-top: 3.5px solid var(--color-primary);">
+    <a href="/calculators/${calc.id}" class="card flex flex-col justify-between">
       <div>
         <div class="icon-badge" style="width: 44px; height: 44px; font-size: 1.35rem;">⚡</div>
         <h3 style="margin-bottom: 0.35rem; font-size: 1.2rem; color: var(--color-text-primary); font-weight: 700;">${calc.name}</h3>
@@ -259,7 +259,7 @@ function buildCategoriesOverview(layoutHtml, categories) {
   ensureDir(path.join(rootDir, 'categories'));
 
   const categoriesListHtml = categories.map(cat => `
-    <a href="/categories/${cat.id}" class="card flex items-center gap-md" style="padding: 1.5rem; border-left: 4px solid var(--color-primary);">
+    <a href="/categories/${cat.id}" class="card flex items-center gap-md" style="padding: 1.5rem;">
       <div class="icon-badge" style="width: 54px; height: 54px; font-size: 1.85rem; margin-bottom: 0; flex-shrink: 0;">${getCategoryIcon(cat.icon)}</div>
       <div>
         <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--color-text-primary);">${cat.name}</h3>
@@ -641,7 +641,7 @@ function buildBlog(layoutHtml, articles, calculators) {
       <h1 style="font-size: 2.75rem; margin-bottom: 0.75rem;">Calculator Insights & Guides</h1>
       <p style="font-size: 1.15rem; color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">Read expert articles detailing how math equations, interest computations, and physical units affect your day-to-day decisions.</p>
     </header>
-    <div class="grid grid-cols-3" style="gap: 1.5rem; margin-bottom: 3rem;">
+    <div class="grid grid-cols-2" style="gap: 1.5rem; margin-bottom: 3rem;">
       ${articlesListHtml}
     </div>
   `;

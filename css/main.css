@@ -34,7 +34,7 @@
   --color-primary: hsl(var(--color-primary-hsl));
   --color-primary-hover: hsl(150, 70%, 58%);
   --color-primary-light: hsl(150, 36%, 16%);
-  --color-primary-glow: rgba(44, 216, 126, 0.28);
+  --color-primary-glow: transparent;
 
   /* Status Colors */
   --color-success: var(--color-lichen-green);
@@ -44,12 +44,12 @@
   --color-error: hsl(356, 80%, 54%);
   --color-error-light: hsl(356, 80%, 96%);
 
-  /* Harmonious Quad-Color Shadows */
-  --shadow-sm: 0 1px 3px 0 rgba(17, 28, 33, 0.06);
-  --shadow-md: 0 4px 14px -2px rgba(27, 134, 78, 0.1), 0 2px 6px -1px rgba(17, 28, 33, 0.05);
-  --shadow-lg: 0 14px 28px -4px rgba(27, 134, 78, 0.14), 0 4px 12px -2px rgba(17, 28, 33, 0.06);
-  --shadow-xl: 0 24px 38px -8px rgba(27, 134, 78, 0.18), 0 10px 20px -5px rgba(17, 28, 33, 0.08);
-  --shadow-glow: 0 0 24px 0 rgba(27, 134, 78, 0.25);
+  /* Clean Shadows - Zero Glitter / Zero Shining Glow */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.5), 0 2px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, 0.6), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 32px -8px rgba(0, 0, 0, 0.7), 0 8px 16px -5px rgba(0, 0, 0, 0.5);
+  --shadow-glow: none;
 
   /* Borders & Radius */
   --radius-xs: 6px;
@@ -174,11 +174,10 @@ textarea:focus-visible {
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
 @media (max-width: 1024px) {
-  .grid-cols-4 { grid-template-columns: repeat(3, 1fr); }
+  .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .grid-cols-2 { grid-template-columns: 1fr; }
   .grid-cols-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
   body { font-size: 0.95rem; }
@@ -193,11 +192,17 @@ textarea:focus-visible {
 }
 
 @media (max-width: 600px) {
-  .grid-cols-2, .grid-cols-3, .grid-cols-4 { grid-template-columns: 1fr; }
+  .grid-cols-3, .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid { gap: 1rem; }
 }
 
 @media (max-width: 480px) {
-  .container { padding-left: 1rem; padding-right: 1rem; }
+  .container { padding-left: 0.85rem; padding-right: 0.85rem; }
+  .grid { gap: 0.75rem; }
+}
+
+@media (max-width: 380px) {
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 { grid-template-columns: 1fr; }
 }
 
 .flex {
