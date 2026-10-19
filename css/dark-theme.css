@@ -45,7 +45,8 @@ body.dark-theme {
   --shadow-xl: 0 24px 38px -8px rgba(0, 0, 0, 0.85), 0 10px 20px -5px rgba(0, 0, 0, 0.7);
   --shadow-glow: 0 0 24px 0 rgba(44, 216, 126, 0.28);
 
-  background: linear-gradient(180deg, #0D161A 0%, #111C22 400px, #0F181D 100%) !important;
+  background: var(--color-volcanic-slag) !important;
+  background-color: var(--color-volcanic-slag) !important;
   background-attachment: fixed !important;
 }
 

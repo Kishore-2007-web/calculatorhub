@@ -7,33 +7,34 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Core Quad-Color Tokens: Summit Stone, Lichen Green, Alpine Ice, Volcanic Slag */
-  --color-summit-stone: hsl(196, 26%, 44%);       /* #537B8C - Mountain slate mineral stone */
-  --color-summit-stone-light: hsl(196, 26%, 74%); /* #A8C6D3 - Crisp mineral stone dividers & borders */
-  --color-summit-stone-dark: hsl(196, 32%, 24%);  /* #29424E - Deep structural stone */
-  --color-lichen-green: hsl(150, 58%, 32%);       /* #1B864E - Rich organic lichen green */
-  --color-alpine-ice: hsl(192, 58%, 88%);         /* #CAEBF2 - Crisp glacial alpine ice backdrop */
-  --color-alpine-ice-light: hsl(192, 60%, 96%);   /* #EBF7FA - Crystalline frosty highlight */
-  --color-volcanic-slag: hsl(195, 30%, 10%);      /* #111C21 - Deep volcanic basalt charcoal */
-  --color-volcanic-slag-surface: hsl(195, 26%, 15%); /* #1B2931 - Elevated basalt slab */
+  /* Core Quad-Color Tokens: Summit Stone, Lichen Green, Alpine Ice, Volcanic Slag */
+  --color-summit-stone: hsl(196, 22%, 58%);       /* #7AA1B0 - Mountain slate mineral stone */
+  --color-summit-stone-light: hsl(196, 20%, 30%); /* #3D535F - Crisp mineral stone dividers & borders */
+  --color-summit-stone-dark: hsl(196, 26%, 18%);  /* #22333B - Deep structural stone */
+  --color-lichen-green: hsl(150, 64%, 48%);       /* #2CD87E - Rich organic lichen green */
+  --color-alpine-ice: hsl(192, 58%, 94%);         /* #E2F6FA - Crisp glacial alpine ice highlight */
+  --color-alpine-ice-light: hsl(192, 60%, 98%);   /* Crystalline frosty highlight */
+  --color-volcanic-slag: hsl(195, 30%, 8%);       /* #0F181D - Deep volcanic basalt canvas */
+  --color-volcanic-slag-surface: hsl(195, 26%, 13%); /* #16242C - Elevated basalt slab */
 
-  /* Light Theme Surface & Base */
-  --color-bg-base: var(--color-alpine-ice);
-  --color-bg-surface: hsl(0, 0%, 100%);
-  --color-bg-surface-glass: rgba(202, 235, 242, 0.82);
-  --color-border: var(--color-summit-stone-light);
+  /* Surface & Base - Grounded in Volcanic Slag */
+  --color-bg-base: var(--color-volcanic-slag);
+  --color-bg-surface: hsl(195, 26%, 12%);
+  --color-bg-surface-glass: rgba(18, 30, 37, 0.9);
+  --color-border: hsl(196, 20%, 26%);
   --color-border-hover: var(--color-primary);
 
-  /* Typography / Text Colors (Volcanic Slag & Summit Stone) */
-  --color-text-primary: var(--color-volcanic-slag);
-  --color-text-secondary: hsl(195, 20%, 30%);
-  --color-text-tertiary: hsl(195, 16%, 46%);
+  /* Typography / Text Colors (Alpine Ice & Summit Stone) */
+  --color-text-primary: var(--color-alpine-ice);
+  --color-text-secondary: hsl(195, 18%, 76%);
+  --color-text-tertiary: hsl(195, 14%, 58%);
 
   /* Primary Accent & Brand (Lichen Green) */
-  --color-primary-hsl: 150, 58%, 32%;
+  --color-primary-hsl: 150, 64%, 48%;
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-primary-hover: hsl(150, 64%, 24%);
-  --color-primary-light: hsl(150, 42%, 91%);
-  --color-primary-glow: rgba(27, 134, 78, 0.25);
+  --color-primary-hover: hsl(150, 70%, 58%);
+  --color-primary-light: hsl(150, 36%, 16%);
+  --color-primary-glow: rgba(44, 216, 126, 0.28);
 
   /* Status Colors */
   --color-success: var(--color-lichen-green);
@@ -80,12 +81,15 @@ html {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden !important;
+  background-color: var(--color-volcanic-slag);
+  color-scheme: dark;
 }
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(180deg, #CAEBF2 0%, #D8F0F5 350px, #E8F6F8 100%);
-  background-attachment: fixed;
+  background: var(--color-volcanic-slag) !important;
+  background-color: var(--color-volcanic-slag) !important;
+  background-attachment: fixed !important;
   color: var(--color-text-primary);
   line-height: 1.6;
   width: 100%;
